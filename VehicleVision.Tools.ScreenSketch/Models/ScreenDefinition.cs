@@ -21,6 +21,10 @@ public class WindowDefinition
     public string Title { get; set; } = "";
     public int Width { get; set; } = 800;
     public int Height { get; set; } = 600;
+
+    /// <summary>ウィンドウ装飾（タイトルバー・枠線・影）の表示。false でコンテンツ領域のみ描画</summary>
+    public bool Chrome { get; set; } = true;
+
     public List<ControlDefinition>? Controls { get; set; }
 }
 

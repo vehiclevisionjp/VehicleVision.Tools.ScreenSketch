@@ -1,0 +1,24 @@
+screen:
+  title: tabcontrol
+window:
+  width: 320
+  height: 130
+  chrome: false
+  controls:
+    - type: tabcontrol
+      x: 16
+      y: 10
+      width: 288
+      height: 108
+      activeTab: 0
+      tabs:
+        - text: タブ1
+          controls:
+            - type: label
+              text: タブ1の内容
+              x: 12
+              y: 12
+        - text: タブ2
+          controls: []
+        - text: タブ3
+          controls: []

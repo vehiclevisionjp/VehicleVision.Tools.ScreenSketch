@@ -1,0 +1,12 @@
+screen:
+  title: シンプルな画面
+
+window:
+  title: サンプル
+  width: 400
+  height: 200
+  controls:
+    - type: label
+      text: "Hello, World!"
+      x: 20
+      y: 20

@@ -1,0 +1,16 @@
+screen:
+  title: statusbar
+window:
+  width: 340
+  height: 44
+  chrome: false
+  controls:
+    - type: statusbar
+      x: 0
+      y: 10
+      width: 340
+      height: 22
+      items:
+        - 準備完了
+        - "行: 1, 列: 1"
+        - UTF-8

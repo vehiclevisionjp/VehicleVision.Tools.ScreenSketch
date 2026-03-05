@@ -1,0 +1,21 @@
+screen:
+  title: datagrid
+window:
+  width: 340
+  height: 130
+  chrome: false
+  controls:
+    - type: datagrid
+      x: 16
+      y: 10
+      width: 308
+      height: 108
+      columns:
+        - header: 名前
+          width: 120
+        - header: 値
+          width: 188
+      rows:
+        - [項目1, 値1]
+        - [項目2, 値2]
+        - [項目3, 値3]

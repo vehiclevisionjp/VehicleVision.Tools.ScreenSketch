@@ -76,4 +76,8 @@ public static class Theme
     public const int AnnotationMargin = 120;
     public const int AnnotationRadius = 14;
     public const int WindowPadding = 40;
+    public const int ChromelessPadding = 10;
+
+    // ── Chromeless ──
+    public const string ChromelessBorder = "#D0D0D0";
 }

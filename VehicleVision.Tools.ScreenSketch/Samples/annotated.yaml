@@ -1,0 +1,49 @@
+screen:
+  title: 入力フォーム
+  description: ユーザー情報を入力するフォームです。
+
+window:
+  title: ユーザー登録
+  width: 500
+  height: 300
+  controls:
+    - type: label
+      text: "名前:"
+      x: 20
+      y: 20
+    - type: textbox
+      id: nameInput
+      x: 80
+      y: 15
+      width: 200
+      placeholder: 氏名を入力
+    - type: label
+      text: "メール:"
+      x: 20
+      y: 60
+    - type: textbox
+      id: emailInput
+      x: 80
+      y: 55
+      width: 200
+      placeholder: email@example.com
+    - type: button
+      id: submitBtn
+      x: 80
+      y: 100
+      text: 登録
+    - type: button
+      x: 170
+      y: 100
+      text: キャンセル
+
+annotations:
+  - target: nameInput
+    label: "①"
+    description: ユーザーの氏名を入力します。
+  - target: emailInput
+    label: "②"
+    description: メールアドレスを入力します。
+  - target: submitBtn
+    label: "③"
+    description: 入力内容を登録します。

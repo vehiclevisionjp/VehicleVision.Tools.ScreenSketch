@@ -27,7 +27,7 @@ public class SvgRenderer
         var window = def.Window ?? new WindowDefinition();
         var hasAnnotations = def.Annotations is { Count: > 0 };
         var annotationMargin = hasAnnotations ? Theme.AnnotationMargin : 0;
-        var pad = Theme.WindowPadding;
+        var pad = window.Chrome ? Theme.WindowPadding : Theme.ChromelessPadding;
 
         var svgWidth = window.Width + pad * 2 + annotationMargin;
         var svgHeight = window.Height + pad * 2;
@@ -41,7 +41,10 @@ public class SvgRenderer
         svg.Add(CreateDefs());
         svg.Add(El("rect", At("width", svgWidth), At("height", svgHeight), At("fill", "#FFFFFF")));
 
-        RenderWindow(svg, window, pad, pad);
+        if (window.Chrome)
+            RenderWindow(svg, window, pad, pad);
+        else
+            RenderChromeless(svg, window, pad, pad);
 
         if (def.Annotations is { Count: > 0 })
             RenderAnnotations(svg, def.Annotations, pad, pad, window.Width);
@@ -126,6 +129,20 @@ public class SvgRenderer
     // ────────────────────────────────────────────
     //  ウィンドウ描画
     // ────────────────────────────────────────────
+
+    /// <summary>ウィンドウ装飾なしでコンテンツ領域のみを描画する</summary>
+    private void RenderChromeless(XElement svg, WindowDefinition window, int wx, int wy)
+    {
+        // 薄い枠線のみ
+        svg.Add(Rect(wx, wy, window.Width, window.Height,
+            Theme.WindowBackground, Theme.ChromelessBorder, 1, 2));
+
+        if (window.Controls != null)
+        {
+            foreach (var c in window.Controls)
+                RenderControl(svg, c, wx, wy, window.Width, window.Height);
+        }
+    }
 
     private void RenderWindow(XElement svg, WindowDefinition window, int wx, int wy)
     {
