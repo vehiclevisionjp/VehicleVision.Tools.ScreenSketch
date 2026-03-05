@@ -11,10 +11,11 @@
 
 ## ワークフロー一覧
 
-| ワークフロー   | ファイル      | トリガー                      | 目的                                  |
-| -------------- | ------------- | ----------------------------- | ------------------------------------- |
-| CI             | `ci.yml`      | main / develop への push・PR  | ビルド・テストの自動実行              |
-| Create Release | `release.yml` | 手動実行（main ブランチのみ） | バージョンアップ、GitHub Release 作成 |
+| ワークフロー   | ファイル         | トリガー                             | 目的                                  |
+| -------------- | ---------------- | ------------------------------------ | ------------------------------------- |
+| CI             | `ci.yml`         | main / develop への push・PR         | ビルド・テストの自動実行              |
+| Create Release | `release.yml`    | 手動実行（main ブランチのみ）        | バージョンアップ、GitHub Release 作成 |
+| Sync Wiki      | `sync-wiki.yml`  | main への push（docs/wiki 変更時）   | docs/wiki を GitHub Wiki へ同期       |
 
 ---
 
@@ -134,6 +135,33 @@ flowchart TD
 | --------------- | -------------------------------------------- |
 | `GITHUB_TOKEN`  | 自動提供。コミット、タグ、リリース作成に使用 |
 | `NUGET_API_KEY` | NuGet.org への公開に使用                     |
+
+---
+
+## 3. Sync Wiki ワークフロー
+
+### 概要
+
+`docs/wiki/` ディレクトリの Markdown ファイルを GitHub Wiki リポジトリへ自動同期する。
+
+### トリガー
+
+- `main` ブランチへの push（`docs/wiki/**` または `images/**` の変更時のみ）
+
+### 処理フロー
+
+```mermaid
+flowchart TD
+    A[main への push] --> B{docs/wiki または images の変更?}
+    B -->|Yes| C[リポジトリをチェックアウト]
+    B -->|No| Z[スキップ]
+    C --> D[Wiki リポジトリをチェックアウト]
+    D --> E[sync-docs-to-wiki.js 実行]
+    E --> F[画像パスを raw URL に変換]
+    F --> G{差分あり?}
+    G -->|Yes| H[Wiki リポジトリへ push]
+    G -->|No| I[スキップ]
+```
 
 ---
 

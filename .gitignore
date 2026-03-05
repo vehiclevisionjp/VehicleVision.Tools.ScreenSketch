@@ -44,3 +44,10 @@ pdf-output/
 
 ## NuGet output
 nupkg/
+
+## Wiki sync temp
+wiki-temp/
+
+## VS Code Extension
+*.vsix
+vscode-screen-sketch/out/

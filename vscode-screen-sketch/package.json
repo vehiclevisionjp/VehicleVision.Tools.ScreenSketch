@@ -34,12 +34,17 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
   },
+  "extensionKind": [
+    "workspace"
+  ],
   "devDependencies": {
     "@types/markdown-it": "^14.0.0",
     "@types/node": "^25.3.3",
     "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^3.3.2",
     "typescript": "^5.7.0"
   }
 }

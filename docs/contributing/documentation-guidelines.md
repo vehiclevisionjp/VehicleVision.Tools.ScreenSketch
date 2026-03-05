@@ -35,6 +35,15 @@ docs/
 │   ├── development-environment.md
 │   ├── documentation-guidelines.md
 │   └── testing-guidelines.md
+├── script/
+│   └── sync-docs-to-wiki.js
+└── wiki/
+    ├── Home.md
+    ├── Command-Reference.md
+    ├── Controls.md
+    ├── Examples.md
+    ├── VS-Code-Extension.md
+    └── YAML-Definition-Reference.md
 ```
 
 ### ファイル命名規則
@@ -42,6 +51,11 @@ docs/
 #### `docs/contributing/` 配下
 
 - ケバブケース（`coding-guidelines.md`）
+
+#### `docs/wiki/` 配下
+
+- パスカルケース + ハイフン区切り（`Command-Reference.md`）
+- GitHub Wiki のページ名としてそのまま使用される
 
 ---
 

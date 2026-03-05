@@ -1,3 +1,9 @@
 node_modules/
-out/
+src/
+out/**/*.map
 *.vsix
+.gitignore
+tsconfig.json
+.vscode/
+.vscode-test/
+package-lock.json

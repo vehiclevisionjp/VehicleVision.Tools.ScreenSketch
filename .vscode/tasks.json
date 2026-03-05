@@ -112,6 +112,34 @@
       "problemMatcher": [],
       "group": "test",
       "detail": "フォーマットのチェック（変更なし）"
+    },
+    {
+      "label": "ext: compile",
+      "type": "npm",
+      "script": "compile",
+      "path": "vscode-screen-sketch",
+      "problemMatcher": "$tsc",
+      "group": "build",
+      "detail": "VS Code 拡張の TypeScript コンパイル"
+    },
+    {
+      "label": "ext: watch",
+      "type": "npm",
+      "script": "watch",
+      "path": "vscode-screen-sketch",
+      "problemMatcher": "$tsc-watch",
+      "isBackground": true,
+      "group": "build",
+      "detail": "VS Code 拡張の TypeScript ウォッチビルド"
+    },
+    {
+      "label": "ext: package",
+      "type": "npm",
+      "script": "package",
+      "path": "vscode-screen-sketch",
+      "problemMatcher": [],
+      "group": "build",
+      "detail": "VSIX パッケージを生成"
     }
   ]
 }
