@@ -39,8 +39,8 @@ jobs:
 
       - name: Install extension dependencies
         run: npm install
-        working-directory: vscode-screen-sketch
+        working-directory: VehicleVision.Tools.ScreenSketch.VSCode
 
       - name: Build extension
         run: npm run compile
-        working-directory: vscode-screen-sketch
+        working-directory: VehicleVision.Tools.ScreenSketch.VSCode

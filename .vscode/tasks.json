@@ -117,7 +117,7 @@
       "label": "ext: compile",
       "type": "npm",
       "script": "compile",
-      "path": "vscode-screen-sketch",
+      "path": "VehicleVision.Tools.ScreenSketch.VSCode",
       "problemMatcher": "$tsc",
       "group": "build",
       "detail": "VS Code 拡張の TypeScript コンパイル"
@@ -126,7 +126,7 @@
       "label": "ext: watch",
       "type": "npm",
       "script": "watch",
-      "path": "vscode-screen-sketch",
+      "path": "VehicleVision.Tools.ScreenSketch.VSCode",
       "problemMatcher": "$tsc-watch",
       "isBackground": true,
       "group": "build",
@@ -136,7 +136,7 @@
       "label": "ext: package",
       "type": "npm",
       "script": "package",
-      "path": "vscode-screen-sketch",
+      "path": "VehicleVision.Tools.ScreenSketch.VSCode",
       "problemMatcher": [],
       "group": "build",
       "detail": "VSIX パッケージを生成"

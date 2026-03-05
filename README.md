@@ -102,7 +102,7 @@ VehicleVision.Tools.ScreenSketch/
 │   ├── Models/                 # YAML定義モデル
 │   ├── Rendering/              # SVGレンダリング・テーマ
 │   └── Samples/                # サンプルYAMLファイル
-├── vscode-screen-sketch/       # VS Code拡張（Markdownプレビュー連携）
+├── VehicleVision.Tools.ScreenSketch.VSCode/  # VS Code拡張（Markdownプレビュー連携）
 │   ├── src/
 │   │   └── extension.ts        # markdown-itプラグイン
 │   ├── package.json
@@ -141,5 +141,9 @@ VehicleVision.Tools.ScreenSketch/
 ## 謝辞
 
 セキュリティ脆弱性の報告やプロジェクトへの貢献をしてくださった方々に感謝いたします。
+
+## 著作権
+
+Copyright (c) 株式会社ピー・エム・シー ITソリューション事業部
 
 <!-- 貢献者・報告者はこちらに追記 -->

@@ -6,10 +6,10 @@
             "type": "extensionHost",
             "request": "launch",
             "args": [
-                "--extensionDevelopmentPath=${workspaceFolder}/vscode-screen-sketch"
+                "--extensionDevelopmentPath=${workspaceFolder}/VehicleVision.Tools.ScreenSketch.VSCode"
             ],
             "outFiles": [
-                "${workspaceFolder}/vscode-screen-sketch/out/**/*.js"
+                "${workspaceFolder}/VehicleVision.Tools.ScreenSketch.VSCode/out/**/*.js"
             ],
             "preLaunchTask": "ext: compile"
         }

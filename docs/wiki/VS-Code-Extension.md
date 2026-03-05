@@ -52,7 +52,7 @@ window:
 ## 開発
 
 ```bash
-cd vscode-screen-sketch
+cd VehicleVision.Tools.ScreenSketch.VSCode
 npm install
 npm run compile
 ```

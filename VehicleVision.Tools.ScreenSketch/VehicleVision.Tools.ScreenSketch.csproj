@@ -19,7 +19,8 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>screen-sketch</ToolCommandName>
     <PackageId>VehicleVision.Tools.ScreenSketch</PackageId>
-    <Authors>VehicleVision</Authors>
+    <Authors>PMC Co., Ltd., IT Solution Division</Authors>
+    <Copyright>Copyright (c) PMC Co., Ltd., IT Solution Division</Copyright>
     <Description>YAMLで画面レイアウトを定義し、SVG画像とMarkdownドキュメントを生成するCLIツール</Description>
     <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/vehiclevisionjp/VehicleVision.Tools.ScreenSketch</PackageProjectUrl>

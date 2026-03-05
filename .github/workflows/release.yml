@@ -70,7 +70,7 @@ jobs:
 
       - name: Update version in extension package.json
         run: |
-          cd vscode-screen-sketch
+          cd VehicleVision.Tools.ScreenSketch.VSCode
           sed -i 's|"version": "[^"]*"|"version": "${{ steps.new_version.outputs.new_version }}"|' package.json
 
       - name: Build project
@@ -93,7 +93,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj vscode-screen-sketch/package.json
+          git add VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj VehicleVision.Tools.ScreenSketch.VSCode/package.json
           git commit -m "chore: bump version to v${{ steps.new_version.outputs.new_version }}"
           git push
 
