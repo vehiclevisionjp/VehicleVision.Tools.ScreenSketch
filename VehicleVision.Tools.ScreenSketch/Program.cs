@@ -23,6 +23,7 @@ public class Program
             "generate" => RunGenerate(args.Skip(1).ToArray()),
             "transform" => RunTransform(args.Skip(1).ToArray()),
             "restore" => RunRestore(args.Skip(1).ToArray()),
+            "render" => RunRender(),
             _ => RunGenerate(args) // 後方互換: コマンド指定なしの場合は generate
         };
     }
@@ -238,6 +239,35 @@ public class Program
     }
 
     // ────────────────────────────────────────────
+    //  render: stdin YAML → stdout SVG
+    // ────────────────────────────────────────────
+
+    private static int RunRender()
+    {
+        try
+        {
+            var yaml = Console.In.ReadToEnd();
+
+            var deserializer = new DeserializerBuilder()
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                .IgnoreUnmatchedProperties()
+                .Build();
+
+            var definition = deserializer.Deserialize<ScreenDefinition>(yaml);
+            var renderer = new SvgRenderer();
+            var svg = renderer.Render(definition);
+
+            Console.Write(svg);
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error: {ex.Message}");
+            return 1;
+        }
+    }
+
+    // ────────────────────────────────────────────
     //  ファイル探索
     // ────────────────────────────────────────────
 
@@ -283,10 +313,14 @@ public class Program
         Console.Error.WriteLine("  restore <input-path>");
         Console.Error.WriteLine("    変換済みの yaml-screen ブロックをコードブロックに復元する");
         Console.Error.WriteLine();
+        Console.Error.WriteLine("  render");
+        Console.Error.WriteLine("    stdin から YAML を読み取り、stdout に SVG を出力する");
+        Console.Error.WriteLine();
         Console.Error.WriteLine("Examples:");
         Console.Error.WriteLine("  ManualGenerator generate screens/ docs/manual/");
         Console.Error.WriteLine("  ManualGenerator transform docs/ docs/_output/");
         Console.Error.WriteLine("  ManualGenerator transform docs/ docs/_temp/ --inline");
         Console.Error.WriteLine("  ManualGenerator restore docs/");
+        Console.Error.WriteLine("  echo 'window: ...' | ManualGenerator render");
     }
 }

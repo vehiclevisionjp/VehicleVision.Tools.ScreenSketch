@@ -1,0 +1,45 @@
+{
+  "name": "vscode-screen-sketch",
+  "displayName": "Screen Sketch Preview",
+  "description": "Markdown プレビューで yaml-screen コードブロックを SVG 画面イメージとして表示します",
+  "version": "0.0.0",
+  "publisher": "vehiclevisionjp",
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vehiclevisionjp/VehicleVision.Tools.ScreenSketch.git",
+    "directory": "vscode-screen-sketch"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "markdown.markdownItPlugins": true,
+    "configuration": {
+      "title": "Screen Sketch",
+      "properties": {
+        "screenSketch.toolPath": {
+          "type": "string",
+          "default": "screen-sketch",
+          "description": "screen-sketch コマンドのパス。dotnet tool でインストール済みの場合はデフォルトのままで OK です。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.0.0",
+    "@types/node": "^25.3.3",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.7.0"
+  }
+}
