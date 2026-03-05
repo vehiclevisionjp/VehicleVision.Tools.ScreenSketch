@@ -39,9 +39,6 @@ Thumbs.db
 node_modules/
 package-lock.json
 
-## Wiki sync temp
-.wiki-temp/
-
 ## PDF output
 pdf-output/
 

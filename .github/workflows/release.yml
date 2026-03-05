@@ -82,7 +82,6 @@ jobs:
           cp README.md release-temp/
           if [ -f LICENSE ]; then cp LICENSE release-temp/; fi
           if [ -d LICENSES ]; then mkdir -p release-temp/LICENSES && cp -r LICENSES/* release-temp/LICENSES/; fi
-          if [ -d docs/wiki ]; then mkdir -p release-temp/wiki && cp docs/wiki/*.md release-temp/wiki/; fi
           cd release-temp
           zip -r ../VehicleVision.Tools.ScreenSketch_v${{ steps.new_version.outputs.new_version }}.zip ./*
 

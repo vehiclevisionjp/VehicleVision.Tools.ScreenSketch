@@ -35,21 +35,9 @@ docs/
 │   ├── development-environment.md
 │   ├── documentation-guidelines.md
 │   └── testing-guidelines.md
-├── script/
-│   ├── decode-toc.js
-│   ├── sync-docs-to-wiki.js
-│   └── toc-single.js
-└── wiki/
-    ├── Home.md
-    └── (Wikiドキュメント)
 ```
 
 ### ファイル命名規則
-
-#### `docs/wiki/` 配下
-
-- ケバブケース（`example-document.md`）
-- カテゴリごとにサブディレクトリで整理
 
 #### `docs/contributing/` 配下
 
@@ -119,7 +107,6 @@ npm run toc
 
 | 変更内容                     | 更新が必要なドキュメント                                   |
 | ---------------------------- | ---------------------------------------------------------- |
-| 公開APIの追加・変更          | `docs/wiki/` 配下の該当ドキュメント                        |
 | ガイドラインの追加           | `CONTRIBUTING.md` および `.github/copilot-instructions.md` |
 | プロジェクト設定の変更       | `README.md` および `.github/copilot-instructions.md`       |
 | セキュリティ脆弱性の報告対応 | `README.md` の謝辞セクション（報告者名を追記）             |

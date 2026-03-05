@@ -11,11 +11,10 @@
 
 ## ワークフロー一覧
 
-| ワークフロー      | ファイル        | トリガー                                           | 目的                                  |
-| ----------------- | --------------- | -------------------------------------------------- | ------------------------------------- |
-| CI                | `ci.yml`        | main / develop への push・PR                       | ビルド・テストの自動実行              |
-| Create Release    | `release.yml`   | 手動実行（main ブランチのみ）                      | バージョンアップ、GitHub Release 作成 |
-| Sync Docs to Wiki | `sync-wiki.yml` | main への push（docs/wiki 配下の変更時）/ 手動実行 | Wiki ページの自動同期                 |
+| ワークフロー   | ファイル      | トリガー                      | 目的                                  |
+| -------------- | ------------- | ----------------------------- | ------------------------------------- |
+| CI             | `ci.yml`      | main / develop への push・PR  | ビルド・テストの自動実行              |
+| Create Release | `release.yml` | 手動実行（main ブランチのみ） | バージョンアップ、GitHub Release 作成 |
 
 ---
 
@@ -53,13 +52,11 @@ flowchart TB
 
     subgraph CI/CD
         E --> F{変更内容}
-        F -->|docs/wiki/** の変更| G[Sync Docs to Wiki]
         F -->|手動実行| H[Create Release]
         B -->|push / PR| I[CI ビルド・テスト]
     end
 
     subgraph 成果物
-        G --> J[GitHub Wiki 更新]
         H --> K[GitHub Release]
     end
 ```
@@ -137,19 +134,6 @@ flowchart TD
 | --------------- | -------------------------------------------- |
 | `GITHUB_TOKEN`  | 自動提供。コミット、タグ、リリース作成に使用 |
 | `NUGET_API_KEY` | NuGet.org への公開に使用                     |
-
----
-
-## 3. Sync Docs to Wiki ワークフロー
-
-### 概要
-
-`docs/wiki/` 配下の Markdown ファイルを GitHub Wiki に自動同期する。
-
-### トリガー
-
-- `main` ブランチへの push（`docs/wiki/**/*.md` の変更時）
-- 手動実行
 
 ---
 
