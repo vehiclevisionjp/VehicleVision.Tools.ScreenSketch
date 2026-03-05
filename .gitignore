@@ -1,0 +1,49 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## NuGet
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nupkg
+**/packages/repositories.config
+
+## Visual Studio
+.vs/
+*.rsuser
+*.userprefs
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## OS generated files
+.DS_Store
+Thumbs.db
+
+## Node.js
+node_modules/
+package-lock.json
+
+## Wiki sync temp
+.wiki-temp/
+
+## PDF output
+pdf-output/
+
+## NuGet output
+nupkg/
