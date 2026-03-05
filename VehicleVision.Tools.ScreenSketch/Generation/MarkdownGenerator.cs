@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using VehicleVision.Tools.ScreenSketch.Models;
 
 namespace VehicleVision.Tools.ScreenSketch.Generation;
@@ -7,14 +8,14 @@ namespace VehicleVision.Tools.ScreenSketch.Generation;
 public class MarkdownGenerator
 {
     /// <summary>1 画面分の Markdown を生成</summary>
-    public string Generate(ScreenDefinition definition, string svgRelativePath)
+    public static string Generate(ScreenDefinition definition, string svgRelativePath)
     {
         var sb = new StringBuilder();
         var screen = definition.Screen ?? new ScreenInfo();
-        var today = DateTime.Now.ToString("yyyy-MM-dd");
+        var today = DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
 
         // タイトル
-        sb.AppendLine($"# {screen.Title}");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"# {screen.Title}");
         sb.AppendLine();
         sb.AppendLine(screen.Description);
         sb.AppendLine();
@@ -30,7 +31,7 @@ public class MarkdownGenerator
         // 画面イメージ
         sb.AppendLine("## 画面イメージ");
         sb.AppendLine();
-        sb.AppendLine($"![{screen.Title}]({svgRelativePath})");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"![{screen.Title}]({svgRelativePath})");
         sb.AppendLine();
 
         // コントロール説明
@@ -43,7 +44,7 @@ public class MarkdownGenerator
             sb.AppendLine("| ラベル | 説明 |");
             sb.AppendLine("| ------ | ---- |");
             foreach (var ann in definition.Annotations)
-                sb.AppendLine($"| {ann.Label} | {ann.Description} |");
+                sb.AppendLine(CultureInfo.InvariantCulture, $"| {ann.Label} | {ann.Description} |");
             sb.AppendLine();
         }
 
@@ -54,7 +55,7 @@ public class MarkdownGenerator
         sb.AppendLine();
         sb.AppendLine("| 日付       | 変更内容 |");
         sb.AppendLine("| ---------- | -------- |");
-        sb.AppendLine($"| {today} | 初版作成 |");
+        sb.AppendLine(CultureInfo.InvariantCulture, $"| {today} | 初版作成 |");
         sb.AppendLine();
 
         return sb.ToString();
@@ -71,7 +72,7 @@ public class MarkdownGenerator
         for (var i = 0; i < pages.Count; i++)
         {
             var (title, fileName) = pages[i];
-            sb.AppendLine($"{i + 1}. [{title}]({fileName})");
+            sb.AppendLine(CultureInfo.InvariantCulture, $"{i + 1}. [{title}]({fileName})");
         }
         sb.AppendLine();
         return sb.ToString();

@@ -74,16 +74,13 @@ VehicleVision.Tools.ScreenSketch/
 │   ├── SECURITY.md
 │   └── workflows/
 │       ├── ci.yml
-│       ├── release.yml
-│       └── sync-wiki.yml
+│       └── release.yml
 ├── .vscode/                    # VS Code設定
 │   ├── extensions.json
 │   ├── settings.json
 │   └── tasks.json
 ├── docs/                       # ドキュメント
-│   ├── contributing/           # 開発者向けガイドライン
-│   ├── script/                 # ドキュメント用スクリプト
-│   └── wiki/                   # Wikiドキュメント
+│   └── contributing/           # 開発者向けガイドライン
 ├── VehicleVision.Tools.ScreenSketch/
 │   ├── Generation/             # Markdown生成ロジック
 │   ├── Models/                 # YAML定義モデル
@@ -97,7 +94,6 @@ VehicleVision.Tools.ScreenSketch/
 ├── .prettierrc
 ├── AUTHORS
 ├── CONTRIBUTING.md
-├── Directory.Build.props
 ├── LICENSE
 ├── README.md
 └── package.json

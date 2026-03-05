@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Globalization;
+using System.Xml.Linq;
 using VehicleVision.Tools.ScreenSketch.Models;
 
 namespace VehicleVision.Tools.ScreenSketch.Rendering;
@@ -158,7 +159,7 @@ public class SvgRenderer
         }
     }
 
-    private void RenderWindowButtons(XElement svg, int wx, int wy, int windowWidth)
+    private static void RenderWindowButtons(XElement svg, int wx, int wy, int windowWidth)
     {
         var btnY = wy + Theme.TitleBarHeight / 2;
 
@@ -275,14 +276,14 @@ public class SvgRenderer
     //  コントロール描画
     // ────────────────────────────────────────────
 
-    private void RenderButton(XElement svg, int x, int y, int w, int h, string? text)
+    private static void RenderButton(XElement svg, int x, int y, int w, int h, string? text)
     {
         svg.Add(Rect(x, y, w, h, Theme.ButtonBackground, Theme.ButtonBorder, 1, 3));
         if (!string.IsNullOrEmpty(text))
             svg.Add(Txt(text, x + w / 2, y + h / 2, 12, Theme.ButtonText, "middle"));
     }
 
-    private void RenderTextBox(XElement svg, int x, int y, int w, int h,
+    private static void RenderTextBox(XElement svg, int x, int y, int w, int h,
         string? text, string? placeholder)
     {
         svg.Add(Rect(x, y, w, h, Theme.TextBoxBackground, Theme.TextBoxBorder, 1, 2));
@@ -295,13 +296,13 @@ public class SvgRenderer
             svg.Add(Txt(display, x + 4, y + h / 2, 12, fill, fontStyle: style));
     }
 
-    private void RenderStaticLabel(XElement svg, int x, int y, int h, string? text)
+    private static void RenderStaticLabel(XElement svg, int x, int y, int h, string? text)
     {
         if (!string.IsNullOrEmpty(text))
             svg.Add(Txt(text, x, y + h / 2, 12, Theme.LabelText));
     }
 
-    private void RenderComboBox(XElement svg, int x, int y, int w, int h,
+    private static void RenderComboBox(XElement svg, int x, int y, int w, int h,
         string? text, List<string>? items)
     {
         svg.Add(Rect(x, y, w, h, Theme.TextBoxBackground, Theme.TextBoxBorder, 1, 2));
@@ -319,7 +320,7 @@ public class SvgRenderer
             At("fill", "#666666")));
     }
 
-    private void RenderCheckBox(XElement svg, int x, int y, string? text, bool isChecked)
+    private static void RenderCheckBox(XElement svg, int x, int y, string? text, bool isChecked)
     {
         var boxSize = 14;
         var boxY = y + 3;
@@ -338,7 +339,7 @@ public class SvgRenderer
             svg.Add(Txt(text, x + boxSize + 6, y + 10, 12, Theme.LabelText));
     }
 
-    private void RenderRadioButton(XElement svg, int x, int y, string? text, bool selected)
+    private static void RenderRadioButton(XElement svg, int x, int y, string? text, bool selected)
     {
         var r = 7;
         var cx = x + r;
@@ -376,7 +377,7 @@ public class SvgRenderer
         }
     }
 
-    private void RenderDataGrid(XElement svg, ControlDefinition c, int ax, int ay)
+    private static void RenderDataGrid(XElement svg, ControlDefinition c, int ax, int ay)
     {
         var w = c.Width;
         var h = c.Height;
@@ -430,7 +431,7 @@ public class SvgRenderer
         }
     }
 
-    private void RenderMenuBar(XElement svg, int x, int y, int w, int h, List<string>? items)
+    private static void RenderMenuBar(XElement svg, int x, int y, int w, int h, List<string>? items)
     {
         svg.Add(Rect(x, y, w, h, Theme.MenuBackground, "none"));
         svg.Add(Line(x, y + h, x + w, y + h, Theme.MenuBorder));
@@ -446,7 +447,7 @@ public class SvgRenderer
         }
     }
 
-    private void RenderStatusBar(XElement svg, int x, int y, int w, int h, List<string>? items)
+    private static void RenderStatusBar(XElement svg, int x, int y, int w, int h, List<string>? items)
     {
         svg.Add(Rect(x, y, w, h, Theme.StatusBarBackground, "none"));
 
@@ -504,7 +505,7 @@ public class SvgRenderer
         }
     }
 
-    private void RenderListBox(XElement svg, int x, int y, int w, int h,
+    private static void RenderListBox(XElement svg, int x, int y, int w, int h,
         List<string>? items, int selectedIndex)
     {
         svg.Add(Rect(x, y, w, h, Theme.TextBoxBackground, Theme.TextBoxBorder));
@@ -536,7 +537,7 @@ public class SvgRenderer
         }
     }
 
-    private void RenderImagePlaceholder(XElement svg, int x, int y, int w, int h, string? text)
+    private static void RenderImagePlaceholder(XElement svg, int x, int y, int w, int h, string? text)
     {
         svg.Add(Rect(x, y, w, h, "#F5F5F5", Theme.GridBorder, 1, 2));
 
@@ -551,7 +552,7 @@ public class SvgRenderer
         svg.Add(Txt(label, cx, cy + 30, 11, "#999999", "middle"));
     }
 
-    private void RenderProgressBar(XElement svg, int x, int y, int w, int h, int value)
+    private static void RenderProgressBar(XElement svg, int x, int y, int w, int h, int value)
     {
         var clamped = Math.Clamp(value, 0, 100);
         svg.Add(Rect(x, y, w, h, "#E0E0E0", Theme.GridBorder, 1, 3));
@@ -563,7 +564,7 @@ public class SvgRenderer
         svg.Add(Txt($"{clamped}%", x + w / 2, y + h / 2, 10, Theme.LabelText, "middle", "bold"));
     }
 
-    private void RenderNumericUpDown(XElement svg, int x, int y, int w, int h,
+    private static void RenderNumericUpDown(XElement svg, int x, int y, int w, int h,
         int value, int minimum, int maximum)
     {
         var clamped = Math.Clamp(value, minimum, maximum);
@@ -571,7 +572,7 @@ public class SvgRenderer
 
         // テキストエリア
         svg.Add(Rect(x, y, w, h, Theme.TextBoxBackground, Theme.TextBoxBorder, 1, 2));
-        svg.Add(Txt(clamped.ToString(), x + 4, y + h / 2, 12, Theme.TextBoxText));
+        svg.Add(Txt(clamped.ToString(CultureInfo.InvariantCulture), x + 4, y + h / 2, 12, Theme.TextBoxText));
 
         // 上ボタン
         svg.Add(Rect(x + w - btnW, y, btnW, h / 2, Theme.ButtonBackground, Theme.TextBoxBorder, 1, 0));
@@ -589,7 +590,7 @@ public class SvgRenderer
             At("fill", "#666666")));
     }
 
-    private void RenderDateTimePicker(XElement svg, int x, int y, int w, int h,
+    private static void RenderDateTimePicker(XElement svg, int x, int y, int w, int h,
         string? dateText, string? format)
     {
         svg.Add(Rect(x, y, w, h, Theme.TextBoxBackground, Theme.TextBoxBorder, 1, 2));
@@ -619,7 +620,7 @@ public class SvgRenderer
         svg.Add(El("circle", At("cx", ix), At("cy", iy + 2), At("r", 1), At("fill", "#666666")));
     }
 
-    private void RenderTreeView(XElement svg, int x, int y, int w, int h,
+    private static void RenderTreeView(XElement svg, int x, int y, int w, int h,
         List<TreeNodeDefinition>? nodes)
     {
         svg.Add(Rect(x, y, w, h, Theme.TreeViewBackground, Theme.TextBoxBorder));
@@ -632,7 +633,7 @@ public class SvgRenderer
         }
     }
 
-    private int RenderTreeNode(XElement svg, TreeNodeDefinition node, int x, int y,
+    private static int RenderTreeNode(XElement svg, TreeNodeDefinition node, int x, int y,
         int depth, int maxY)
     {
         var nodeH = 20;
@@ -677,7 +678,7 @@ public class SvgRenderer
         return nextY;
     }
 
-    private void RenderToolbar(XElement svg, int x, int y, int w, int h, List<string>? items)
+    private static void RenderToolbar(XElement svg, int x, int y, int w, int h, List<string>? items)
     {
         svg.Add(Rect(x, y, w, h, Theme.ToolbarBackground, "none"));
         svg.Add(Line(x, y + h, x + w, y + h, Theme.ToolbarBorder));
@@ -704,7 +705,7 @@ public class SvgRenderer
         }
     }
 
-    private void RenderLinkLabel(XElement svg, int x, int y, int h, string? text)
+    private static void RenderLinkLabel(XElement svg, int x, int y, int h, string? text)
     {
         if (!string.IsNullOrEmpty(text))
         {
@@ -714,7 +715,7 @@ public class SvgRenderer
         }
     }
 
-    private void RenderTextArea(XElement svg, int x, int y, int w, int h,
+    private static void RenderTextArea(XElement svg, int x, int y, int w, int h,
         string? text, string? placeholder, bool readOnly)
     {
         var bgColor = readOnly ? "#F5F5F5" : Theme.TextBoxBackground;

@@ -76,8 +76,7 @@ public class Program
                 File.WriteAllText(svgPath, svg);
                 Console.WriteLine($"  -> SVG: {svgPath}");
 
-                var mdGenerator = new MarkdownGenerator();
-                var md = mdGenerator.Generate(definition, $"images/{baseName}.svg");
+                var md = MarkdownGenerator.Generate(definition, $"images/{baseName}.svg");
                 var mdPath = Path.Combine(outputDir, $"{baseName}.md");
                 File.WriteAllText(mdPath, md);
                 Console.WriteLine($"  -> Markdown: {mdPath}");
@@ -214,7 +213,6 @@ public class Program
             return 1;
         }
 
-        var processor = new MarkdownInlineProcessor();
         var totalBlocks = 0;
 
         foreach (var mdFile in mdFiles.OrderBy(f => f))
@@ -222,7 +220,7 @@ public class Program
             Console.WriteLine($"Processing: {mdFile}");
 
             var content = File.ReadAllText(mdFile);
-            var result = processor.Restore(content);
+            var result = MarkdownInlineProcessor.Restore(content);
 
             if (result == null)
             {

@@ -211,26 +211,19 @@ using VehicleVision.Tools.ScreenSketch.Models;
 
 プロジェクトルートの `.editorconfig` でコードスタイルを統一している。詳細は `.editorconfig` ファイルを参照。
 
-### Directory.Build.props
+### csproj 共通設定
 
-プロジェクト全体の共通設定は `Directory.Build.props` で管理：
+プロジェクトの共通設定は `VehicleVision.Tools.ScreenSketch.csproj` の PropertyGroup で管理：
 
-```xml
-<Project>
-  <PropertyGroup>
-    <LangVersion>latest</LangVersion>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisLevel>latest-recommended</AnalysisLevel>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <Nullable>enable</Nullable>
-    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
-    <WarningLevel>5</WarningLevel>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
-</Project>
-```
+| プロパティ                  | 値                   | 説明                           |
+| --------------------------- | -------------------- | ------------------------------ |
+| `LangVersion`               | `latest`             | 最新の C# 言語バージョンを使用 |
+| `EnableNETAnalyzers`        | `true`               | .NET アナライザーを有効化      |
+| `AnalysisLevel`             | `latest-recommended` | 推奨レベルのコード分析         |
+| `EnforceCodeStyleInBuild`   | `true`               | ビルド時にコードスタイルを強制 |
+| `TreatWarningsAsErrors`     | `true`（Release 時） | Release ビルドで警告をエラーに |
+| `GenerateDocumentationFile` | `true`               | XML ドキュメントファイルを生成 |
+| `WarningLevel`              | `5`                  | 最大レベルの警告を有効化       |
 
 ---
 

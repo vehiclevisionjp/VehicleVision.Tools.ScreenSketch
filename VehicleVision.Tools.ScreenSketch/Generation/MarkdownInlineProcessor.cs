@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
 using VehicleVision.Tools.ScreenSketch.Models;
 using VehicleVision.Tools.ScreenSketch.Rendering;
@@ -129,7 +130,7 @@ public class MarkdownInlineProcessor
         if (embedSvgInline)
         {
             // PDF/HTML 生成時: SVG をインライン埋め込み
-            sb.AppendLine($"<div class=\"screen-svg\">");
+            sb.AppendLine(CultureInfo.InvariantCulture, $"<div class=\"screen-svg\">");
             sb.AppendLine(svg);
             sb.AppendLine("</div>");
         }
@@ -139,7 +140,7 @@ public class MarkdownInlineProcessor
             var imgPath = string.IsNullOrEmpty(imageRelativeDir)
                 ? svgFileName
                 : $"{imageRelativeDir}/{svgFileName}";
-            sb.AppendLine($"![{title}]({imgPath})");
+            sb.AppendLine(CultureInfo.InvariantCulture, $"![{title}]({imgPath})");
         }
 
         // アノテーションテーブル
@@ -149,7 +150,7 @@ public class MarkdownInlineProcessor
             sb.AppendLine("| ラベル | 説明 |");
             sb.AppendLine("| ------ | ---- |");
             foreach (var ann in definition.Annotations)
-                sb.AppendLine($"| {ann.Label} | {ann.Description} |");
+                sb.AppendLine(CultureInfo.InvariantCulture, $"| {ann.Label} | {ann.Description} |");
         }
 
         return sb.ToString().TrimEnd('\r', '\n');
@@ -161,7 +162,7 @@ public class MarkdownInlineProcessor
     /// </summary>
     /// <param name="markdownContent">入力 Markdown テキスト</param>
     /// <returns>復元後の Markdown テキスト。変換済みブロックがなければ null</returns>
-    public RestoreResult? Restore(string markdownContent)
+    public static RestoreResult? Restore(string markdownContent)
     {
         var matches = TransformedBlockRegex.Matches(markdownContent);
         if (matches.Count == 0)
