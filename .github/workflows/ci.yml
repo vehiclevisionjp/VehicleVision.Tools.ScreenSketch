@@ -31,3 +31,16 @@ jobs:
 
       - name: Test
         run: dotnet test --configuration Release --no-build --verbosity normal
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install extension dependencies
+        run: npm install
+        working-directory: vscode-screen-sketch
+
+      - name: Build extension
+        run: npm run compile
+        working-directory: vscode-screen-sketch

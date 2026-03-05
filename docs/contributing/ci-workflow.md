@@ -11,11 +11,12 @@
 
 ## ワークフロー一覧
 
-| ワークフロー   | ファイル         | トリガー                             | 目的                                  |
-| -------------- | ---------------- | ------------------------------------ | ------------------------------------- |
-| CI             | `ci.yml`         | main / develop への push・PR         | ビルド・テストの自動実行              |
-| Create Release | `release.yml`    | 手動実行（main ブランチのみ）        | バージョンアップ、GitHub Release 作成 |
-| Sync Wiki      | `sync-wiki.yml`  | main への push（docs/wiki 変更時）   | docs/wiki を GitHub Wiki へ同期       |
+| ワークフロー     | ファイル             | トリガー                           | 目的                                  |
+| ---------------- | -------------------- | ---------------------------------- | ------------------------------------- |
+| CI               | `ci.yml`             | main / develop への push・PR       | ビルド・テストの自動実行              |
+| Create Release   | `release.yml`        | 手動実行（main ブランチのみ）      | バージョンアップ、GitHub Release 作成 |
+| Publish to NuGet | `release-nuget.yml`  | 手動実行（main ブランチのみ）      | GitHub Release の nupkg を NuGet へ公開 |
+| Sync Wiki        | `sync-wiki.yml`      | main への push（docs/wiki 変更時） | docs/wiki を GitHub Wiki へ同期       |
 
 ---
 
@@ -59,6 +60,8 @@ flowchart TB
 
     subgraph 成果物
         H --> K[GitHub Release]
+        K -->|手動実行| L[Publish to NuGet]
+        L --> M[NuGet.org / GitHub Packages]
     end
 ```
 
@@ -84,9 +87,11 @@ flowchart TD
     C --> D[NuGet パッケージ復元]
     D --> E[Release 構成でビルド]
     E --> F[テスト実行]
-    F --> G{結果}
-    G -->|成功| H[CI パス]
-    G -->|失敗| I[CI 失敗]
+    F --> G[Node.js セットアップ]
+    G --> H[VS Code 拡張ビルド]
+    H --> I{結果}
+    I -->|成功| J[CI パス]
+    I -->|失敗| K[CI 失敗]
 ```
 
 ---
@@ -118,27 +123,54 @@ flowchart TD
     C --> D[.NET 10 セットアップ]
     D --> E[現在のバージョン取得<br/>csproj から読み取り]
     E --> F[新バージョン計算]
-    F --> G[csproj のバージョン更新]
+    F --> G[csproj・package.json のバージョン更新]
     G --> H[プロジェクトビルド]
     H --> I[NuGet パッケージ作成]
     I --> J[リリース ZIP 作成]
     J --> K[バージョン更新コミット]
     K --> L[Git タグ作成]
-    L --> M[NuGet.org に公開]
-    M --> N[GitHub Packages に公開]
-    N --> O[GitHub Release 作成]
+    L --> M[GitHub Release 作成]
+```
+
+### 必要なシークレット
+
+| シークレット名 | 用途                                         |
+| -------------- | -------------------------------------------- |
+| `GITHUB_TOKEN` | 自動提供。コミット、タグ、リリース作成に使用 |
+
+---
+
+## 3. Publish to NuGet ワークフロー
+
+### 概要
+
+GitHub Release に添付された nupkg を NuGet.org および GitHub Packages に公開する。
+
+### トリガー
+
+- 手動実行（`main` ブランチのみ）
+- リリースタグを入力パラメータとして指定する（例: `Release_v1.0.0`）
+
+### 処理フロー
+
+```mermaid
+flowchart TD
+    A[手動実行] --> B[リリースタグ指定]
+    B --> C[GitHub Release から nupkg ダウンロード]
+    C --> D[NuGet.org に公開]
+    D --> E[GitHub Packages に公開]
 ```
 
 ### 必要なシークレット
 
 | シークレット名  | 用途                                         |
 | --------------- | -------------------------------------------- |
-| `GITHUB_TOKEN`  | 自動提供。コミット、タグ、リリース作成に使用 |
+| `GITHUB_TOKEN`  | 自動提供。GitHub Packages への公開に使用     |
 | `NUGET_API_KEY` | NuGet.org への公開に使用                     |
 
 ---
 
-## 3. Sync Wiki ワークフロー
+## 4. Sync Wiki ワークフロー
 
 ### 概要
 

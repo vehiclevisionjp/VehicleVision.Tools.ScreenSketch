@@ -19,7 +19,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
-      packages: write
 
     steps:
       - name: Checkout repository
@@ -69,6 +68,11 @@ jobs:
         run: |
           sed -i 's|<Version>${{ steps.get_version.outputs.current_version }}</Version>|<Version>${{ steps.new_version.outputs.new_version }}</Version>|' VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj
 
+      - name: Update version in extension package.json
+        run: |
+          cd vscode-screen-sketch
+          sed -i 's|"version": "[^"]*"|"version": "${{ steps.new_version.outputs.new_version }}"|' package.json
+
       - name: Build project
         run: dotnet build VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj --configuration Release
 
@@ -89,7 +93,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj
+          git add VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj vscode-screen-sketch/package.json
           git commit -m "chore: bump version to v${{ steps.new_version.outputs.new_version }}"
           git push
 
@@ -97,12 +101,6 @@ jobs:
         run: |
           git tag "Release_v${{ steps.new_version.outputs.new_version }}"
           git push origin "Release_v${{ steps.new_version.outputs.new_version }}"
-
-      - name: Publish to NuGet.org
-        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
-
-      - name: Publish to GitHub Packages
-        run: dotnet nuget push ./nupkg/*.nupkg --source "https://nuget.pkg.github.com/vehiclevisionjp/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
