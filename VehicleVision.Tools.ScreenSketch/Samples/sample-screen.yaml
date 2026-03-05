@@ -1,0 +1,123 @@
+# 車両検索画面の定義
+# このファイルが ManualGenerator の入力となり、SVG + Markdown が生成されます
+
+screen:
+  title: "車両検索画面"
+  description: "車両のナンバープレート番号で検索し、入退場履歴を確認する画面です。"
+
+window:
+  title: "VehicleVision Dealer - 車両検索"
+  width: 800
+  height: 550
+  controls:
+    # メニューバー（幅・高さ・位置は自動）
+    - type: menubar
+      items: ["ファイル(F)", "編集(E)", "表示(V)", "ツール(T)", "ヘルプ(H)"]
+
+    # 検索条件グループ
+    - type: group
+      id: searchGroup
+      text: "検索条件"
+      x: 10
+      y: 30
+      width: 770
+      height: 70
+      controls:
+        - type: label
+          text: "車両番号:"
+          x: 15
+          y: 15
+
+        - type: textbox
+          id: plateInput
+          x: 90
+          y: 10
+          width: 200
+          height: 24
+          placeholder: "例: 品川 300 あ 1234"
+
+        - type: button
+          id: searchBtn
+          x: 300
+          y: 10
+          width: 80
+          height: 26
+          text: "検索"
+
+        - type: button
+          id: clearBtn
+          x: 390
+          y: 10
+          width: 80
+          height: 26
+          text: "クリア"
+
+        - type: combobox
+          id: cameraFilter
+          x: 500
+          y: 10
+          width: 150
+          height: 24
+          text: "全カメラ"
+          items: ["全カメラ", "正門カメラ", "裏門カメラ"]
+
+    # 検索結果グリッド
+    - type: datagrid
+      id: resultGrid
+      x: 10
+      y: 110
+      width: 770
+      height: 350
+      columns:
+        - header: "車両番号"
+          width: 180
+        - header: "入場日時"
+          width: 160
+        - header: "退場日時"
+          width: 160
+        - header: "カメラ"
+          width: 120
+        - header: "ステータス"
+          width: 100
+      rows:
+        - ["品川 300 あ 1234", "2025/01/15 09:30", "-", "正門カメラ", "在場"]
+        - [
+            "多摩 500 さ 5678",
+            "2025/01/15 08:15",
+            "2025/01/15 10:00",
+            "正門カメラ",
+            "退場",
+          ]
+        - [
+            "横浜 400 た 9012",
+            "2025/01/14 14:20",
+            "2025/01/14 16:30",
+            "裏門カメラ",
+            "退場",
+          ]
+
+    # ステータスバー（位置とサイズは自動）
+    - type: statusbar
+      items: ["準備完了", "検索結果: 3件"]
+
+# アノテーション: コントロールにラベルを付け、マニュアルで説明する
+annotations:
+  - target: plateInput
+    label: "①"
+    description: "車両のナンバープレート番号を入力するフィールドです。部分一致検索に対応しています。"
+
+  - target: searchBtn
+    label: "②"
+    description: "入力された条件でデータベースを検索します。Enter キーでも実行できます。"
+
+  - target: clearBtn
+    label: "③"
+    description: "検索条件と検索結果をクリアします。"
+
+  - target: cameraFilter
+    label: "④"
+    description: "表示するカメラを絞り込むフィルターです。"
+
+  - target: resultGrid
+    label: "⑤"
+    description: "検索結果を一覧表示するグリッドです。列ヘッダーをクリックするとソートできます。"

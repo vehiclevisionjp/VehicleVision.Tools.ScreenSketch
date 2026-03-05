@@ -1,0 +1,129 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'バージョンアップの種類'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch   # 1.0.0 → 1.0.1
+          - minor   # 1.0.0 → 1.1.0
+          - major   # 1.0.0 → 2.0.0
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.x'
+
+      - name: Get current version
+        id: get_version
+        run: |
+          CURRENT_VERSION=$(grep -oP '(?<=<Version>)[^<]+' VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj)
+          echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $CURRENT_VERSION"
+
+      - name: Calculate new version
+        id: new_version
+        run: |
+          CURRENT="${{ steps.get_version.outputs.current_version }}"
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
+
+          case "${{ github.event.inputs.version_type }}" in
+            major)
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+              ;;
+            minor)
+              MINOR=$((MINOR + 1))
+              PATCH=0
+              ;;
+            patch)
+              PATCH=$((PATCH + 1))
+              ;;
+          esac
+
+          NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "New version: $NEW_VERSION"
+
+      - name: Update version in csproj
+        run: |
+          sed -i 's|<Version>${{ steps.get_version.outputs.current_version }}</Version>|<Version>${{ steps.new_version.outputs.new_version }}</Version>|' VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj
+
+      - name: Build project
+        run: dotnet build VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj --configuration Release
+
+      - name: Create NuGet package
+        run: dotnet pack VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj --configuration Release --no-build --output ./nupkg
+
+      - name: Create Release ZIP
+        run: |
+          mkdir -p release-temp
+          cp -r VehicleVision.Tools.ScreenSketch/bin/Release/net10.0/* release-temp/
+          cp README.md release-temp/
+          if [ -f LICENSE ]; then cp LICENSE release-temp/; fi
+          if [ -d LICENSES ]; then mkdir -p release-temp/LICENSES && cp -r LICENSES/* release-temp/LICENSES/; fi
+          if [ -d docs/wiki ]; then mkdir -p release-temp/wiki && cp docs/wiki/*.md release-temp/wiki/; fi
+          cd release-temp
+          zip -r ../VehicleVision.Tools.ScreenSketch_v${{ steps.new_version.outputs.new_version }}.zip ./*
+
+      - name: Commit version update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add VehicleVision.Tools.ScreenSketch/VehicleVision.Tools.ScreenSketch.csproj
+          git commit -m "chore: bump version to v${{ steps.new_version.outputs.new_version }}"
+          git push
+
+      - name: Create Git tag
+        run: |
+          git tag "Release_v${{ steps.new_version.outputs.new_version }}"
+          git push origin "Release_v${{ steps.new_version.outputs.new_version }}"
+
+      - name: Publish to NuGet.org
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Publish to GitHub Packages
+        run: dotnet nuget push ./nupkg/*.nupkg --source "https://nuget.pkg.github.com/vehiclevisionjp/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: Release_v${{ steps.new_version.outputs.new_version }}
+          name: v${{ steps.new_version.outputs.new_version }}
+          generate_release_notes: true
+          files: |
+            ./nupkg/*.nupkg
+            ./VehicleVision.Tools.ScreenSketch_v${{ steps.new_version.outputs.new_version }}.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge main to develop
+        run: |
+          git fetch origin develop || true
+          if git rev-parse --verify origin/develop > /dev/null 2>&1; then
+            git checkout develop
+            git merge main --no-ff -m "chore: merge main (v${{ steps.new_version.outputs.new_version }}) into develop"
+            git push origin develop
+          fi
