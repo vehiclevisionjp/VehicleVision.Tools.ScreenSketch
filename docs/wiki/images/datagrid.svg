@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="150" viewBox="0 0 360 150">
+  <defs>
+    <filter id="windowShadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-opacity="0.15" />
+    </filter>
+    <style>text { font-family: 'Segoe UI', 'Meiryo', sans-serif; }</style>
+  </defs>
+  <rect width="360" height="150" fill="#FFFFFF" />
+  <rect x="10" y="10" width="340" height="130" fill="#F0F0F0" stroke="#D0D0D0" stroke-width="1" rx="2" />
+  <rect x="26" y="20" width="308" height="108" fill="#FFFFFF" stroke="#D5DFE5" stroke-width="1" />
+  <rect x="26" y="20" width="308" height="26" fill="#F5F5F5" stroke="#D5DFE5" stroke-width="1" />
+  <text x="34" y="33" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="bold" dominant-baseline="central">名前</text>
+  <text x="154" y="33" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="bold" dominant-baseline="central">値</text>
+  <line x1="146" y1="20" x2="146" y2="128" stroke="#D5DFE5" stroke-width="1" />
+  <line x1="26" y1="46" x2="334" y2="46" stroke="#D5DFE5" stroke-width="1" />
+  <line x1="26" y1="46" x2="334" y2="46" stroke="#D5DFE5" stroke-width="1" />
+  <text x="34" y="58" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">項目1</text>
+  <text x="154" y="58" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">値1</text>
+  <rect x="27" y="70" width="306" height="24" fill="#FAFAFA" stroke="none" stroke-width="1" />
+  <line x1="26" y1="70" x2="334" y2="70" stroke="#D5DFE5" stroke-width="1" />
+  <text x="34" y="82" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">項目2</text>
+  <text x="154" y="82" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">値2</text>
+  <line x1="26" y1="94" x2="334" y2="94" stroke="#D5DFE5" stroke-width="1" />
+  <text x="34" y="106" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">項目3</text>
+  <text x="154" y="106" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">値3</text>
+</svg>

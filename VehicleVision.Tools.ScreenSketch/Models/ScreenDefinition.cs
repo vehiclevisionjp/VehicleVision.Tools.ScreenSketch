@@ -13,6 +13,9 @@ public class ScreenInfo
 {
     public string Title { get; set; } = "";
     public string Description { get; set; } = "";
+
+    /// <summary>カラーテーマ名（default, dark, blueprint）</summary>
+    public string? Theme { get; set; }
 }
 
 /// <summary>ウィンドウ定義</summary>
@@ -104,6 +107,15 @@ public class ControlDefinition
 
     /// <summary>読み取り専用（textarea）</summary>
     public bool ReadOnly { get; set; }
+
+    /// <summary>背景色のオーバーライド（例: "#FF0000"）</summary>
+    public string? Background { get; set; }
+
+    /// <summary>前景色（テキスト色）のオーバーライド（例: "#FFFFFF"）</summary>
+    public string? Foreground { get; set; }
+
+    /// <summary>枠線色のオーバーライド（例: "#0000FF"）</summary>
+    public string? BorderColor { get; set; }
 }
 
 /// <summary>DataGrid 列定義</summary>

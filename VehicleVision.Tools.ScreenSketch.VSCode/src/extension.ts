@@ -47,8 +47,14 @@ function renderSync(yaml: string): string | null {
     try {
         const config = vscode.workspace.getConfiguration("screenSketch");
         const toolPath = config.get<string>("toolPath", "screen-sketch");
+        const theme = config.get<string>("theme", "");
 
-        const result = execFileSync(toolPath, ["render"], {
+        const args = ["render"];
+        if (theme) {
+            args.push("--theme", theme);
+        }
+
+        const result = execFileSync(toolPath, args, {
             input: yaml,
             encoding: "utf-8",
             timeout: 10_000,

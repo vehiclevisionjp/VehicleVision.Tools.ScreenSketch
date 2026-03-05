@@ -2,14 +2,17 @@
 
 ## コントロール共通プロパティ
 
-| プロパティ | 型     | 説明                                       |
-| ---------- | ------ | ------------------------------------------ |
-| `type`     | string | コントロール種別（必須）                   |
-| `id`       | string | アノテーション用の識別子（任意）           |
-| `x`        | int    | X 座標（親コンテナからの相対位置）         |
-| `y`        | int    | Y 座標（親コンテナからの相対位置）         |
-| `width`    | int    | 幅（コントロールごとにデフォルト値あり）   |
-| `height`   | int    | 高さ（コントロールごとにデフォルト値あり） |
+| プロパティ    | 型     | 説明                                       |
+| ------------- | ------ | ------------------------------------------ |
+| `type`        | string | コントロール種別（必須）                   |
+| `id`          | string | アノテーション用の識別子（任意）           |
+| `x`           | int    | X 座標（親コンテナからの相対位置）         |
+| `y`           | int    | Y 座標（親コンテナからの相対位置）         |
+| `width`       | int    | 幅（コントロールごとにデフォルト値あり）   |
+| `height`      | int    | 高さ（コントロールごとにデフォルト値あり） |
+| `background`  | string | 背景色のオーバーライド（例: `"#FF0000"`）  |
+| `foreground`  | string | テキスト色のオーバーライド（例: `"#FFFFFF"`） |
+| `borderColor` | string | 枠線色のオーバーライド（例: `"#0000FF"`）  |
 
 ---
 
@@ -19,7 +22,7 @@
 
 ### button（ボタン）
 
-![button](../../images/button.svg)
+![button](images/button.svg)
 
 | プロパティ | 型     | 説明         |
 | ---------- | ------ | ------------ |
@@ -31,7 +34,7 @@
 
 ### textbox（テキストボックス）
 
-![textbox](../../images/textbox.svg)
+![textbox](images/textbox.svg)
 
 | プロパティ    | 型     | 説明             |
 | ------------- | ------ | ---------------- |
@@ -44,7 +47,7 @@
 
 ### textarea（テキストエリア）
 
-![textarea](../../images/textarea.svg)
+![textarea](images/textarea.svg)
 
 | プロパティ    | 型     | 説明             |
 | ------------- | ------ | ---------------- |
@@ -58,7 +61,7 @@
 
 ### label（ラベル）
 
-![label](../../images/label.svg)
+![label](images/label.svg)
 
 | プロパティ | 型     | 説明         |
 | ---------- | ------ | ------------ |
@@ -70,7 +73,7 @@
 
 ### linklabel（リンクラベル）
 
-![linklabel](../../images/linklabel.svg)
+![linklabel](images/linklabel.svg)
 
 | プロパティ | 型     | 説明         |
 | ---------- | ------ | ------------ |
@@ -83,7 +86,7 @@
 
 ### combobox（コンボボックス）
 
-![combobox](../../images/combobox.svg)
+![combobox](images/combobox.svg)
 
 | プロパティ | 型       | 説明           |
 | ---------- | -------- | -------------- |
@@ -96,7 +99,7 @@
 
 ### checkbox（チェックボックス）
 
-![checkbox](../../images/checkbox.svg)
+![checkbox](images/checkbox.svg)
 
 | プロパティ | 型     | 説明         |
 | ---------- | ------ | ------------ |
@@ -109,7 +112,7 @@
 
 ### radiobutton（ラジオボタン）
 
-![radiobutton](../../images/radiobutton.svg)
+![radiobutton](images/radiobutton.svg)
 
 | プロパティ | 型     | 説明         |
 | ---------- | ------ | ------------ |
@@ -122,7 +125,7 @@
 
 ### group（グループ）
 
-![group](../../images/group.svg)
+![group](images/group.svg)
 
 | プロパティ | 型                  | 説明                 |
 | ---------- | ------------------- | -------------------- |
@@ -150,7 +153,7 @@
 
 ### datagrid（データグリッド）
 
-![datagrid](../../images/datagrid.svg)
+![datagrid](images/datagrid.svg)
 
 | プロパティ | 型                 | 説明     |
 | ---------- | ------------------ | -------- |
@@ -179,7 +182,7 @@
 
 ### menubar（メニューバー）
 
-![menubar](../../images/menubar.svg)
+![menubar](images/menubar.svg)
 
 | プロパティ | 型       | 説明         |
 | ---------- | -------- | ------------ |
@@ -191,7 +194,7 @@
 
 ### statusbar（ステータスバー）
 
-![statusbar](../../images/statusbar.svg)
+![statusbar](images/statusbar.svg)
 
 | プロパティ | 型       | 説明               |
 | ---------- | -------- | ------------------ |
@@ -203,7 +206,7 @@
 
 ### tabcontrol（タブコントロール）
 
-![tabcontrol](../../images/tabcontrol.svg)
+![tabcontrol](images/tabcontrol.svg)
 
 | プロパティ  | 型              | 説明               |
 | ----------- | --------------- | ------------------ |
@@ -234,7 +237,7 @@
 
 ### listbox（リストボックス）
 
-![listbox](../../images/listbox.svg)
+![listbox](images/listbox.svg)
 
 | プロパティ      | 型       | 説明               |
 | --------------- | -------- | ------------------ |
@@ -247,7 +250,7 @@
 
 ### panel（パネル）
 
-![panel](../../images/panel.svg)
+![panel](images/panel.svg)
 
 | プロパティ | 型                  | 説明                 |
 | ---------- | ------------------- | -------------------- |
@@ -259,7 +262,7 @@
 
 ### image（画像プレースホルダ）
 
-![image](../../images/image.svg)
+![image](images/image.svg)
 
 | プロパティ | 型     | 説明         |
 | ---------- | ------ | ------------ |
@@ -271,7 +274,7 @@
 
 ### progressbar（プログレスバー）
 
-![progressbar](../../images/progressbar.svg)
+![progressbar](images/progressbar.svg)
 
 | プロパティ | 型  | 説明            |
 | ---------- | --- | --------------- |
@@ -283,7 +286,7 @@
 
 ### numericupdown（数値入力）
 
-![numericupdown](../../images/numericupdown.svg)
+![numericupdown](images/numericupdown.svg)
 
 | プロパティ | 型  | 説明   |
 | ---------- | --- | ------ |
@@ -297,7 +300,7 @@
 
 ### datetimepicker（日付時刻入力）
 
-![datetimepicker](../../images/datetimepicker.svg)
+![datetimepicker](images/datetimepicker.svg)
 
 | プロパティ | 型     | 説明                                      |
 | ---------- | ------ | ----------------------------------------- |
@@ -310,7 +313,7 @@
 
 ### treeview（ツリービュー）
 
-![treeview](../../images/treeview.svg)
+![treeview](images/treeview.svg)
 
 | プロパティ | 型                   | 説明       |
 | ---------- | -------------------- | ---------- |
@@ -340,7 +343,7 @@
 
 ### toolbar（ツールバー）
 
-![toolbar](../../images/toolbar.svg)
+![toolbar](images/toolbar.svg)
 
 | プロパティ | 型       | 説明                                       |
 | ---------- | -------- | ------------------------------------------ |

@@ -18,7 +18,7 @@ window:
           y: 20
 ```
 
-![最小構成サンプル](../../images/minimal.svg)
+![最小構成サンプル](images/minimal.svg)
 
 ---
 
@@ -57,7 +57,7 @@ annotations:
       description: '入力内容を登録します。'
 ```
 
-![アノテーション付きサンプル](../../images/annotated.svg)
+![アノテーション付きサンプル](images/annotated.svg)
 
 ---
 
@@ -91,4 +91,4 @@ window:
           text: '保存'
 ```
 
-![部分描画サンプル](../../images/partial-window.svg)
+![部分描画サンプル](images/partial-window.svg)

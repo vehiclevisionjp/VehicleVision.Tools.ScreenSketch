@@ -9,13 +9,14 @@ VehicleVision.Tools.ScreenSketch のコマンド一覧です。
 YAML ファイルから SVG 画面イメージと Markdown ドキュメントを生成します。
 
 ```bash
-screen-sketch generate <input-path> [output-dir]
+screen-sketch generate <input-path> [output-dir] [--theme <name>]
 ```
 
 | 引数           | 必須 | 説明                                                |
 | -------------- | ---- | --------------------------------------------------- |
 | `<input-path>` | ○    | YAML ファイルまたは YAML ファイルを含むディレクトリ |
 | `[output-dir]` |      | 出力先ディレクトリ（省略時: `./output`）            |
+| `--theme`      |      | カラーテーマ（`default`, `dark`, `blueprint`）   |
 
 **出力ファイル：**
 
@@ -30,7 +31,7 @@ screen-sketch generate <input-path> [output-dir]
 Markdown ファイル内の ` ```yaml-screen ` コードブロックを検出し、SVG 画像参照 + アノテーションテーブルに変換します。元の YAML は HTML コメントとして保持されるため、再変換や復元が可能です。
 
 ```bash
-screen-sketch transform <input-path> [output-dir] [--inline]
+screen-sketch transform <input-path> [output-dir] [--inline] [--theme <name>]
 ```
 
 | 引数           | 必須 | 説明                                                      |
@@ -38,6 +39,7 @@ screen-sketch transform <input-path> [output-dir] [--inline]
 | `<input-path>` | ○    | Markdown ファイルまたはディレクトリ                       |
 | `[output-dir]` |      | 出力先ディレクトリ（省略時: 入力と同じ場所に上書き）      |
 | `--inline`     |      | SVG をインライン埋め込みする（PDF/HTML 生成の前処理向け） |
+| `--theme`      |      | カラーテーマ（`default`, `dark`, `blueprint`）           |
 
 **変換前（Markdown）：**
 
@@ -96,7 +98,11 @@ screen-sketch restore <input-path>
 stdin から YAML を読み取り、stdout に SVG を出力します。VS Code 拡張や外部ツールからのパイプ連携に使用します。
 
 ```bash
-screen-sketch render < input.yaml > output.svg
+screen-sketch render [--theme <name>] < input.yaml > output.svg
 ```
 
-引数はありません。YAML は標準入力から読み取り、SVG は標準出力に書き出します。
+| 引数      | 必須 | 説明                                           |
+| --------- | ---- | ---------------------------------------------- |
+| `--theme` |      | カラーテーマ（`default`, `dark`, `blueprint`） |
+
+YAML は標準入力から読み取り、SVG は標準出力に書き出します。

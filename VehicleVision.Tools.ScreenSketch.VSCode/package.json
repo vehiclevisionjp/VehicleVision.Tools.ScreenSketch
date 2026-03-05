@@ -27,6 +27,12 @@
           "type": "string",
           "default": "screen-sketch",
           "description": "screen-sketch コマンドのパス。dotnet tool でインストール済みの場合はデフォルトのままで OK です。"
+        },
+        "screenSketch.theme": {
+          "type": "string",
+          "default": "",
+          "enum": ["", "default", "dark", "blueprint"],
+          "description": "SVG レンダリングに使用するカラーテーマ。空の場合は YAML 内の screen.theme またはデフォルトテーマが使われます。"
         }
       }
     }

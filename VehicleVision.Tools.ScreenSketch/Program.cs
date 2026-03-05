@@ -23,7 +23,7 @@ public class Program
             "generate" => RunGenerate(args.Skip(1).ToArray()),
             "transform" => RunTransform(args.Skip(1).ToArray()),
             "restore" => RunRestore(args.Skip(1).ToArray()),
-            "render" => RunRender(),
+            "render" => RunRender(args.Skip(1).ToArray()),
             _ => RunGenerate(args) // 後方互換: コマンド指定なしの場合は generate
         };
     }
@@ -34,14 +34,25 @@ public class Program
 
     private static int RunGenerate(string[] args)
     {
-        if (args.Length < 1)
+        string? themeName = null;
+        var positional = new List<string>();
+
+        for (var i = 0; i < args.Length; i++)
         {
-            Console.Error.WriteLine("Usage: ManualGenerator generate <input-path> [output-dir]");
+            if (args[i] == "--theme" && i + 1 < args.Length)
+                themeName = args[++i];
+            else
+                positional.Add(args[i]);
+        }
+
+        if (positional.Count < 1)
+        {
+            Console.Error.WriteLine("Usage: ManualGenerator generate <input-path> [output-dir] [--theme <name>]");
             return 1;
         }
 
-        var inputPath = args[0];
-        var outputDir = args.Length > 1 ? args[1] : "./output";
+        var inputPath = positional[0];
+        var outputDir = positional.Count > 1 ? positional[1] : "./output";
 
         var yamlFiles = GetYamlFiles(inputPath);
         if (yamlFiles.Count == 0)
@@ -71,7 +82,8 @@ public class Program
                 var definition = deserializer.Deserialize<ScreenDefinition>(yaml);
                 var baseName = Path.GetFileNameWithoutExtension(yamlFile);
 
-                var renderer = new SvgRenderer();
+                var colors = ThemeColors.FromName(themeName ?? definition.Screen?.Theme);
+                var renderer = new SvgRenderer(colors);
                 var svg = renderer.Render(definition);
                 var svgPath = Path.Combine(imagesDir, $"{baseName}.svg");
                 File.WriteAllText(svgPath, svg);
@@ -112,6 +124,7 @@ public class Program
         var inline = false;
         var inputPath = "";
         var outputDir = "";
+        string? themeName = null;
 
         for (var i = 0; i < args.Length; i++)
         {
@@ -119,6 +132,9 @@ public class Program
             {
                 case "--inline":
                     inline = true;
+                    break;
+                case "--theme" when i + 1 < args.Length:
+                    themeName = args[++i];
                     break;
                 default:
                     if (string.IsNullOrEmpty(inputPath))
@@ -131,7 +147,7 @@ public class Program
 
         if (string.IsNullOrEmpty(inputPath))
         {
-            Console.Error.WriteLine("Usage: ManualGenerator transform <input-path> [output-dir] [--inline]");
+            Console.Error.WriteLine("Usage: ManualGenerator transform <input-path> [output-dir] [--inline] [--theme <name>]");
             Console.Error.WriteLine();
             Console.Error.WriteLine("  <input-path>  Markdown ファイルまたはディレクトリ");
             Console.Error.WriteLine("  [output-dir]   出力先（省略時は入力と同じ場所に上書き）");
@@ -146,7 +162,7 @@ public class Program
             return 1;
         }
 
-        var processor = new MarkdownInlineProcessor();
+        var processor = new MarkdownInlineProcessor(themeName);
         var totalBlocks = 0;
         var totalErrors = 0;
 
@@ -242,8 +258,15 @@ public class Program
     //  render: stdin YAML → stdout SVG
     // ────────────────────────────────────────────
 
-    private static int RunRender()
+    private static int RunRender(string[] args)
     {
+        string? themeName = null;
+        for (var i = 0; i < args.Length; i++)
+        {
+            if (args[i] == "--theme" && i + 1 < args.Length)
+                themeName = args[++i];
+        }
+
         try
         {
             var yaml = Console.In.ReadToEnd();
@@ -254,7 +277,8 @@ public class Program
                 .Build();
 
             var definition = deserializer.Deserialize<ScreenDefinition>(yaml);
-            var renderer = new SvgRenderer();
+            var colors = ThemeColors.FromName(themeName ?? definition.Screen?.Theme);
+            var renderer = new SvgRenderer(colors);
             var svg = renderer.Render(definition);
 
             Console.Write(svg);
@@ -303,24 +327,30 @@ public class Program
         Console.Error.WriteLine();
         Console.Error.WriteLine("Commands:");
         Console.Error.WriteLine();
-        Console.Error.WriteLine("  generate <input-path> [output-dir]");
+        Console.Error.WriteLine("  generate <input-path> [output-dir] [--theme <name>]");
         Console.Error.WriteLine("    YAML ファイルから SVG + Markdown を新規生成する");
+        Console.Error.WriteLine("    --theme: カラーテーマ (default, dark, blueprint)");
         Console.Error.WriteLine();
-        Console.Error.WriteLine("  transform <input-path> [output-dir] [--inline]");
+        Console.Error.WriteLine("  transform <input-path> [output-dir] [--inline] [--theme <name>]");
         Console.Error.WriteLine("    Markdown 内の ```yaml-screen ブロックを SVG + テーブルに変換する");
         Console.Error.WriteLine("    --inline: SVG をインライン埋め込み（PDF/HTML 生成前処理向け）");
+        Console.Error.WriteLine("    --theme: カラーテーマ (default, dark, blueprint)");
         Console.Error.WriteLine();
         Console.Error.WriteLine("  restore <input-path>");
         Console.Error.WriteLine("    変換済みの yaml-screen ブロックをコードブロックに復元する");
         Console.Error.WriteLine();
-        Console.Error.WriteLine("  render");
+        Console.Error.WriteLine("  render [--theme <name>]");
         Console.Error.WriteLine("    stdin から YAML を読み取り、stdout に SVG を出力する");
+        Console.Error.WriteLine("    --theme: カラーテーマ (default, dark, blueprint)");
         Console.Error.WriteLine();
         Console.Error.WriteLine("Examples:");
         Console.Error.WriteLine("  ManualGenerator generate screens/ docs/manual/");
+        Console.Error.WriteLine("  ManualGenerator generate screens/ docs/manual/ --theme dark");
         Console.Error.WriteLine("  ManualGenerator transform docs/ docs/_output/");
         Console.Error.WriteLine("  ManualGenerator transform docs/ docs/_temp/ --inline");
+        Console.Error.WriteLine("  ManualGenerator transform docs/ --theme blueprint");
         Console.Error.WriteLine("  ManualGenerator restore docs/");
         Console.Error.WriteLine("  echo 'window: ...' | ManualGenerator render");
+        Console.Error.WriteLine("  echo 'window: ...' | ManualGenerator render --theme dark");
     }
 }

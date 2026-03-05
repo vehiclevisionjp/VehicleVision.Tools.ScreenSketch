@@ -29,9 +29,11 @@ public class MarkdownInlineProcessor
         RegexOptions.Compiled);
 
     private readonly IDeserializer _deserializer;
+    private readonly string? _themeNameOverride;
 
-    public MarkdownInlineProcessor()
+    public MarkdownInlineProcessor(string? themeNameOverride = null)
     {
+        _themeNameOverride = themeNameOverride;
         _deserializer = new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
             .IgnoreUnmatchedProperties()
@@ -77,7 +79,8 @@ public class MarkdownInlineProcessor
             try
             {
                 var definition = _deserializer.Deserialize<ScreenDefinition>(yamlContent);
-                var renderer = new SvgRenderer();
+                var colors = ThemeColors.FromName(_themeNameOverride ?? definition.Screen?.Theme);
+                var renderer = new SvgRenderer(colors);
                 var svg = renderer.Render(definition);
 
                 // SVG ファイル出力

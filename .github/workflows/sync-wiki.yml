@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - 'docs/wiki/**'
-      - 'images/**'
 
 jobs:
   sync:
@@ -31,7 +30,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Sync docs to wiki
-        run: node docs/script/sync-docs-to-wiki.js ./wiki-temp ${{ github.repository_owner }} ${{ github.event.repository.name }} main
+        run: node docs/script/sync-docs-to-wiki.js ./wiki-temp
 
       - name: Push to wiki
         run: |

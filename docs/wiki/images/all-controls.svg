@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="800" viewBox="0 0 1100 800">
+  <defs>
+    <filter id="windowShadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-opacity="0.15" />
+    </filter>
+    <style>text { font-family: 'Segoe UI', 'Meiryo', sans-serif; }</style>
+  </defs>
+  <rect width="1100" height="800" fill="#FFFFFF" />
+  <rect x="40" y="40" width="900" height="720" fill="#F0F0F0" stroke="#999999" stroke-width="1" rx="4" filter="url(#windowShadow)" />
+  <rect x="40" y="40" width="900" height="30" fill="#0078D4" stroke="none" stroke-width="0" rx="4" />
+  <rect x="40" y="64" width="900" height="6" fill="#0078D4" stroke="none" stroke-width="1" />
+  <text x="50" y="55" font-size="12" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">ScreenSketch - コントロール一覧</text>
+  <line x1="918" y1="51" x2="926" y2="59" stroke="#FFFFFF" stroke-width="1" />
+  <line x1="918" y1="59" x2="926" y2="51" stroke="#FFFFFF" stroke-width="1" />
+  <rect x="893" y="51" width="8" height="8" fill="none" stroke="#FFFFFF" stroke-width="1" />
+  <line x1="868" y1="55" x2="876" y2="55" stroke="#FFFFFF" stroke-width="1" />
+  <rect x="40" y="70" width="900" height="22" fill="#F5F5F5" stroke="none" stroke-width="1" />
+  <line x1="40" y1="92" x2="940" y2="92" stroke="#D5DFE5" stroke-width="1" />
+  <text x="48" y="81" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">ファイル(F)</text>
+  <text x="130" y="81" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">編集(E)</text>
+  <text x="188" y="81" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">表示(V)</text>
+  <text x="246" y="81" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">ヘルプ(H)</text>
+  <rect x="40" y="92" width="900" height="28" fill="#F0F0F0" stroke="none" stroke-width="1" />
+  <line x1="40" y1="120" x2="940" y2="120" stroke="#D5DFE5" stroke-width="1" />
+  <rect x="44" y="94" width="34" height="24" fill="none" stroke="none" stroke-width="0" rx="3" />
+  <text x="50" y="106" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">新規</text>
+  <rect x="80" y="94" width="34" height="24" fill="none" stroke="none" stroke-width="0" rx="3" />
+  <text x="86" y="106" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">開く</text>
+  <rect x="116" y="94" width="34" height="24" fill="none" stroke="none" stroke-width="0" rx="3" />
+  <text x="122" y="106" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">保存</text>
+  <line x1="154" y1="96" x2="154" y2="116" stroke="#C0C0C0" stroke-width="1" />
+  <rect x="160" y="94" width="56" height="24" fill="none" stroke="none" stroke-width="0" rx="3" />
+  <text x="166" y="106" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">元に戻す</text>
+  <rect x="218" y="94" width="56" height="24" fill="none" stroke="none" stroke-width="0" rx="3" />
+  <text x="224" y="106" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">やり直し</text>
+  <rect x="50" y="134" width="430" height="172" fill="none" stroke="#D5DFE5" stroke-width="1" rx="3" />
+  <rect x="58" y="126" width="56" height="16" fill="#F0F0F0" stroke="none" stroke-width="1" />
+  <text x="64" y="134" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">基本入力</text>
+  <text x="65" y="167" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">名前:</text>
+  <rect x="130" y="152" width="200" height="24" fill="#FFFFFF" stroke="#7A7A7A" stroke-width="1" rx="2" />
+  <text x="134" y="164" font-size="12" fill="#A0A0A0" text-anchor="start" font-weight="normal" dominant-baseline="central" font-style="italic">テキストを入力</text>
+  <text x="340" y="167" font-size="12" fill="#0066CC" text-anchor="start" font-weight="normal" dominant-baseline="central">入力ヘルプ</text>
+  <line x1="340" y1="175" x2="400" y2="175" stroke="#0066CC" stroke-width="1" />
+  <text x="65" y="197" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">種別:</text>
+  <rect x="130" y="182" width="160" height="24" fill="#FFFFFF" stroke="#7A7A7A" stroke-width="1" rx="2" />
+  <text x="134" y="194" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">選択してください</text>
+  <rect x="270" y="182" width="20" height="24" fill="#E1E1E1" stroke="#7A7A7A" stroke-width="1" rx="2" />
+  <polygon points="275,191 285,191 280,197" fill="#666666" />
+  <text x="65" y="227" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">日付:</text>
+  <rect x="130" y="212" width="160" height="24" fill="#FFFFFF" stroke="#7A7A7A" stroke-width="1" rx="2" />
+  <text x="134" y="224" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">2026/01/01</text>
+  <rect x="270" y="212" width="20" height="24" fill="#E1E1E1" stroke="#7A7A7A" stroke-width="1" rx="2" />
+  <rect x="275" y="219" width="10" height="10" fill="none" stroke="#666666" stroke-width="1" rx="1" />
+  <line x1="275" y1="222" x2="285" y2="222" stroke="#666666" stroke-width="1" />
+  <circle cx="280" cy="226" r="1" fill="#666666" />
+  <text x="65" y="257" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">数量:</text>
+  <rect x="130" y="242" width="100" height="24" fill="#FFFFFF" stroke="#7A7A7A" stroke-width="1" rx="2" />
+  <text x="134" y="254" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">5</text>
+  <rect x="212" y="242" width="18" height="12" fill="#E1E1E1" stroke="#7A7A7A" stroke-width="1" />
+  <polygon points="217,250 225,250 221,245" fill="#666666" />
+  <rect x="212" y="254" width="18" height="12" fill="#E1E1E1" stroke="#7A7A7A" stroke-width="1" />
+  <polygon points="217,258 225,258 221,263" fill="#666666" />
+  <rect x="65" y="280" width="14" height="14" fill="#FFFFFF" stroke="#666666" stroke-width="1" rx="2" />
+  <polyline points="68,287 71,290 76,283" fill="none" stroke="#0078D4" stroke-width="2" />
+  <text x="85" y="287" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">オプションを有効にする</text>
+  <circle cx="277" cy="287" r="7" fill="#FFFFFF" stroke="#666666" stroke-width="1" />
+  <circle cx="277" cy="287" r="4" fill="#0078D4" />
+  <text x="290" y="287" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">選択肢A</text>
+  <circle cx="377" cy="287" r="7" fill="#FFFFFF" stroke="#666666" stroke-width="1" />
+  <text x="390" y="287" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">選択肢B</text>
+  <text x="50" y="322" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">備考:</text>
+  <rect x="50" y="330" width="430" height="70" fill="#FFFFFF" stroke="#7A7A7A" stroke-width="1" rx="2" />
+  <rect x="466" y="331" width="13" height="68" fill="#F0F0F0" stroke="#D5DFE5" stroke-width="1" />
+  <rect x="468" y="334" width="9" height="20" fill="#C0C0C0" stroke="none" stroke-width="0" rx="3" />
+  <text x="54" y="342" font-size="12" fill="#A0A0A0" text-anchor="start" font-weight="normal" dominant-baseline="central" font-style="italic">自由記述欄（複数行対応）</text>
+  <rect x="310" y="408" width="80" height="26" fill="#E1E1E1" stroke="#ADADAD" stroke-width="1" rx="3" />
+  <text x="350" y="421" font-size="12" fill="#1E1E1E" text-anchor="middle" font-weight="normal" dominant-baseline="central">登録</text>
+  <rect x="400" y="408" width="80" height="26" fill="#E1E1E1" stroke="#ADADAD" stroke-width="1" rx="3" />
+  <text x="440" y="421" font-size="12" fill="#1E1E1E" text-anchor="middle" font-weight="normal" dominant-baseline="central">クリア</text>
+  <text x="50" y="422" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">進捗:</text>
+  <rect x="90" y="410" width="200" height="20" fill="#E0E0E0" stroke="#D5DFE5" stroke-width="1" rx="3" />
+  <rect x="91" y="411" width="128" height="18" fill="#0078D4" stroke="none" stroke-width="0" rx="2" />
+  <text x="190" y="420" font-size="10" fill="#1E1E1E" text-anchor="middle" font-weight="bold" dominant-baseline="central">65%</text>
+  <rect x="490" y="152" width="440" height="284" fill="#FFFFFF" stroke="#D5DFE5" stroke-width="1" />
+  <rect x="490" y="126" width="48" height="27" fill="#FFFFFF" stroke="#D5DFE5" stroke-width="1" rx="3" />
+  <rect x="491" y="151" width="46" height="3" fill="#FFFFFF" stroke="none" stroke-width="1" />
+  <text x="502" y="139" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">一覧</text>
+  <rect x="540" y="126" width="60" height="27" fill="#F5F5F5" stroke="#D5DFE5" stroke-width="1" rx="3" />
+  <text x="552" y="139" font-size="12" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">ツリー</text>
+  <rect x="602" y="126" width="60" height="27" fill="#F5F5F5" stroke="#D5DFE5" stroke-width="1" rx="3" />
+  <text x="614" y="139" font-size="12" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">リスト</text>
+  <rect x="495" y="157" width="428" height="250" fill="#FFFFFF" stroke="#D5DFE5" stroke-width="1" />
+  <rect x="495" y="157" width="428" height="26" fill="#F5F5F5" stroke="#D5DFE5" stroke-width="1" />
+  <text x="503" y="170" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="bold" dominant-baseline="central">ID</text>
+  <text x="563" y="170" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="bold" dominant-baseline="central">名前</text>
+  <line x1="555" y1="157" x2="555" y2="407" stroke="#D5DFE5" stroke-width="1" />
+  <text x="713" y="170" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="bold" dominant-baseline="central">ステータス</text>
+  <line x1="705" y1="157" x2="705" y2="407" stroke="#D5DFE5" stroke-width="1" />
+  <text x="813" y="170" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="bold" dominant-baseline="central">更新日</text>
+  <line x1="805" y1="157" x2="805" y2="407" stroke="#D5DFE5" stroke-width="1" />
+  <line x1="495" y1="183" x2="923" y2="183" stroke="#D5DFE5" stroke-width="1" />
+  <line x1="495" y1="183" x2="923" y2="183" stroke="#D5DFE5" stroke-width="1" />
+  <text x="503" y="195" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">001</text>
+  <text x="563" y="195" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">サンプル項目A</text>
+  <text x="713" y="195" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">有効</text>
+  <text x="813" y="195" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">2026/03/01</text>
+  <rect x="496" y="207" width="426" height="24" fill="#FAFAFA" stroke="none" stroke-width="1" />
+  <line x1="495" y1="207" x2="923" y2="207" stroke="#D5DFE5" stroke-width="1" />
+  <text x="503" y="219" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">002</text>
+  <text x="563" y="219" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">サンプル項目B</text>
+  <text x="713" y="219" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">無効</text>
+  <text x="813" y="219" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">2026/02/15</text>
+  <line x1="495" y1="231" x2="923" y2="231" stroke="#D5DFE5" stroke-width="1" />
+  <text x="503" y="243" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">003</text>
+  <text x="563" y="243" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">サンプル項目C</text>
+  <text x="713" y="243" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">有効</text>
+  <text x="813" y="243" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">2026/01/20</text>
+  <rect x="50" y="445" width="880" height="300" fill="none" stroke="#D5DFE5" stroke-width="1" rx="2" />
+  <rect x="55" y="450" width="868" height="260" fill="#FFFFFF" stroke="#D5DFE5" stroke-width="1" />
+  <rect x="55" y="450" width="868" height="26" fill="#F5F5F5" stroke="#D5DFE5" stroke-width="1" />
+  <text x="63" y="463" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="bold" dominant-baseline="central">項目名</text>
+  <text x="263" y="463" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="bold" dominant-baseline="central">値</text>
+  <line x1="255" y1="450" x2="255" y2="710" stroke="#D5DFE5" stroke-width="1" />
+  <text x="513" y="463" font-size="11" fill="#1E1E1E" text-anchor="start" font-weight="bold" dominant-baseline="central">説明</text>
+  <line x1="505" y1="450" x2="505" y2="710" stroke="#D5DFE5" stroke-width="1" />
+  <line x1="55" y1="476" x2="923" y2="476" stroke="#D5DFE5" stroke-width="1" />
+  <line x1="55" y1="476" x2="923" y2="476" stroke="#D5DFE5" stroke-width="1" />
+  <text x="63" y="488" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">button</text>
+  <text x="263" y="488" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">ボタン</text>
+  <text x="513" y="488" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">クリック可能なボタンコントロール</text>
+  <rect x="56" y="500" width="866" height="24" fill="#FAFAFA" stroke="none" stroke-width="1" />
+  <line x1="55" y1="500" x2="923" y2="500" stroke="#D5DFE5" stroke-width="1" />
+  <text x="63" y="512" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">textbox</text>
+  <text x="263" y="512" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">テキストボックス</text>
+  <text x="513" y="512" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">単一行テキスト入力</text>
+  <line x1="55" y1="524" x2="923" y2="524" stroke="#D5DFE5" stroke-width="1" />
+  <text x="63" y="536" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">textarea</text>
+  <text x="263" y="536" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">テキストエリア</text>
+  <text x="513" y="536" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">複数行テキスト入力（スクロール付き）</text>
+  <rect x="56" y="548" width="866" height="24" fill="#FAFAFA" stroke="none" stroke-width="1" />
+  <line x1="55" y1="548" x2="923" y2="548" stroke="#D5DFE5" stroke-width="1" />
+  <text x="63" y="560" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">label</text>
+  <text x="263" y="560" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">ラベル</text>
+  <text x="513" y="560" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">静的テキスト表示</text>
+  <line x1="55" y1="572" x2="923" y2="572" stroke="#D5DFE5" stroke-width="1" />
+  <text x="63" y="584" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">linklabel</text>
+  <text x="263" y="584" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">リンクラベル</text>
+  <text x="513" y="584" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">ハイパーリンク付きテキスト</text>
+  <rect x="56" y="596" width="866" height="24" fill="#FAFAFA" stroke="none" stroke-width="1" />
+  <line x1="55" y1="596" x2="923" y2="596" stroke="#D5DFE5" stroke-width="1" />
+  <text x="63" y="608" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">combobox</text>
+  <text x="263" y="608" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">コンボボックス</text>
+  <text x="513" y="608" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">ドロップダウン選択</text>
+  <line x1="55" y1="620" x2="923" y2="620" stroke="#D5DFE5" stroke-width="1" />
+  <text x="63" y="632" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">checkbox</text>
+  <text x="263" y="632" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">チェックボックス</text>
+  <text x="513" y="632" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">ON/OFF 切替</text>
+  <rect x="56" y="644" width="866" height="24" fill="#FAFAFA" stroke="none" stroke-width="1" />
+  <line x1="55" y1="644" x2="923" y2="644" stroke="#D5DFE5" stroke-width="1" />
+  <text x="63" y="656" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">radiobutton</text>
+  <text x="263" y="656" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">ラジオボタン</text>
+  <text x="513" y="656" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">択一選択</text>
+  <line x1="55" y1="668" x2="923" y2="668" stroke="#D5DFE5" stroke-width="1" />
+  <text x="63" y="680" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">numericupdown</text>
+  <text x="263" y="680" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">数値入力</text>
+  <text x="513" y="680" font-size="11" fill="#333333" text-anchor="start" font-weight="normal" dominant-baseline="central">上下ボタン付き数値入力</text>
+  <rect x="40" y="738" width="900" height="22" fill="#007ACC" stroke="none" stroke-width="1" />
+  <text x="50" y="749" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">準備完了</text>
+  <line x1="104" y1="741" x2="104" y2="757" stroke="#FFFFFF" stroke-width="1" />
+  <text x="114" y="749" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">全21種コントロール対応</text>
+  <line x1="332" y1="164" x2="954" y2="164" stroke="#E53935" stroke-width="1" stroke-dasharray="4,3" />
+  <circle cx="332" cy="164" r="3" fill="#E53935" />
+  <circle cx="970" cy="164" r="14" fill="#E53935" />
+  <text x="970" y="164" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">①</text>
+  <line x1="292" y1="194" x2="954" y2="200" stroke="#E53935" stroke-width="1" stroke-dasharray="4,3" />
+  <circle cx="292" cy="194" r="3" fill="#E53935" />
+  <circle cx="970" cy="200" r="14" fill="#E53935" />
+  <text x="970" y="200" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">②</text>
+  <line x1="292" y1="224" x2="954" y2="236" stroke="#E53935" stroke-width="1" stroke-dasharray="4,3" />
+  <circle cx="292" cy="224" r="3" fill="#E53935" />
+  <circle cx="970" cy="236" r="14" fill="#E53935" />
+  <text x="970" y="236" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">③</text>
+  <line x1="232" y1="254" x2="954" y2="272" stroke="#E53935" stroke-width="1" stroke-dasharray="4,3" />
+  <circle cx="232" cy="254" r="3" fill="#E53935" />
+  <circle cx="970" cy="272" r="14" fill="#E53935" />
+  <text x="970" y="272" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">④</text>
+  <line x1="932" y1="281" x2="954" y2="308" stroke="#E53935" stroke-width="1" stroke-dasharray="4,3" />
+  <circle cx="932" cy="281" r="3" fill="#E53935" />
+  <circle cx="970" cy="308" r="14" fill="#E53935" />
+  <text x="970" y="308" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">⑤</text>
+  <line x1="482" y1="365" x2="954" y2="365" stroke="#E53935" stroke-width="1" stroke-dasharray="4,3" />
+  <circle cx="482" cy="365" r="3" fill="#E53935" />
+  <circle cx="970" cy="365" r="14" fill="#E53935" />
+  <text x="970" y="365" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">⑦</text>
+  <line x1="392" y1="421" x2="954" y2="421" stroke="#E53935" stroke-width="1" stroke-dasharray="4,3" />
+  <circle cx="392" cy="421" r="3" fill="#E53935" />
+  <circle cx="970" cy="421" r="14" fill="#E53935" />
+  <text x="970" y="421" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">⑥</text>
+</svg>
