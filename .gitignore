@@ -51,3 +51,4 @@ wiki-temp/
 ## VS Code Extension
 *.vsix
 VehicleVision.Tools.ScreenSketch.VSCode/out/
+VehicleVision.Tools.ScreenSketch.VSCode/bin/

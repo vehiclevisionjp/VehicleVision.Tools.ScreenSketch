@@ -41,7 +41,11 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "package": "vsce package"
+    "package": "vsce package",
+    "package:win32-x64": "dotnet publish ../VehicleVision.Tools.ScreenSketch -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -o bin && vsce package --target win32-x64",
+    "package:linux-x64": "dotnet publish ../VehicleVision.Tools.ScreenSketch -c Release -r linux-x64 --self-contained -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -o bin && vsce package --target linux-x64",
+    "package:darwin-x64": "dotnet publish ../VehicleVision.Tools.ScreenSketch -c Release -r osx-x64 --self-contained -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -o bin && vsce package --target darwin-x64",
+    "package:darwin-arm64": "dotnet publish ../VehicleVision.Tools.ScreenSketch -c Release -r osx-arm64 --self-contained -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -o bin && vsce package --target darwin-arm64"
   },
   "extensionKind": [
     "workspace"

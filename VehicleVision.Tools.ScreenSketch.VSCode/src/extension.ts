@@ -1,16 +1,36 @@
 import * as vscode from "vscode";
+import * as path from "path";
+import * as fs from "fs";
 import { execFileSync } from "child_process";
 import type MarkdownIt from "markdown-it";
 
-export function activate(_context: vscode.ExtensionContext) {
+/** バンドル済みバイナリまたはグローバルツールのパスを解決する */
+function resolveToolPath(extensionPath: string): string {
+    // 1. 拡張にバンドルされたバイナリを探す（マーケットプレイス公開時）
+    const exeName = process.platform === "win32"
+        ? "VehicleVision.Tools.ScreenSketch.exe"
+        : "VehicleVision.Tools.ScreenSketch";
+    const bundled = path.join(extensionPath, "bin", exeName);
+    if (fs.existsSync(bundled)) {
+        return bundled;
+    }
+
+    // 2. ユーザー設定 or グローバルツールにフォールバック（開発時）
+    const config = vscode.workspace.getConfiguration("screenSketch");
+    return config.get<string>("toolPath", "screen-sketch");
+}
+
+export function activate(context: vscode.ExtensionContext) {
+    const toolPath = resolveToolPath(context.extensionPath);
+
     return {
         extendMarkdownIt(md: MarkdownIt) {
-            return md.use(screenSketchPlugin);
+            return md.use((md) => screenSketchPlugin(md, toolPath));
         },
     };
 }
 
-function screenSketchPlugin(md: MarkdownIt): void {
+function screenSketchPlugin(md: MarkdownIt, toolPath: string): void {
     const defaultFence =
         md.renderer.rules.fence ||
         function (tokens, idx, options, _env, self) {
@@ -22,7 +42,7 @@ function screenSketchPlugin(md: MarkdownIt): void {
 
         if (token.info.trim() === "yaml-screen") {
             const yaml = token.content;
-            const svg = renderSync(yaml);
+            const svg = renderSync(yaml, toolPath);
             if (svg !== null) {
                 return `<div class="screen-sketch-preview">${svg}</div>`;
             }
@@ -43,10 +63,9 @@ function screenSketchPlugin(md: MarkdownIt): void {
  * screen-sketch render コマンドを同期的に呼び出し、SVG 文字列を返す。
  * プレビュー描画は同期コンテキストで実行されるため、child_process.execFileSync を使用。
  */
-function renderSync(yaml: string): string | null {
+function renderSync(yaml: string, toolPath: string): string | null {
     try {
         const config = vscode.workspace.getConfiguration("screenSketch");
-        const toolPath = config.get<string>("toolPath", "screen-sketch");
         const theme = config.get<string>("theme", "");
 
         const args = ["render"];
