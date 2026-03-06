@@ -23,6 +23,11 @@
     "configuration": {
       "title": "Screen Sketch",
       "properties": {
+        "screenSketch.toolPath": {
+          "type": "string",
+          "default": "screen-sketch",
+          "description": "screen-sketch コマンドのパス。dotnet tool でインストール済みの場合はデフォルトのままで OK です。"
+        },
         "screenSketch.theme": {
           "type": "string",
           "default": "",
@@ -41,11 +46,7 @@
   "extensionKind": [
     "workspace"
   ],
-  "dependencies": {
-    "js-yaml": "^4.1.0"
-  },
   "devDependencies": {
-    "@types/js-yaml": "^4.0.9",
     "@types/markdown-it": "^14.0.0",
     "@types/node": "^25.3.3",
     "@types/vscode": "^1.80.0",
