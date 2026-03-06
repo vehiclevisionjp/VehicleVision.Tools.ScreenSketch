@@ -1,0 +1,19 @@
+screen:
+  title: toolbar
+window:
+  width: 340
+  height: 50
+  chrome: false
+  controls:
+    - type: toolbar
+      x: 0
+      y: 0
+      width: 340
+      height: 28
+      items:
+        - 新規
+        - 開く
+        - 保存
+        - "|"
+        - 元に戻す
+        - やり直し

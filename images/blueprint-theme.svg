@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="480" viewBox="0 0 680 480">
+  <defs>
+    <filter id="windowShadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-opacity="0.15" />
+    </filter>
+    <style>text { font-family: 'Segoe UI', 'Meiryo', sans-serif; }</style>
+  </defs>
+  <rect width="680" height="480" fill="#1A3A5C" />
+  <rect x="40" y="40" width="600" height="400" fill="#1A3A5C" stroke="#4A90D9" stroke-width="1" rx="4" filter="url(#windowShadow)" />
+  <rect x="40" y="40" width="600" height="30" fill="#2E6EB5" stroke="none" stroke-width="0" rx="4" />
+  <rect x="40" y="64" width="600" height="6" fill="#2E6EB5" stroke="none" stroke-width="1" />
+  <text x="50" y="55" font-size="12" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">ブループリントモード画面</text>
+  <line x1="618" y1="51" x2="626" y2="59" stroke="#FFFFFF" stroke-width="1" />
+  <line x1="618" y1="59" x2="626" y2="51" stroke="#FFFFFF" stroke-width="1" />
+  <rect x="593" y="51" width="8" height="8" fill="none" stroke="#FFFFFF" stroke-width="1" />
+  <line x1="568" y1="55" x2="576" y2="55" stroke="#FFFFFF" stroke-width="1" />
+  <rect x="40" y="70" width="600" height="22" fill="#1A3A5C" stroke="none" stroke-width="1" />
+  <line x1="40" y1="92" x2="640" y2="92" stroke="#4A90D9" stroke-width="1" />
+  <text x="48" y="81" font-size="12" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">ファイル</text>
+  <text x="112" y="81" font-size="12" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">編集</text>
+  <text x="152" y="81" font-size="12" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">表示</text>
+  <text x="192" y="81" font-size="12" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">ヘルプ</text>
+  <text x="60" y="120" font-size="12" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">ユーザー名</text>
+  <rect x="160" y="106" width="200" height="24" fill="#0F2A45" stroke="#4A90D9" stroke-width="1" rx="2" />
+  <text x="164" y="118" font-size="12" fill="#7BAAD4" text-anchor="start" font-weight="normal" dominant-baseline="central" font-style="italic">入力してください</text>
+  <rect x="380" y="105" width="80" height="26" fill="#1A3A5C" stroke="#4A90D9" stroke-width="1" rx="3" />
+  <text x="420" y="118" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="normal" dominant-baseline="central">検索</text>
+  <rect x="480" y="105" width="120" height="26" fill="#E53935" stroke="#C62828" stroke-width="1" rx="3" />
+  <text x="540" y="118" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="normal" dominant-baseline="central">強調ボタン</text>
+  <rect x="60" y="150" width="540" height="200" fill="#0F2A45" stroke="#4A90D9" stroke-width="1" />
+  <rect x="60" y="150" width="540" height="26" fill="#1A3A5C" stroke="#4A90D9" stroke-width="1" />
+  <text x="68" y="163" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="bold" dominant-baseline="central">ID</text>
+  <text x="128" y="163" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="bold" dominant-baseline="central">名前</text>
+  <line x1="120" y1="150" x2="120" y2="350" stroke="#4A90D9" stroke-width="1" />
+  <text x="328" y="163" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="bold" dominant-baseline="central">ステータス</text>
+  <line x1="320" y1="150" x2="320" y2="350" stroke="#4A90D9" stroke-width="1" />
+  <text x="468" y="163" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="bold" dominant-baseline="central">更新日</text>
+  <line x1="460" y1="150" x2="460" y2="350" stroke="#4A90D9" stroke-width="1" />
+  <line x1="60" y1="176" x2="600" y2="176" stroke="#4A90D9" stroke-width="1" />
+  <line x1="60" y1="176" x2="600" y2="176" stroke="#4A90D9" stroke-width="1" />
+  <text x="68" y="188" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">001</text>
+  <text x="128" y="188" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">サンプルデータ A</text>
+  <text x="328" y="188" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">有効</text>
+  <text x="468" y="188" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">2026/01/15</text>
+  <rect x="61" y="200" width="538" height="24" fill="#15304F" stroke="none" stroke-width="1" />
+  <line x1="60" y1="200" x2="600" y2="200" stroke="#4A90D9" stroke-width="1" />
+  <text x="68" y="212" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">002</text>
+  <text x="128" y="212" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">サンプルデータ B</text>
+  <text x="328" y="212" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">無効</text>
+  <text x="468" y="212" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">2026/02/20</text>
+  <line x1="60" y1="224" x2="600" y2="224" stroke="#4A90D9" stroke-width="1" />
+  <text x="68" y="236" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">003</text>
+  <text x="128" y="236" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">サンプルデータ C</text>
+  <text x="328" y="236" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">有効</text>
+  <text x="468" y="236" font-size="11" fill="#C0DEFF" text-anchor="start" font-weight="normal" dominant-baseline="central">2026/03/01</text>
+  <rect x="40" y="418" width="600" height="22" fill="#2E6EB5" stroke="none" stroke-width="1" />
+  <text x="50" y="429" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">準備完了</text>
+  <line x1="104" y1="421" x2="104" y2="437" stroke="#FFFFFF" stroke-width="1" />
+  <text x="114" y="429" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="normal" dominant-baseline="central">3 件</text>
+</svg>

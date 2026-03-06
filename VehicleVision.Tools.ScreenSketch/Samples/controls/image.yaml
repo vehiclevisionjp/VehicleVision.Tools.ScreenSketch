@@ -1,0 +1,13 @@
+screen:
+  title: image
+window:
+  width: 220
+  height: 110
+  chrome: false
+  controls:
+    - type: image
+      x: 16
+      y: 10
+      width: 188
+      height: 88
+      text: ロゴ画像

@@ -1,0 +1,16 @@
+screen:
+  title: checkbox
+window:
+  width: 200
+  height: 70
+  chrome: false
+  controls:
+    - type: checkbox
+      x: 16
+      y: 10
+      text: チェック済み
+      checked: true
+    - type: checkbox
+      x: 16
+      y: 36
+      text: 未チェック

@@ -1,0 +1,13 @@
+screen:
+  title: progressbar
+window:
+  width: 260
+  height: 50
+  chrome: false
+  controls:
+    - type: progressbar
+      x: 16
+      y: 12
+      width: 228
+      height: 22
+      value: 65

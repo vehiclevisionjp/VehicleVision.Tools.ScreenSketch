@@ -1,0 +1,22 @@
+screen:
+  title: treeview
+window:
+  width: 260
+  height: 150
+  chrome: false
+  controls:
+    - type: treeview
+      x: 16
+      y: 10
+      width: 228
+      height: 128
+      nodes:
+        - text: フォルダ1
+          expanded: true
+          children:
+            - text: ファイル1.txt
+            - text: ファイル2.txt
+        - text: フォルダ2
+          expanded: false
+          children:
+            - text: ファイル3.txt

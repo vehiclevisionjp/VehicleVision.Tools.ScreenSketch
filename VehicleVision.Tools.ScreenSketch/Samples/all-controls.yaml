@@ -1,0 +1,300 @@
+# 全コントロールのサンプル定義
+# 対応する全21種類のコントロールを網羅したデモ画面です
+
+screen:
+  title: "コントロール一覧"
+  description: "ScreenSketch が対応する全コントロールを表示するサンプルです。"
+
+window:
+  title: "ScreenSketch - コントロール一覧"
+  width: 900
+  height: 720
+  controls:
+    # ── menubar ──
+    - type: menubar
+      items: ["ファイル(F)", "編集(E)", "表示(V)", "ヘルプ(H)"]
+
+    # ── toolbar ──
+    - type: toolbar
+      id: toolbar
+      y: 22
+      items: ["新規", "開く", "保存", "|", "元に戻す", "やり直し"]
+
+    # ── 入力フォーム（group） ──
+    - type: group
+      id: inputGroup
+      text: "基本入力"
+      x: 10
+      y: 56
+      width: 430
+      height: 180
+      controls:
+        # label
+        - type: label
+          text: "名前:"
+          x: 15
+          y: 15
+
+        # textbox
+        - type: textbox
+          id: nameInput
+          x: 80
+          y: 10
+          width: 200
+          placeholder: "テキストを入力"
+
+        # linklabel
+        - type: linklabel
+          id: helpLink
+          text: "入力ヘルプ"
+          x: 290
+          y: 15
+
+        # combobox
+        - type: label
+          text: "種別:"
+          x: 15
+          y: 45
+
+        - type: combobox
+          id: typeCombo
+          x: 80
+          y: 40
+          width: 160
+          items: ["選択してください", "タイプA", "タイプB", "タイプC"]
+
+        # datetimepicker
+        - type: label
+          text: "日付:"
+          x: 15
+          y: 75
+
+        - type: datetimepicker
+          id: datePicker
+          x: 80
+          y: 70
+          width: 160
+
+        # numericupdown
+        - type: label
+          text: "数量:"
+          x: 15
+          y: 105
+
+        - type: numericupdown
+          id: quantityInput
+          x: 80
+          y: 100
+          width: 100
+          value: 5
+          minimum: 0
+          maximum: 99
+
+        # checkbox
+        - type: checkbox
+          id: optionCheck
+          text: "オプションを有効にする"
+          x: 15
+          y: 135
+          checked: true
+
+        # radiobutton
+        - type: radiobutton
+          text: "選択肢A"
+          x: 220
+          y: 135
+          selected: true
+
+        - type: radiobutton
+          text: "選択肢B"
+          x: 320
+          y: 135
+
+    # ── textarea ──
+    - type: label
+      text: "備考:"
+      x: 10
+      y: 242
+
+    - type: textarea
+      id: memoArea
+      x: 10
+      y: 260
+      width: 430
+      height: 70
+      placeholder: "自由記述欄（複数行対応）"
+
+    # ── button ──
+    - type: button
+      id: submitBtn
+      x: 270
+      y: 338
+      width: 80
+      text: "登録"
+
+    - type: button
+      id: clearBtn
+      x: 360
+      y: 338
+      width: 80
+      text: "クリア"
+
+    # ── progressbar ──
+    - type: label
+      text: "進捗:"
+      x: 10
+      y: 342
+
+    - type: progressbar
+      id: progressBar
+      x: 50
+      y: 340
+      width: 200
+      value: 65
+
+    # ── tabcontrol ──
+    - type: tabcontrol
+      id: tabControl
+      x: 450
+      y: 56
+      width: 440
+      height: 310
+      activeTab: 0
+      tabs:
+        - text: "一覧"
+          controls:
+            # datagrid
+            - type: datagrid
+              id: dataGrid
+              x: 5
+              y: 5
+              width: 428
+              height: 250
+              columns:
+                - header: "ID"
+                  width: 60
+                - header: "名前"
+                  width: 150
+                - header: "ステータス"
+                  width: 100
+                - header: "更新日"
+                  width: 118
+              rows:
+                - ["001", "サンプル項目A", "有効", "2026/03/01"]
+                - ["002", "サンプル項目B", "無効", "2026/02/15"]
+                - ["003", "サンプル項目C", "有効", "2026/01/20"]
+
+        - text: "ツリー"
+          controls:
+            # treeview
+            - type: treeview
+              x: 5
+              y: 5
+              width: 428
+              height: 250
+              nodes:
+                - text: "ルートフォルダ"
+                  expanded: true
+                  children:
+                    - text: "サブフォルダ1"
+                      expanded: true
+                      children:
+                        - text: "ファイルA.txt"
+                        - text: "ファイルB.txt"
+                    - text: "サブフォルダ2"
+                      expanded: false
+                      children:
+                        - text: "ファイルC.txt"
+
+        - text: "リスト"
+          controls:
+            # listbox
+            - type: listbox
+              x: 5
+              y: 5
+              width: 200
+              height: 250
+              selectedIndex: 1
+              items:
+                - "アイテム1"
+                - "アイテム2（選択中）"
+                - "アイテム3"
+                - "アイテム4"
+                - "アイテム5"
+
+            # image
+            - type: image
+              x: 220
+              y: 5
+              width: 200
+              height: 120
+              text: "プレビュー"
+
+    # ── panel ──
+    - type: panel
+      x: 10
+      y: 375
+      width: 880
+      height: 300
+      controls:
+        - type: datagrid
+          id: detailGrid
+          x: 5
+          y: 5
+          width: 868
+          height: 260
+          columns:
+            - header: "項目名"
+              width: 200
+            - header: "値"
+              width: 250
+            - header: "説明"
+              width: 418
+          rows:
+            - ["button", "ボタン", "クリック可能なボタンコントロール"]
+            - ["textbox", "テキストボックス", "単一行テキスト入力"]
+            - [
+                "textarea",
+                "テキストエリア",
+                "複数行テキスト入力（スクロール付き）",
+              ]
+            - ["label", "ラベル", "静的テキスト表示"]
+            - ["linklabel", "リンクラベル", "ハイパーリンク付きテキスト"]
+            - ["combobox", "コンボボックス", "ドロップダウン選択"]
+            - ["checkbox", "チェックボックス", "ON/OFF 切替"]
+            - ["radiobutton", "ラジオボタン", "択一選択"]
+            - ["numericupdown", "数値入力", "上下ボタン付き数値入力"]
+            - ["datetimepicker", "日付入力", "カレンダー付き日付選択"]
+
+    # ── statusbar ──
+    - type: statusbar
+      items: ["準備完了", "全21種コントロール対応"]
+
+annotations:
+  - target: nameInput
+    label: "①"
+    description: "textbox: 単一行テキスト入力フィールドです。placeholder でヒントを表示できます。"
+
+  - target: typeCombo
+    label: "②"
+    description: "combobox: ドロップダウンリストから値を選択します。items で選択肢を定義します。"
+
+  - target: datePicker
+    label: "③"
+    description: "datetimepicker: 日付を選択するコントロールです。format で表示形式を変更できます。"
+
+  - target: quantityInput
+    label: "④"
+    description: "numericupdown: 上下ボタンで数値を増減します。minimum / maximum で範囲を制限できます。"
+
+  - target: tabControl
+    label: "⑤"
+    description: "tabcontrol: 複数のタブでコンテンツを切り替えます。activeTab でデフォルト表示タブを指定します。"
+
+  - target: submitBtn
+    label: "⑥"
+    description: "button: クリック可能なボタンです。text でラベルを設定します。"
+
+  - target: memoArea
+    label: "⑦"
+    description: "textarea: 複数行テキスト入力です。readOnly で読み取り専用にできます。"

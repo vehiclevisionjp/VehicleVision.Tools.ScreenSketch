@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": [
+                "--extensionDevelopmentPath=${workspaceFolder}/VehicleVision.Tools.ScreenSketch.VSCode"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/VehicleVision.Tools.ScreenSketch.VSCode/out/**/*.js"
+            ],
+            "preLaunchTask": "ext: compile"
+        }
+    ]
+}

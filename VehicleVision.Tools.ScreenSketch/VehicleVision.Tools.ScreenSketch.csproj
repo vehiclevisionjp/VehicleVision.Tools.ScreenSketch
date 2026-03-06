@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>VehicleVision.Tools.ScreenSketch</RootNamespace>
+    <AssemblyName>VehicleVision.Tools.ScreenSketch</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <WarningLevel>5</WarningLevel>
+    <Version>0.0.0</Version>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>screen-sketch</ToolCommandName>
+    <PackageId>VehicleVision.Tools.ScreenSketch</PackageId>
+    <Authors>PMC Co., Ltd., IT Solution Division</Authors>
+    <Copyright>Copyright (c) PMC Co., Ltd., IT Solution Division</Copyright>
+    <Description>YAMLで画面レイアウトを定義し、SVG画像とMarkdownドキュメントを生成するCLIツール</Description>
+    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/vehiclevisionjp/VehicleVision.Tools.ScreenSketch</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/vehiclevisionjp/VehicleVision.Tools.ScreenSketch</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>yaml;svg;markdown;screen;documentation;tool</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="16.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
