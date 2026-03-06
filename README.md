@@ -86,6 +86,24 @@ dotnet run --project VehicleVision.Tools.ScreenSketch -- generate <input-path> [
 
 ![コントロール一覧](images/all-controls.svg)
 
+### テーマ別サンプル
+
+#### 標準（default）
+
+![標準テーマ](images/default-theme.svg)
+
+#### ダーク（dark）
+
+![ダークテーマ](images/dark-theme.svg)
+
+#### ブループリント（blueprint）
+
+![ブループリントテーマ](images/blueprint-theme.svg)
+
+#### カスタム（custom）
+
+![カスタムテーマ](images/custom-theme.svg)
+
 その他のサンプルは [Samples](VehicleVision.Tools.ScreenSketch/Samples/) ディレクトリを参照してください。
 
 ## ドキュメント
