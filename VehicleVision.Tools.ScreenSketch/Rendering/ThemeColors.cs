@@ -72,14 +72,38 @@ public class ThemeColors
     public string CanvasBackground { get; init; } = "#FFFFFF";
 
     /// <summary>テーマ名からプリセットを取得する</summary>
-    public static ThemeColors FromName(string? themeName)
+    /// <param name="themeName">テーマ名（default, dark, blueprint, custom）</param>
+    /// <param name="customOverrides">カスタムテーマの色定義。theme が "custom" の場合に使用</param>
+    public static ThemeColors FromName(string? themeName, Dictionary<string, string>? customOverrides = null)
     {
         return (themeName?.ToLowerInvariant()) switch
         {
             "dark" => CreateDark(),
             "blueprint" => CreateBlueprint(),
+            "custom" => CreateCustom(customOverrides),
             _ => new ThemeColors()
         };
+    }
+
+    /// <summary>カスタムテーマ。未指定の要素は標準テーマにフォールバックする</summary>
+    public static ThemeColors CreateCustom(Dictionary<string, string>? overrides)
+    {
+        var colors = new ThemeColors();
+        if (overrides is not { Count: > 0 }) return colors;
+
+        var properties = typeof(ThemeColors).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
+            .Where(p => p.PropertyType == typeof(string) && p.CanWrite)
+            .ToDictionary(p => p.Name, p => p, StringComparer.OrdinalIgnoreCase);
+
+        foreach (var (key, value) in overrides)
+        {
+            if (properties.TryGetValue(key, out var prop))
+            {
+                prop.SetValue(colors, value);
+            }
+        }
+
+        return colors;
     }
 
     /// <summary>ダークテーマ</summary>

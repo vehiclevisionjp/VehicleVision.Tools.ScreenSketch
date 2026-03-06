@@ -79,7 +79,7 @@ public class MarkdownInlineProcessor
             try
             {
                 var definition = _deserializer.Deserialize<ScreenDefinition>(yamlContent);
-                var colors = ThemeColors.FromName(_themeNameOverride ?? definition.Screen?.Theme);
+                var colors = ThemeColors.FromName(_themeNameOverride ?? definition.Screen?.Theme, definition.Screen?.CustomTheme);
                 var renderer = new SvgRenderer(colors);
                 var svg = renderer.Render(definition);
 

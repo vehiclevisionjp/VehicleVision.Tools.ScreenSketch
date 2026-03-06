@@ -82,7 +82,7 @@ public class Program
                 var definition = deserializer.Deserialize<ScreenDefinition>(yaml);
                 var baseName = Path.GetFileNameWithoutExtension(yamlFile);
 
-                var colors = ThemeColors.FromName(themeName ?? definition.Screen?.Theme);
+                var colors = ThemeColors.FromName(themeName ?? definition.Screen?.Theme, definition.Screen?.CustomTheme);
                 var renderer = new SvgRenderer(colors);
                 var svg = renderer.Render(definition);
                 var svgPath = Path.Combine(imagesDir, $"{baseName}.svg");
@@ -277,7 +277,7 @@ public class Program
                 .Build();
 
             var definition = deserializer.Deserialize<ScreenDefinition>(yaml);
-            var colors = ThemeColors.FromName(themeName ?? definition.Screen?.Theme);
+            var colors = ThemeColors.FromName(themeName ?? definition.Screen?.Theme, definition.Screen?.CustomTheme);
             var renderer = new SvgRenderer(colors);
             var svg = renderer.Render(definition);
 
@@ -329,19 +329,19 @@ public class Program
         Console.Error.WriteLine();
         Console.Error.WriteLine("  generate <input-path> [output-dir] [--theme <name>]");
         Console.Error.WriteLine("    YAML ファイルから SVG + Markdown を新規生成する");
-        Console.Error.WriteLine("    --theme: カラーテーマ (default, dark, blueprint)");
+        Console.Error.WriteLine("    --theme: カラーテーマ (default, dark, blueprint, custom)");
         Console.Error.WriteLine();
         Console.Error.WriteLine("  transform <input-path> [output-dir] [--inline] [--theme <name>]");
         Console.Error.WriteLine("    Markdown 内の ```yaml-screen ブロックを SVG + テーブルに変換する");
         Console.Error.WriteLine("    --inline: SVG をインライン埋め込み（PDF/HTML 生成前処理向け）");
-        Console.Error.WriteLine("    --theme: カラーテーマ (default, dark, blueprint)");
+        Console.Error.WriteLine("    --theme: カラーテーマ (default, dark, blueprint, custom)");
         Console.Error.WriteLine();
         Console.Error.WriteLine("  restore <input-path>");
         Console.Error.WriteLine("    変換済みの yaml-screen ブロックをコードブロックに復元する");
         Console.Error.WriteLine();
         Console.Error.WriteLine("  render [--theme <name>]");
         Console.Error.WriteLine("    stdin から YAML を読み取り、stdout に SVG を出力する");
-        Console.Error.WriteLine("    --theme: カラーテーマ (default, dark, blueprint)");
+        Console.Error.WriteLine("    --theme: カラーテーマ (default, dark, blueprint, custom)");
         Console.Error.WriteLine();
         Console.Error.WriteLine("Examples:");
         Console.Error.WriteLine("  ManualGenerator generate screens/ docs/manual/");

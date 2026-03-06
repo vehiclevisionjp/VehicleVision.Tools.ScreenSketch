@@ -1,0 +1,63 @@
+screen:
+  title: カスタムテーマ サンプル
+  description: ユーザー定義のカスタムテーマ例。未指定の要素は標準テーマにフォールバックする
+  theme: custom
+  customTheme:
+    canvasBackground: "#F5F0EB"
+    windowBackground: "#FAF7F2"
+    windowBorder: "#8B7355"
+    titleBarBackground: "#6B4226"
+    titleBarText: "#FFFFFF"
+    buttonBackground: "#D2B48C"
+    buttonBorder: "#8B7355"
+    buttonText: "#3E2723"
+    textBoxBackground: "#FFFDF5"
+    textBoxBorder: "#A0866C"
+    labelText: "#3E2723"
+    statusBarBackground: "#6B4226"
+    statusBarText: "#FFFFFF"
+
+window:
+  title: カスタムテーマ画面
+  width: 500
+  height: 300
+  controls:
+    - type: label
+      text: ユーザー名
+      x: 20
+      y: 40
+
+    - type: textbox
+      x: 120
+      y: 36
+      width: 200
+      placeholder: 入力してください
+
+    - type: button
+      text: 登録
+      x: 340
+      y: 35
+      width: 100
+
+    - type: label
+      text: カスタムテーマでは一部の色だけを変更できます
+      x: 20
+      y: 90
+
+    - type: button
+      text: 標準色ボタン
+      x: 20
+      y: 130
+      width: 140
+
+    - type: button
+      text: 個別色ボタン
+      x: 180
+      y: 130
+      width: 140
+      background: "#4CAF50"
+      foreground: "#FFFFFF"
+      borderColor: "#388E3C"
+
+    - type: statusbar
+      items: [準備完了, "カスタムテーマ"]
