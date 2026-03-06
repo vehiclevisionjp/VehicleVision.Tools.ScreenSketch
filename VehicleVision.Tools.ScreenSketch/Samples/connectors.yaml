@@ -64,6 +64,8 @@ connectors:
     to: emailInput
     label: "①"
     description: 名前を入力後、メールアドレスを入力します。
+    fromAnchor: bottom
+    toAnchor: top
     fromShape: circle
     toShape: arrow
   - from: emailInput
@@ -74,6 +76,9 @@ connectors:
     labelBackground: "#4CAF50"
     fromShape: diamond
     toShape: arrow
+    lineType: curve
+    fromAnchor: bottom
+    toAnchor: top
   - from: submitBtn
     to: cancelBtn
     label: "③"

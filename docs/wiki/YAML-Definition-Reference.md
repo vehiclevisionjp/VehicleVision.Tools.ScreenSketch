@@ -28,7 +28,7 @@ connectors: # コネクタ線（任意）
 
 ### customTheme で指定可能なプロパティ
 
-`customTheme` のキーには以下のプロパティ名を指定できます（大文字小文字は区別しません）。値は `#RRGGBB` 形式の16進カラーコードです。
+`customTheme` のキーには以下のプロパティ名を指定できます（大文字小文字は区別しません）。値は `#RRGGBB` 形式の16進カラーコード、または WinForms の名前付き色（例: `Control`, `ActiveBorder`, `Window`）を指定できます。
 
 | カテゴリ       | プロパティ名           | 標準テーマの既定値 |
 | -------------- | ---------------------- | ------------------ |
@@ -132,10 +132,43 @@ screen:
 | `to`              | string | 接続先コントロールの `id`                                   |
 | `label`           | string | 表示ラベル（例: `"①"`）                                     |
 | `description`     | string | マニュアルに記載する説明文                                  |
-| `lineColor`       | string | コネクタ線の色オーバーライド（例: `"#4CAF50"`）             |
+| `lineColor`       | string | コネクタ線の色オーバーライド（例: `"#4CAF50"` または `SteelBlue`） |
 | `lineStyle`       | string | コネクタ線のスタイル（`solid`, `dashed`, `dotted`）省略時は `solid` |
 | `labelBackground` | string | ラベル円の背景色オーバーライド（例: `"#FF9800"`）           |
 | `labelColor`      | string | ラベルテキストの色オーバーライド（例: `"#FFFFFF"`）         |
+| `fromShape`       | string | 接続元の端点形状（`none`, `arrow`, `circle`, `diamond`, `square`）省略時は `none` |
+| `toShape`         | string | 接続先の端点形状（`none`, `arrow`, `circle`, `diamond`, `square`）省略時は `arrow` |
+| `fromAnchor`      | string | 接続元のアンカー位置（`auto`, `top`, `bottom`, `left`, `right`, `center`）省略時は `auto` |
+| `toAnchor`        | string | 接続先のアンカー位置（`auto`, `top`, `bottom`, `left`, `right`, `center`）省略時は `auto` |
+| `lineType`        | string | 線の種類（`straight`, `curve`）省略時は `straight`          |
+
+### 端点形状（fromShape / toShape）
+
+| 値        | 形状         |
+| --------- | ------------ |
+| `none`    | なし         |
+| `arrow`   | 三角矢印     |
+| `circle`  | 小円         |
+| `diamond` | ひし形       |
+| `square`  | 四角形       |
+
+### アンカー位置（fromAnchor / toAnchor）
+
+| 値       | 説明                                     |
+| -------- | ---------------------------------------- |
+| `auto`   | 相手コントロールへの最短エッジ点（既定） |
+| `top`    | コントロール上辺の中央                   |
+| `bottom` | コントロール下辺の中央                   |
+| `left`   | コントロール左辺の中央                   |
+| `right`  | コントロール右辺の中央                   |
+| `center` | コントロール中心                         |
+
+### 線の種類（lineType）
+
+| 値         | 説明                                         |
+| ---------- | -------------------------------------------- |
+| `straight` | 直線（既定）                                 |
+| `curve`    | ベジェ曲線（アンカー方向に沿って滑らかに曲がる） |
 
 **使用例：**
 
@@ -145,10 +178,46 @@ connectors:
     to: emailInput
     label: "①"
     description: 名前を入力後、メールアドレスを入力します。
+    fromAnchor: bottom
+    toAnchor: top
+    fromShape: circle
+    toShape: arrow
   - from: emailInput
     to: submitBtn
     label: "②"
     description: 登録ボタンを押します。
+    lineType: curve
+    fromAnchor: bottom
+    toAnchor: top
     lineColor: "#4CAF50"
     labelBackground: "#4CAF50"
 ```
+
+---
+
+## 色の指定
+
+色プロパティ（`background`, `foreground`, `borderColor`, `lineColor`, `labelBackground`, `labelColor` など）には以下の形式が使用できます。
+
+| 形式                | 例                        | 説明                                                     |
+| ------------------- | ------------------------- | -------------------------------------------------------- |
+| 16進カラーコード    | `"#FF0000"`, `"#1976D2"`  | `#RRGGBB` 形式                                          |
+| WinForms 名前付き色 | `Control`, `ActiveBorder` | `System.Drawing.KnownColor` のラベル名（大文字小文字不問） |
+
+### よく使う名前付き色の例
+
+| 名前             | 用途                   | 色       |
+| ---------------- | ---------------------- | -------- |
+| `Control`        | コントロール背景       | `#ECE9D8` |
+| `ControlText`    | コントロール文字色     | `#000000` |
+| `ControlDark`    | コントロール暗い枠線   | `#ACA899` |
+| `Window`         | ウィンドウ背景         | `#FFFFFF` |
+| `WindowText`     | ウィンドウ文字色       | `#000000` |
+| `WindowFrame`    | ウィンドウ枠線         | `#000000` |
+| `Highlight`      | 選択背景               | `#316AC5` |
+| `HighlightText`  | 選択文字色             | `#FFFFFF` |
+| `ActiveBorder`   | アクティブ枠線         | `#D4D0C8` |
+| `ButtonFace`     | ボタン背景             | `#ECE9D8` |
+| `GrayText`       | 無効テキスト           | `#ACA899` |
+| `SteelBlue`      | Web カラー（青灰色）   | `#4682B4` |
+| `Tomato`         | Web カラー（トマト色） | `#FF6347` |

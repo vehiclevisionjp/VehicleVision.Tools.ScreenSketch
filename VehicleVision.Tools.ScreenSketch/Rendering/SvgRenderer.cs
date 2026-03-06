@@ -20,8 +20,10 @@ public class SvgRenderer
 
     public record ControlBounds(int X, int Y, int Width, int Height)
     {
+        public int CenterX => X + Width / 2;
         public int CenterY => Y + Height / 2;
         public int Right => X + Width;
+        public int Bottom => Y + Height;
     }
 
     // ────────────────────────────────────────────
@@ -916,28 +918,63 @@ public class SvgRenderer
             var textColor = ResolveColor(conn.LabelColor, _colors.ConnectorText);
             var dashArray = ResolveDashArray(conn.LineStyle, "solid");
 
-            // 最近接エッジ間を結ぶ座標を計算
-            var (startX, startY, endX, endY) = ComputeEdgePoints(fromBounds, toBounds);
+            // アンカー位置の解決
+            var fromAnchor = (conn.FromAnchor ?? "auto").ToLowerInvariant();
+            var toAnchor = (conn.ToAnchor ?? "auto").ToLowerInvariant();
+            var (startX, startY) = ResolveAnchorPoint(fromBounds, toBounds, fromAnchor);
+            var (endX, endY) = ResolveAnchorPoint(toBounds, fromBounds, toAnchor);
 
-            // コネクタ線
-            svg.Add(Line(startX, startY, endX, endY, lineColor, 1, dashArray));
+            var isCurve = (conn.LineType ?? "straight").Equals("curve", StringComparison.OrdinalIgnoreCase);
 
-            // 接続元の端点形状
-            var fromShape = (conn.FromShape ?? "none").ToLowerInvariant();
-            RenderEndpointShape(svg, fromShape, endX, endY, startX, startY, lineColor);
+            int midX, midY;
 
-            // 接続先の端点形状
-            var toShape = (conn.ToShape ?? "arrow").ToLowerInvariant();
-            RenderEndpointShape(svg, toShape, startX, startY, endX, endY, lineColor);
+            if (isCurve)
+            {
+                // ベジェ曲線の制御点を計算
+                var (cp1x, cp1y) = ComputeControlPoint(startX, startY, fromAnchor, fromBounds, toBounds);
+                var (cp2x, cp2y) = ComputeControlPoint(endX, endY, toAnchor, toBounds, fromBounds);
+
+                // SVG 三次ベジェ曲線パス
+                var pathEl = El("path",
+                    At("d", $"M {startX},{startY} C {cp1x},{cp1y} {cp2x},{cp2y} {endX},{endY}"),
+                    At("stroke", lineColor),
+                    At("stroke-width", 1),
+                    At("fill", "none"));
+                if (dashArray != null) pathEl.Add(At("stroke-dasharray", dashArray));
+                svg.Add(pathEl);
+
+                // 曲線の中間点（t=0.5 のベジェ座標）
+                midX = CubicBezierAt(startX, cp1x, cp2x, endX);
+                midY = CubicBezierAt(startY, cp1y, cp2y, endY);
+
+                // 端点形状（曲線の場合は制御点から方向を取得）
+                var fromShape = (conn.FromShape ?? "none").ToLowerInvariant();
+                RenderEndpointShape(svg, fromShape, cp1x, cp1y, startX, startY, lineColor);
+
+                var toShape = (conn.ToShape ?? "arrow").ToLowerInvariant();
+                RenderEndpointShape(svg, toShape, cp2x, cp2y, endX, endY, lineColor);
+            }
+            else
+            {
+                // 直線
+                svg.Add(Line(startX, startY, endX, endY, lineColor, 1, dashArray));
+
+                midX = (startX + endX) / 2;
+                midY = (startY + endY) / 2;
+
+                // 端点形状
+                var fromShape = (conn.FromShape ?? "none").ToLowerInvariant();
+                RenderEndpointShape(svg, fromShape, endX, endY, startX, startY, lineColor);
+
+                var toShape = (conn.ToShape ?? "arrow").ToLowerInvariant();
+                RenderEndpointShape(svg, toShape, startX, startY, endX, endY, lineColor);
+            }
 
             // ラベル（中間点に表示）
             if (!string.IsNullOrEmpty(conn.Label))
             {
-                var midX = (startX + endX) / 2;
-                var midY = (startY + endY) / 2;
                 var radius = Math.Max(Theme.AnnotationRadius, EstimateTextWidth(conn.Label, 13) / 2 + 4);
 
-                // ラベル背景円
                 svg.Add(El("circle",
                     At("cx", midX), At("cy", midY), At("r", radius),
                     At("fill", circleColor)));
@@ -946,6 +983,81 @@ public class SvgRenderer
                     textColor, "middle", "bold"));
             }
         }
+    }
+
+    /// <summary>アンカー名からコントロールエッジ上の座標を解決する</summary>
+    private static (int X, int Y) ResolveAnchorPoint(
+        ControlBounds self, ControlBounds other, string anchor)
+    {
+        return anchor switch
+        {
+            "top" => (self.CenterX, self.Y),
+            "bottom" => (self.CenterX, self.Bottom),
+            "left" => (self.X, self.CenterY),
+            "right" => (self.Right, self.CenterY),
+            "center" => (self.CenterX, self.CenterY),
+            _ => AutoAnchorPoint(self, other) // "auto"
+        };
+    }
+
+    /// <summary>自動アンカー: 相手コントロールへの最近接エッジ点を計算する</summary>
+    private static (int X, int Y) AutoAnchorPoint(ControlBounds self, ControlBounds other)
+    {
+        var x = ClampToEdgeX(self, other.CenterX, other.CenterY);
+        var y = ClampToEdgeY(self, other.CenterX, other.CenterY);
+        return (x, y);
+    }
+
+    /// <summary>ベジェ曲線の制御点を計算する。アンカー方向に沿って外側にオフセット</summary>
+    private static (int X, int Y) ComputeControlPoint(
+        int anchorX, int anchorY, string anchor,
+        ControlBounds self, ControlBounds other)
+    {
+        // オフセット量: 2つのコントロール間距離の40%、最低30px
+        var dx = Math.Abs(other.CenterX - self.CenterX);
+        var dy = Math.Abs(other.CenterY - self.CenterY);
+        var offset = Math.Max(30, (int)(Math.Max(dx, dy) * 0.4));
+
+        return anchor switch
+        {
+            "top" => (anchorX, anchorY - offset),
+            "bottom" => (anchorX, anchorY + offset),
+            "left" => (anchorX - offset, anchorY),
+            "right" => (anchorX + offset, anchorY),
+            "center" => (anchorX, anchorY),
+            _ => ComputeAutoControlPoint(anchorX, anchorY, self, other, offset)
+        };
+    }
+
+    /// <summary>自動アンカーの制御点: エッジ法線方向にオフセット</summary>
+    private static (int X, int Y) ComputeAutoControlPoint(
+        int ax, int ay, ControlBounds self, ControlBounds other, int offset)
+    {
+        // アンカー点がどの辺にあるか判定して法線方向にオフセット
+        var cx = self.CenterX;
+        var cy = self.CenterY;
+
+        // 上辺 or 下辺にある場合は Y 方向にオフセット
+        if (ay == self.Y) return (ax, ay - offset);
+        if (ay == self.Bottom) return (ax, ay + offset);
+        // 左辺 or 右辺にある場合は X 方向にオフセット
+        if (ax == self.X) return (ax - offset, ay);
+        if (ax == self.Right) return (ax + offset, ay);
+
+        // エッジでない場合（center 等）は相手の方向にオフセット
+        var dirX = other.CenterX - cx;
+        var dirY = other.CenterY - cy;
+        var len = Math.Sqrt(dirX * dirX + dirY * dirY);
+        if (len < 1) return (ax, ay);
+        return (ax + (int)(dirX / len * offset), ay + (int)(dirY / len * offset));
+    }
+
+    /// <summary>三次ベジェ曲線の t=0.5 における座標（1軸）</summary>
+    private static int CubicBezierAt(int p0, int p1, int p2, int p3)
+    {
+        // B(0.5) = (1-t)^3*P0 + 3*(1-t)^2*t*P1 + 3*(1-t)*t^2*P2 + t^3*P3
+        // = 0.125*P0 + 0.375*P1 + 0.375*P2 + 0.125*P3
+        return (int)(0.125 * p0 + 0.375 * p1 + 0.375 * p2 + 0.125 * p3);
     }
 
     /// <summary>端点形状を描画する。形状は始点→終点方向の端点に描画される</summary>
@@ -1007,23 +1119,6 @@ public class SvgRenderer
             At("x", x - half), At("y", y - half),
             At("width", half * 2), At("height", half * 2),
             At("fill", color)));
-    }
-
-    /// <summary>2つのコントロールの最近接エッジ間の座標を計算する</summary>
-    private static (int StartX, int StartY, int EndX, int EndY) ComputeEdgePoints(
-        ControlBounds from, ControlBounds to)
-    {
-        var fromCx = from.X + from.Width / 2;
-        var fromCy = from.Y + from.Height / 2;
-        var toCx = to.X + to.Width / 2;
-        var toCy = to.Y + to.Height / 2;
-
-        var startX = ClampToEdgeX(from, toCx, toCy);
-        var startY = ClampToEdgeY(from, toCx, toCy);
-        var endX = ClampToEdgeX(to, fromCx, fromCy);
-        var endY = ClampToEdgeY(to, fromCx, fromCy);
-
-        return (startX, startY, endX, endY);
     }
 
     private static int ClampToEdgeX(ControlBounds b, int targetX, int targetY)

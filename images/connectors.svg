@@ -26,18 +26,18 @@
   <rect x="210" y="170" width="80" height="26" fill="#E1E1E1" stroke="#ADADAD" stroke-width="1" rx="3" />
   <text x="250" y="183" font-size="12" fill="#1E1E1E" text-anchor="middle" font-weight="normal" dominant-baseline="central">キャンセル</text>
   <line x1="220" y1="109" x2="220" y2="125" stroke="#1976D2" stroke-width="1" />
-  <circle cx="220" cy="109" r="3" fill="#1976D2" />
+  <circle cx="220" cy="109" r="4" fill="#1976D2" />
   <polygon points="220,125 217,117 223,117" fill="#1976D2" />
   <circle cx="220" cy="117" r="14" fill="#1976D2" />
   <text x="220" y="117" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">①</text>
-  <line x1="205" y1="149" x2="176" y2="171" stroke="#4CAF50" stroke-width="1" />
-  <circle cx="205" cy="149" r="3" fill="#4CAF50" />
-  <polygon points="176,171 181,165 183,169" fill="#4CAF50" />
-  <circle cx="190" cy="160" r="14" fill="#4CAF50" />
-  <text x="190" y="160" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">②</text>
+  <path d="M 220,149 C 220,179 160,140 160,170" stroke="#4CAF50" stroke-width="1" fill="none" />
+  <polygon points="220,149 226,155 220,161 214,155" fill="#4CAF50" />
+  <polygon points="160,170 157,162 163,162" fill="#4CAF50" />
+  <circle cx="190" cy="159" r="14" fill="#4CAF50" />
+  <text x="190" y="159" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">②</text>
   <line x1="200" y1="183" x2="210" y2="183" stroke="#FF9800" stroke-width="1" stroke-dasharray="4,3" />
-  <circle cx="200" cy="183" r="3" fill="#FF9800" />
-  <polygon points="210,183 202,186 202,180" fill="#FF9800" />
+  <rect x="196" y="179" width="8" height="8" fill="#FF9800" />
+  <polygon points="210,183 204,189 198,183 204,177" fill="#FF9800" />
   <circle cx="205" cy="183" r="14" fill="#FF9800" />
   <text x="205" y="183" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">③</text>
   <line x1="322" y1="97" x2="554" y2="97" stroke="#E53935" stroke-width="1" stroke-dasharray="4,3" />

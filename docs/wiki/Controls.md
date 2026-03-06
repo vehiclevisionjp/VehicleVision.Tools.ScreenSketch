@@ -10,9 +10,12 @@
 | `y`           | int    | Y 座標（親コンテナからの相対位置）         |
 | `width`       | int    | 幅（コントロールごとにデフォルト値あり）   |
 | `height`      | int    | 高さ（コントロールごとにデフォルト値あり） |
-| `background`  | string | 背景色のオーバーライド（例: `"#FF0000"`）  |
-| `foreground`  | string | テキスト色のオーバーライド（例: `"#FFFFFF"`） |
-| `borderColor` | string | 枠線色のオーバーライド（例: `"#0000FF"`）  |
+| `background`  | string | 背景色のオーバーライド（例: `"#FF0000"` または `Control`）  |
+| `foreground`  | string | テキスト色のオーバーライド（例: `"#FFFFFF"` または `ControlText`） |
+| `borderColor` | string | 枠線色のオーバーライド（例: `"#0000FF"` または `ActiveBorder`）  |
+
+色の指定には `#RRGGBB` 形式のほか、WinForms の名前付き色（`Control`, `Window` 等）も使用できます。
+詳細は [YAML 定義リファレンス](YAML-Definition-Reference#色の指定) を参照してください。
 
 ---
 

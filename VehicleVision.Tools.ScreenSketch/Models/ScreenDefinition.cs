@@ -186,7 +186,7 @@ public class ConnectorDefinition
     /// <summary>マニュアルに記載する説明文</summary>
     public string Description { get; set; } = "";
 
-    /// <summary>コネクタ線の色オーバーライド（例: "#FF0000"）</summary>
+    /// <summary>コネクタ線の色オーバーライド（例: "#FF0000" または "SteelBlue"）</summary>
     public string? LineColor { get; set; }
 
     /// <summary>コネクタ線のスタイル（solid, dashed, dotted）。省略時は solid</summary>
@@ -203,4 +203,13 @@ public class ConnectorDefinition
 
     /// <summary>接続先の端点形状（none, arrow, circle, diamond, square）。省略時は arrow</summary>
     public string? ToShape { get; set; }
+
+    /// <summary>接続元のアンカー位置（auto, top, bottom, left, right, center）。省略時は auto</summary>
+    public string? FromAnchor { get; set; }
+
+    /// <summary>接続先のアンカー位置（auto, top, bottom, left, right, center）。省略時は auto</summary>
+    public string? ToAnchor { get; set; }
+
+    /// <summary>線の種類（straight, curve）。省略時は straight</summary>
+    public string? LineType { get; set; }
 }

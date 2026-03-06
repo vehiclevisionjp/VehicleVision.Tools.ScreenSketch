@@ -152,6 +152,9 @@ window:
 `connectors` を使うとコントロール間を矢印付きの線で結び、操作手順を図示できます。
 `annotations` の引き出し線も個別にカスタマイズ可能です。
 
+端点の形状（`fromShape` / `toShape`）、アンカー位置（`fromAnchor` / `toAnchor`）、
+線の種類（`lineType: straight` / `curve`）を組み合わせて柔軟にレイアウトできます。
+
 ```yaml
 screen:
     title: 'コネクタ・手順説明 サンプル'
@@ -211,12 +214,21 @@ connectors:
       to: emailInput
       label: '①'
       description: '名前を入力後、メールアドレスを入力します。'
+      fromAnchor: bottom
+      toAnchor: top
+      fromShape: circle
+      toShape: arrow
     - from: emailInput
       to: submitBtn
       label: '②'
       description: 'メールアドレスを入力後、登録ボタンを押します。'
+      lineType: curve
+      fromAnchor: bottom
+      toAnchor: top
       lineColor: '#4CAF50'
       labelBackground: '#4CAF50'
+      fromShape: diamond
+      toShape: arrow
     - from: submitBtn
       to: cancelBtn
       label: '③'
@@ -224,6 +236,31 @@ connectors:
       lineStyle: dashed
       lineColor: '#FF9800'
       labelBackground: '#FF9800'
+      fromShape: square
+      toShape: diamond
 ```
 
 ![コネクタサンプル](images/connectors.svg)
+
+---
+
+## 名前付き色
+
+色プロパティには `#RRGGBB` 形式に加えて、WinForms の `KnownColor` 名を使用できます。
+
+```yaml
+window:
+    title: '名前付き色'
+    width: 300
+    height: 100
+    controls:
+        - type: button
+          text: 'OK'
+          x: 20
+          y: 20
+          background: Control
+          foreground: ControlText
+          borderColor: ControlDark
+```
+
+詳細は [YAML 定義リファレンス](YAML-Definition-Reference#色の指定) を参照してください。
