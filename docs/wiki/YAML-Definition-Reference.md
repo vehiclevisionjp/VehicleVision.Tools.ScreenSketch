@@ -23,7 +23,7 @@ annotations: # アノテーション（任意）
 | `title`       | string                    | 画面タイトル（Markdown の見出しに使用）                                                       |
 | `description` | string                    | 画面の説明文                                                                                  |
 | `theme`       | string                    | カラーテーマ名（`default`, `dark`, `blueprint`, `custom`）。CLI の `--theme` で上書き可       |
-| `customTheme` | map&lt;string, string&gt; | カスタムテーマの色定義。`theme: custom` 時に使用し、未指定の要素は標準テーマにフォールバック  |
+| `customTheme` | `map<string, string>`     | カスタムテーマの色定義。`theme: custom` 時に使用し、未指定の要素は標準テーマにフォールバック  |
 
 ### customTheme で指定可能なプロパティ
 
