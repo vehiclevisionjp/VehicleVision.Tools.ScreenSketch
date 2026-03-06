@@ -1,17 +1,7 @@
 # VS Code 拡張（Screen Sketch Preview）
 
 Markdown プレビューで ` ```yaml-screen ` コードブロックを SVG 画面イメージとしてリアルタイム表示する VS Code 拡張です。
-
----
-
-## 前提条件
-
-[VehicleVision.Tools.ScreenSketch](https://www.nuget.org/packages/VehicleVision.Tools.ScreenSketch) がインストールされている必要があります。
-拡張は内部で `screen-sketch render` コマンドを呼び出して SVG を生成します。
-
-```bash
-dotnet tool install -g VehicleVision.Tools.ScreenSketch
-```
+レンダリングエンジンを拡張内に組み込んでいるため、外部ツールのインストールは不要です。
 
 ---
 
@@ -43,9 +33,9 @@ window:
 
 ## 設定
 
-| 設定                    | デフォルト      | 説明                         |
-| ----------------------- | --------------- | ---------------------------- |
-| `screenSketch.toolPath` | `screen-sketch` | screen-sketch コマンドのパス |
+| 設定                 | デフォルト | 説明                                                                                    |
+| -------------------- | ---------- | --------------------------------------------------------------------------------------- |
+| `screenSketch.theme` | （空）     | SVG レンダリングに使用するカラーテーマ (`default`, `dark`, `blueprint`)。空の場合は YAML 内の設定が使われます |
 
 ---
 
