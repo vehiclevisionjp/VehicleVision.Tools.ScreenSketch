@@ -5,32 +5,32 @@ import { execFileSync } from "child_process";
 import type MarkdownIt from "markdown-it";
 
 /** バンドル済みバイナリまたはグローバルツールのパスを解決する */
-function resolveToolPath(extensionPath: string): string {
+function resolveToolPath(extensionPath: string): { toolPath: string; bundled: boolean } {
     // 1. 拡張にバンドルされたバイナリを探す（マーケットプレイス公開時）
     const exeName = process.platform === "win32"
         ? "VehicleVision.Tools.ScreenSketch.exe"
         : "VehicleVision.Tools.ScreenSketch";
     const bundled = path.join(extensionPath, "bin", exeName);
     if (fs.existsSync(bundled)) {
-        return bundled;
+        return { toolPath: bundled, bundled: true };
     }
 
     // 2. ユーザー設定 or グローバルツールにフォールバック（開発時）
     const config = vscode.workspace.getConfiguration("screenSketch");
-    return config.get<string>("toolPath", "screen-sketch");
+    return { toolPath: config.get<string>("toolPath", "screen-sketch"), bundled: false };
 }
 
 export function activate(context: vscode.ExtensionContext) {
-    const toolPath = resolveToolPath(context.extensionPath);
+    const resolved = resolveToolPath(context.extensionPath);
 
     return {
         extendMarkdownIt(md: MarkdownIt) {
-            return md.use((md) => screenSketchPlugin(md, toolPath));
+            return md.use((md) => screenSketchPlugin(md, resolved));
         },
     };
 }
 
-function screenSketchPlugin(md: MarkdownIt, toolPath: string): void {
+function screenSketchPlugin(md: MarkdownIt, resolved: { toolPath: string; bundled: boolean }): void {
     const defaultFence =
         md.renderer.rules.fence ||
         function (tokens, idx, options, _env, self) {
@@ -42,15 +42,17 @@ function screenSketchPlugin(md: MarkdownIt, toolPath: string): void {
 
         if (token.info.trim() === "yaml-screen") {
             const yaml = token.content;
-            const svg = renderSync(yaml, toolPath);
+            const svg = renderSync(yaml, resolved.toolPath);
             if (svg !== null) {
                 return `<div class="screen-sketch-preview">${svg}</div>`;
             }
             // レンダリング失敗時はエラーメッセージ + 元のコードブロックを表示
+            const hint = resolved.bundled
+                ? "⚠ screen-sketch render failed."
+                : "⚠ screen-sketch render failed. Is the tool installed? " +
+                  "(<code>dotnet tool install -g VehicleVision.Tools.ScreenSketch</code>)";
             return (
-                `<div class="screen-sketch-error" style="color:#c00;font-size:12px;margin-bottom:8px;">` +
-                `⚠ screen-sketch render failed. Is the tool installed? ` +
-                `(<code>dotnet tool install -g VehicleVision.Tools.ScreenSketch</code>)</div>` +
+                `<div class="screen-sketch-error" style="color:#c00;font-size:12px;margin-bottom:8px;">${hint}</div>` +
                 defaultFence(tokens, idx, options, env, self)
             );
         }
