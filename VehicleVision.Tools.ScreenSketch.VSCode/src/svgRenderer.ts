@@ -116,6 +116,8 @@ function estimateTextWidth(text: string | undefined, fontSize: number): number {
     let width = 0;
     for (let i = 0; i < text.length; i++) {
         const code = text.codePointAt(i)!;
+        // 0x2E80 marks the start of CJK character ranges (full-width).
+        // 0.55 approximates the average width of ASCII characters relative to font size.
         width += code > 0x2e80 ? fontSize : Math.round(fontSize * 0.55);
         // Skip low surrogate of surrogate pair
         if (code > 0xffff) i++;
