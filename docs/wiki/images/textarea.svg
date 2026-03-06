@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="130" viewBox="0 0 280 130">
+  <defs>
+    <filter id="windowShadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-opacity="0.15" />
+    </filter>
+    <style>text { font-family: 'Segoe UI', 'Meiryo', sans-serif; }</style>
+  </defs>
+  <rect width="280" height="130" fill="#FFFFFF" />
+  <rect x="10" y="10" width="260" height="110" fill="#F0F0F0" stroke="#D0D0D0" stroke-width="1" rx="2" />
+  <rect x="26" y="20" width="228" height="88" fill="#FFFFFF" stroke="#7A7A7A" stroke-width="1" rx="2" />
+  <rect x="240" y="21" width="13" height="86" fill="#F0F0F0" stroke="#D5DFE5" stroke-width="1" />
+  <rect x="242" y="24" width="9" height="20" fill="#C0C0C0" stroke="none" stroke-width="0" rx="3" />
+  <text x="30" y="32" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">複数行の</text>
+  <text x="30" y="50" font-size="12" fill="#1E1E1E" text-anchor="start" font-weight="normal" dominant-baseline="central">テキスト入力</text>
+</svg>

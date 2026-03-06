@@ -1,0 +1,13 @@
+screen:
+  title: textarea
+window:
+  width: 260
+  height: 110
+  chrome: false
+  controls:
+    - type: textarea
+      x: 16
+      y: 10
+      width: 228
+      height: 88
+      text: "複数行の\nテキスト入力"

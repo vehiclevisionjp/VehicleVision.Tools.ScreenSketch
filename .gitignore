@@ -39,11 +39,15 @@ Thumbs.db
 node_modules/
 package-lock.json
 
-## Wiki sync temp
-.wiki-temp/
-
 ## PDF output
 pdf-output/
 
 ## NuGet output
 nupkg/
+
+## Wiki sync temp
+wiki-temp/
+
+## VS Code Extension
+*.vsix
+VehicleVision.Tools.ScreenSketch.VSCode/out/

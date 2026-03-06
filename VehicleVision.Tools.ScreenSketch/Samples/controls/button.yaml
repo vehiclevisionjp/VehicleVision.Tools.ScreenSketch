@@ -1,0 +1,13 @@
+screen:
+  title: button
+window:
+  width: 120
+  height: 50
+  chrome: false
+  controls:
+    - type: button
+      x: 16
+      y: 10
+      width: 88
+      height: 28
+      text: ボタン

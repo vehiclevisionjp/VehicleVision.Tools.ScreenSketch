@@ -1,0 +1,16 @@
+screen:
+  title: radiobutton
+window:
+  width: 200
+  height: 70
+  chrome: false
+  controls:
+    - type: radiobutton
+      x: 16
+      y: 10
+      text: 選択中
+      selected: true
+    - type: radiobutton
+      x: 16
+      y: 36
+      text: 未選択

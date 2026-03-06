@@ -1,0 +1,14 @@
+screen:
+  title: linklabel
+window:
+  width: 200
+  height: 44
+  chrome: false
+  controls:
+    - type: linklabel
+      x: 16
+      y: 10
+      width: 170
+      height: 20
+      text: リンクテキスト
+      url: https://example.com

@@ -1,0 +1,12 @@
+# ビルド出力
+**/bin/
+**/obj/
+
+# パッケージ
+**/node_modules/
+
+# 生成ファイル
+*.Designer.cs
+
+# PDF出力
+pdf-output/

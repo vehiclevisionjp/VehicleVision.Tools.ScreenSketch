@@ -1,0 +1,15 @@
+screen:
+  title: numericupdown
+window:
+  width: 170
+  height: 50
+  chrome: false
+  controls:
+    - type: numericupdown
+      x: 16
+      y: 10
+      width: 138
+      height: 26
+      value: 42
+      minimum: 0
+      maximum: 100
