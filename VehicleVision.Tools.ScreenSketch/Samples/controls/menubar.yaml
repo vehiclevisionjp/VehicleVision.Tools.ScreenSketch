@@ -1,0 +1,17 @@
+screen:
+  title: menubar
+window:
+  width: 340
+  height: 44
+  chrome: false
+  controls:
+    - type: menubar
+      x: 0
+      y: 0
+      width: 340
+      height: 22
+      items:
+        - ファイル(F)
+        - 編集(E)
+        - 表示(V)
+        - ヘルプ(H)

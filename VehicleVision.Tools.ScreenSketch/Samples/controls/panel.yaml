@@ -1,0 +1,17 @@
+screen:
+  title: panel
+window:
+  width: 260
+  height: 80
+  chrome: false
+  controls:
+    - type: panel
+      x: 16
+      y: 10
+      width: 228
+      height: 58
+      controls:
+        - type: label
+          text: パネル内のラベル
+          x: 10
+          y: 10

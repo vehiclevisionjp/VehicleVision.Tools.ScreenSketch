@@ -1,0 +1,13 @@
+screen:
+  title: label
+window:
+  width: 180
+  height: 44
+  chrome: false
+  controls:
+    - type: label
+      x: 16
+      y: 10
+      width: 150
+      height: 20
+      text: ラベルテキスト

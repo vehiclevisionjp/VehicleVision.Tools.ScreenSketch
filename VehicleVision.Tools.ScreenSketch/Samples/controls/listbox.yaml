@@ -1,0 +1,18 @@
+screen:
+  title: listbox
+window:
+  width: 220
+  height: 130
+  chrome: false
+  controls:
+    - type: listbox
+      x: 16
+      y: 10
+      width: 188
+      height: 108
+      selectedIndex: 1
+      items:
+        - 項目A
+        - 項目B（選択中）
+        - 項目C
+        - 項目D

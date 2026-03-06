@@ -1,0 +1,84 @@
+screen:
+  title: コントロール個別色 サンプル
+  description: コントロールごとに色をカスタマイズする例
+
+window:
+  title: 個別色指定デモ
+  width: 500
+  height: 350
+  controls:
+    - type: label
+      text: "デフォルト色のラベル"
+      x: 20
+      y: 20
+
+    - type: label
+      text: "赤色のラベル"
+      x: 20
+      y: 50
+      foreground: "#E53935"
+
+    - type: button
+      text: 通常ボタン
+      x: 20
+      y: 90
+      width: 120
+
+    - type: button
+      text: 成功ボタン
+      x: 160
+      y: 90
+      width: 120
+      background: "#4CAF50"
+      foreground: "#FFFFFF"
+      borderColor: "#388E3C"
+
+    - type: button
+      text: 警告ボタン
+      x: 300
+      y: 90
+      width: 120
+      background: "#FF9800"
+      foreground: "#FFFFFF"
+      borderColor: "#F57C00"
+
+    - type: textbox
+      x: 20
+      y: 140
+      width: 200
+      text: 通常テキスト
+
+    - type: textbox
+      x: 240
+      y: 140
+      width: 200
+      text: エラー状態
+      borderColor: "#E53935"
+      background: "#FFF3F0"
+
+    - type: group
+      text: カスタム枠線グループ
+      x: 20
+      y: 185
+      width: 420
+      height: 120
+      borderColor: "#1976D2"
+      foreground: "#1976D2"
+      controls:
+        - type: checkbox
+          text: オプション A
+          x: 15
+          y: 15
+          checked: true
+
+        - type: checkbox
+          text: オプション B
+          x: 15
+          y: 45
+
+        - type: progressbar
+          x: 15
+          y: 75
+          width: 380
+          value: 65
+          foreground: "#4CAF50"

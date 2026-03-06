@@ -1,0 +1,145 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "restore",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "restore"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "--no-restore"
+      ],
+      "dependsOn": [
+        "restore"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "build (Release)",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "--configuration",
+        "Release",
+        "--no-restore"
+      ],
+      "dependsOn": [
+        "restore"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "clean",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "clean"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "rebuild",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "--no-restore"
+      ],
+      "dependsOn": [
+        "clean",
+        "restore"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "format",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "format",
+        "--include-generated"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build",
+      "detail": "C#コードのフォーマット（using整理含む）"
+    },
+    {
+      "label": "npm: lint:md",
+      "type": "npm",
+      "script": "lint:md",
+      "problemMatcher": [],
+      "group": "test",
+      "detail": "Markdownファイルの構文チェック"
+    },
+    {
+      "label": "npm: lint:md:fix",
+      "type": "npm",
+      "script": "lint:md:fix",
+      "problemMatcher": [],
+      "group": "test",
+      "detail": "Markdownのlintエラーを自動修正"
+    },
+    {
+      "label": "npm: format",
+      "type": "npm",
+      "script": "format",
+      "problemMatcher": [],
+      "group": "test",
+      "detail": "Prettierでファイルをフォーマット"
+    },
+    {
+      "label": "npm: format:check",
+      "type": "npm",
+      "script": "format:check",
+      "problemMatcher": [],
+      "group": "test",
+      "detail": "フォーマットのチェック（変更なし）"
+    },
+    {
+      "label": "ext: compile",
+      "type": "npm",
+      "script": "compile",
+      "path": "VehicleVision.Tools.ScreenSketch.VSCode",
+      "problemMatcher": "$tsc",
+      "group": "build",
+      "detail": "VS Code 拡張の TypeScript コンパイル"
+    },
+    {
+      "label": "ext: watch",
+      "type": "npm",
+      "script": "watch",
+      "path": "VehicleVision.Tools.ScreenSketch.VSCode",
+      "problemMatcher": "$tsc-watch",
+      "isBackground": true,
+      "group": "build",
+      "detail": "VS Code 拡張の TypeScript ウォッチビルド"
+    },
+    {
+      "label": "ext: package",
+      "type": "npm",
+      "script": "package",
+      "path": "VehicleVision.Tools.ScreenSketch.VSCode",
+      "problemMatcher": [],
+      "group": "build",
+      "detail": "VSIX パッケージを生成"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+screen:
+  title: textbox
+window:
+  width: 220
+  height: 50
+  chrome: false
+  controls:
+    - type: textbox
+      x: 16
+      y: 10
+      width: 188
+      height: 26
+      placeholder: テキストを入力

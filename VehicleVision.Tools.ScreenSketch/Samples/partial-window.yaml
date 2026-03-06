@@ -1,0 +1,75 @@
+screen:
+  title: 部分描画サンプル
+  description: chrome=false で画面の一部のみを描画する例
+
+window:
+  title: ""
+  width: 420
+  height: 260
+  chrome: false
+  controls:
+    - type: label
+      x: 16
+      y: 16
+      width: 80
+      height: 20
+      text: 氏名
+    - type: textbox
+      x: 100
+      y: 12
+      width: 300
+      height: 28
+      placeholder: 例）山田 太郎
+    - type: label
+      x: 16
+      y: 56
+      width: 80
+      height: 20
+      text: メール
+    - type: textbox
+      x: 100
+      y: 52
+      width: 300
+      height: 28
+      placeholder: user@example.com
+    - type: label
+      x: 16
+      y: 96
+      width: 80
+      height: 20
+      text: 種別
+    - type: combobox
+      x: 100
+      y: 92
+      width: 200
+      height: 28
+      text: 選択してください
+      items:
+        - 一般
+        - 管理者
+        - ゲスト
+    - type: checkbox
+      x: 100
+      y: 136
+      width: 160
+      height: 20
+      text: 通知を受け取る
+      checked: true
+    - type: checkbox
+      x: 100
+      y: 164
+      width: 160
+      height: 20
+      text: 利用規約に同意
+    - type: button
+      x: 210
+      y: 210
+      width: 90
+      height: 32
+      text: 保存
+    - type: button
+      x: 310
+      y: 210
+      width: 90
+      height: 32
+      text: キャンセル

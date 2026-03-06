@@ -1,0 +1,60 @@
+screen:
+  title: ダークテーマ サンプル
+  description: ダークモードのテーマ適用例
+  theme: dark
+
+window:
+  title: ダークモード画面
+  width: 600
+  height: 400
+  controls:
+    - type: menubar
+      items: [ファイル, 編集, 表示, ヘルプ]
+
+    - type: label
+      text: ユーザー名
+      x: 20
+      y: 40
+
+    - type: textbox
+      x: 120
+      y: 36
+      width: 200
+      placeholder: 入力してください
+
+    - type: button
+      text: 検索
+      x: 340
+      y: 35
+      width: 80
+
+    - type: button
+      text: 強調ボタン
+      x: 440
+      y: 35
+      width: 120
+      background: "#E53935"
+      foreground: "#FFFFFF"
+      borderColor: "#C62828"
+
+    - type: datagrid
+      x: 20
+      y: 80
+      width: 540
+      height: 200
+      columns:
+        - header: ID
+          width: 60
+        - header: 名前
+          width: 200
+        - header: ステータス
+          width: 140
+        - header: 更新日
+          width: 140
+      rows:
+        - ["001", "サンプルデータ A", "有効", "2026/01/15"]
+        - ["002", "サンプルデータ B", "無効", "2026/02/20"]
+        - ["003", "サンプルデータ C", "有効", "2026/03/01"]
+
+    - type: statusbar
+      items: [準備完了, "3 件"]

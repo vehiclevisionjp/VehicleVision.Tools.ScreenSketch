@@ -1,0 +1,56 @@
+{
+  "name": "vehiclevision-tools-screensketch-vscode",
+  "displayName": "VehicleVision.Tools.ScreenSketch.VSCode",
+  "description": "Markdown プレビューで yaml-screen コードブロックを SVG 画面イメージとして表示します",
+  "version": "0.0.0",
+  "publisher": "vehiclevisionjp",
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vehiclevisionjp/VehicleVision.Tools.ScreenSketch.git",
+    "directory": "VehicleVision.Tools.ScreenSketch.VSCode"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "markdown.markdownItPlugins": true,
+    "configuration": {
+      "title": "Screen Sketch",
+      "properties": {
+        "screenSketch.toolPath": {
+          "type": "string",
+          "default": "screen-sketch",
+          "description": "screen-sketch コマンドのパス。dotnet tool でインストール済みの場合はデフォルトのままで OK です。"
+        },
+        "screenSketch.theme": {
+          "type": "string",
+          "default": "",
+          "enum": ["", "default", "dark", "blueprint"],
+          "description": "SVG レンダリングに使用するカラーテーマ。空の場合は YAML 内の screen.theme またはデフォルトテーマが使われます。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "devDependencies": {
+    "@types/markdown-it": "^14.0.0",
+    "@types/node": "^25.3.3",
+    "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^3.3.2",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,14 @@
+screen:
+  title: datetimepicker
+window:
+  width: 240
+  height: 50
+  chrome: false
+  controls:
+    - type: datetimepicker
+      x: 16
+      y: 10
+      width: 208
+      height: 26
+      dateText: "2026/03/06"
+      format: short

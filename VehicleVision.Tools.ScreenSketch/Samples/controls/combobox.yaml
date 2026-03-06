@@ -1,0 +1,17 @@
+screen:
+  title: combobox
+window:
+  width: 220
+  height: 50
+  chrome: false
+  controls:
+    - type: combobox
+      x: 16
+      y: 10
+      width: 188
+      height: 26
+      text: 選択してください
+      items:
+        - 項目1
+        - 項目2
+        - 項目3
