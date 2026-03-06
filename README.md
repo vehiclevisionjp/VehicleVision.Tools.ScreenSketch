@@ -46,6 +46,9 @@ dotnet build
 # YAML から SVG + Markdown を生成
 screen-sketch generate <input-path> [output-dir]
 
+# テーマを指定して生成（default, dark, blueprint, custom）
+screen-sketch generate <input-path> [output-dir] --theme dark
+
 # Markdown 内の yaml-screen ブロックを変換
 screen-sketch transform <input-path> [output-dir] [--inline]
 
@@ -54,6 +57,23 @@ screen-sketch restore <input-path>
 
 # stdin から YAML を読み取り、stdout に SVG を出力
 echo '<yaml>' | screen-sketch render
+```
+
+### カスタムテーマ
+
+YAML 内で `theme: custom` と `customTheme` を指定すると、ユーザー独自の配色を定義できます。
+未指定の色は標準テーマにフォールバックします。
+
+```yaml
+screen:
+  title: カスタムテーマ例
+  theme: custom
+  customTheme:
+    canvasBackground: "#F5F0EB"
+    windowBackground: "#FAF7F2"
+    titleBarBackground: "#6B4226"
+    buttonBackground: "#D2B48C"
+    labelText: "#3E2723"
 ```
 
 ソースから実行する場合：
