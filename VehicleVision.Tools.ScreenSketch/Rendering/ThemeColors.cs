@@ -68,6 +68,11 @@ public partial class ThemeColors
     public string AnnotationText { get; init; } = "#FFFFFF";
     public string AnnotationLine { get; init; } = "#E53935";
 
+    // ── Connector ──
+    public string ConnectorLine { get; init; } = "#1976D2";
+    public string ConnectorCircle { get; init; } = "#1976D2";
+    public string ConnectorText { get; init; } = "#FFFFFF";
+
     // ── Chromeless ──
     public string ChromelessBorder { get; init; } = "#D0D0D0";
 
@@ -156,6 +161,9 @@ public partial class ThemeColors
         AnnotationCircle = "#E53935",
         AnnotationText = "#FFFFFF",
         AnnotationLine = "#E53935",
+        ConnectorLine = "#42A5F5",
+        ConnectorCircle = "#42A5F5",
+        ConnectorText = "#FFFFFF",
         ChromelessBorder = "#555555"
     };
 
@@ -201,6 +209,9 @@ public partial class ThemeColors
         AnnotationCircle = "#FF6B35",
         AnnotationText = "#FFFFFF",
         AnnotationLine = "#FF6B35",
+        ConnectorLine = "#7EC8E3",
+        ConnectorCircle = "#7EC8E3",
+        ConnectorText = "#FFFFFF",
         ChromelessBorder = "#4A90D9"
     };
 }

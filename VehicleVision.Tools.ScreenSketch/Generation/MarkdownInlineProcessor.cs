@@ -156,6 +156,16 @@ public class MarkdownInlineProcessor
                 sb.AppendLine(CultureInfo.InvariantCulture, $"| {ann.Label} | {ann.Description} |");
         }
 
+        // コネクタ（手順）テーブル
+        if (definition.Connectors is { Count: > 0 })
+        {
+            sb.AppendLine();
+            sb.AppendLine("| ラベル | 説明 |");
+            sb.AppendLine("| ------ | ---- |");
+            foreach (var conn in definition.Connectors)
+                sb.AppendLine(CultureInfo.InvariantCulture, $"| {conn.Label} | {conn.Description} |");
+        }
+
         return sb.ToString().TrimEnd('\r', '\n');
     }
 

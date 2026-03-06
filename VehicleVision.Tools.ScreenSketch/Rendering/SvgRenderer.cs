@@ -54,6 +54,9 @@ public class SvgRenderer
         else
             RenderChromeless(svg, window, pad, pad);
 
+        if (def.Connectors is { Count: > 0 })
+            RenderConnectors(svg, def.Connectors);
+
         if (def.Annotations is { Count: > 0 })
             RenderAnnotations(svg, def.Annotations, pad, pad, window.Width);
 
@@ -850,27 +853,161 @@ public class SvgRenderer
             var target = _bounds[ann.Target];
             var circleX = annotationX;
 
+            // 個別色オーバーライド
+            var lineColor = ann.LineColor ?? _colors.AnnotationLine;
+            var circleColor = ann.LabelBackground ?? _colors.AnnotationCircle;
+            var textColor = ann.LabelColor ?? _colors.AnnotationText;
+            var dashArray = ResolveDashArray(ann.LineStyle, "dashed");
+
             // リーダー線
             var lineStartX = target.Right + 2;
             var lineStartY = target.CenterY;
             var lineEndX = circleX - Theme.AnnotationRadius - 2;
 
             svg.Add(Line(lineStartX, lineStartY, lineEndX, circleY,
-                _colors.AnnotationLine, 1, "4,3"));
+                lineColor, 1, dashArray));
 
             // コントロール接続点
             svg.Add(El("circle",
                 At("cx", lineStartX), At("cy", lineStartY), At("r", 3),
-                At("fill", _colors.AnnotationCircle)));
+                At("fill", circleColor)));
 
             // ラベル円
             var radius = Math.Max(Theme.AnnotationRadius, EstimateTextWidth(ann.Label, 13) / 2 + 4);
             svg.Add(El("circle",
                 At("cx", circleX), At("cy", circleY), At("r", radius),
-                At("fill", _colors.AnnotationCircle)));
+                At("fill", circleColor)));
 
             svg.Add(Txt(ann.Label, circleX, circleY, 13,
-                _colors.AnnotationText, "middle", "bold"));
+                textColor, "middle", "bold"));
         }
+    }
+
+    /// <summary>線スタイル文字列からSVGのstroke-dasharrayを解決する</summary>
+    private static string? ResolveDashArray(string? lineStyle, string defaultStyle)
+    {
+        var style = (lineStyle ?? defaultStyle).ToLowerInvariant();
+        return style switch
+        {
+            "solid" => null,
+            "dotted" => "2,3",
+            _ => "4,3" // dashed
+        };
+    }
+
+    // ────────────────────────────────────────────
+    //  コネクタ描画
+    // ────────────────────────────────────────────
+
+    private void RenderConnectors(XElement svg, List<ConnectorDefinition> connectors)
+    {
+        foreach (var conn in connectors)
+        {
+            if (!_bounds.TryGetValue(conn.From, out var fromBounds) ||
+                !_bounds.TryGetValue(conn.To, out var toBounds))
+                continue;
+
+            var lineColor = conn.LineColor ?? _colors.ConnectorLine;
+            var circleColor = conn.LabelBackground ?? _colors.ConnectorCircle;
+            var textColor = conn.LabelColor ?? _colors.ConnectorText;
+            var dashArray = ResolveDashArray(conn.LineStyle, "solid");
+
+            // 最近接エッジ間を結ぶ座標を計算
+            var (startX, startY, endX, endY) = ComputeEdgePoints(fromBounds, toBounds);
+
+            // コネクタ線
+            svg.Add(Line(startX, startY, endX, endY, lineColor, 1, dashArray));
+
+            // 接続元の小円
+            svg.Add(El("circle",
+                At("cx", startX), At("cy", startY), At("r", 3),
+                At("fill", circleColor)));
+
+            // 接続先に矢印
+            RenderArrowHead(svg, startX, startY, endX, endY, lineColor);
+
+            // ラベル（中間点に表示）
+            if (!string.IsNullOrEmpty(conn.Label))
+            {
+                var midX = (startX + endX) / 2;
+                var midY = (startY + endY) / 2;
+                var radius = Math.Max(Theme.AnnotationRadius, EstimateTextWidth(conn.Label, 13) / 2 + 4);
+
+                // ラベル背景円
+                svg.Add(El("circle",
+                    At("cx", midX), At("cy", midY), At("r", radius),
+                    At("fill", circleColor)));
+
+                svg.Add(Txt(conn.Label, midX, midY, 13,
+                    textColor, "middle", "bold"));
+            }
+        }
+    }
+
+    /// <summary>2つのコントロールの最近接エッジ間の座標を計算する</summary>
+    private static (int StartX, int StartY, int EndX, int EndY) ComputeEdgePoints(
+        ControlBounds from, ControlBounds to)
+    {
+        var fromCx = from.X + from.Width / 2;
+        var fromCy = from.Y + from.Height / 2;
+        var toCx = to.X + to.Width / 2;
+        var toCy = to.Y + to.Height / 2;
+
+        var startX = ClampToEdgeX(from, toCx, toCy);
+        var startY = ClampToEdgeY(from, toCx, toCy);
+        var endX = ClampToEdgeX(to, fromCx, fromCy);
+        var endY = ClampToEdgeY(to, fromCx, fromCy);
+
+        return (startX, startY, endX, endY);
+    }
+
+    private static int ClampToEdgeX(ControlBounds b, int targetX, int targetY)
+    {
+        var cx = b.X + b.Width / 2;
+        var cy = b.Y + b.Height / 2;
+        var dx = targetX - cx;
+        var dy = targetY - cy;
+        if (dx == 0 && dy == 0) return cx;
+
+        var scaleX = b.Width / 2.0 / Math.Max(1, Math.Abs(dx));
+        var scaleY = b.Height / 2.0 / Math.Max(1, Math.Abs(dy));
+        var scale = Math.Min(scaleX, scaleY);
+        return cx + (int)(dx * scale);
+    }
+
+    private static int ClampToEdgeY(ControlBounds b, int targetX, int targetY)
+    {
+        var cx = b.X + b.Width / 2;
+        var cy = b.Y + b.Height / 2;
+        var dx = targetX - cx;
+        var dy = targetY - cy;
+        if (dx == 0 && dy == 0) return cy;
+
+        var scaleX = b.Width / 2.0 / Math.Max(1, Math.Abs(dx));
+        var scaleY = b.Height / 2.0 / Math.Max(1, Math.Abs(dy));
+        var scale = Math.Min(scaleX, scaleY);
+        return cy + (int)(dy * scale);
+    }
+
+    /// <summary>接続先に矢印を描画する</summary>
+    private static void RenderArrowHead(XElement svg, int x1, int y1, int x2, int y2, string color)
+    {
+        var dx = x2 - x1;
+        var dy = y2 - y1;
+        var len = Math.Sqrt(dx * dx + dy * dy);
+        if (len < 1) return;
+
+        var ux = dx / len;
+        var uy = dy / len;
+        const int arrowSize = 8;
+
+        var ax = x2 - (int)(ux * arrowSize);
+        var ay = y2 - (int)(uy * arrowSize);
+        var px = (int)(-uy * arrowSize * 0.4);
+        var py = (int)(ux * arrowSize * 0.4);
+
+        svg.Add(El("polygon",
+            At("points", $"{x2},{y2} {ax + px},{ay + py} {ax - px},{ay - py}"),
+            At("fill", color)));
     }
 }
