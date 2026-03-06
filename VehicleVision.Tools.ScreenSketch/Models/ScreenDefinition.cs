@@ -6,6 +6,9 @@ public class ScreenDefinition
     public ScreenInfo? Screen { get; set; }
     public WindowDefinition? Window { get; set; }
     public List<AnnotationDefinition>? Annotations { get; set; }
+
+    /// <summary>コントロール間を結ぶコネクタ線定義</summary>
+    public List<ConnectorDefinition>? Connectors { get; set; }
 }
 
 /// <summary>画面メタ情報</summary>
@@ -154,4 +157,59 @@ public class AnnotationDefinition
 
     /// <summary>マニュアルに記載する説明文</summary>
     public string Description { get; set; } = "";
+
+    /// <summary>引き出し線の色オーバーライド（例: "#FF0000"）</summary>
+    public string? LineColor { get; set; }
+
+    /// <summary>引き出し線のスタイル（solid, dashed, dotted）。省略時は dashed</summary>
+    public string? LineStyle { get; set; }
+
+    /// <summary>ラベル円の背景色オーバーライド（例: "#0000FF"）</summary>
+    public string? LabelBackground { get; set; }
+
+    /// <summary>ラベルテキストの色オーバーライド（例: "#FFFFFF"）</summary>
+    public string? LabelColor { get; set; }
+}
+
+/// <summary>コントロール間を結ぶコネクタ線定義</summary>
+public class ConnectorDefinition
+{
+    /// <summary>接続元コントロールの Id</summary>
+    public string From { get; set; } = "";
+
+    /// <summary>接続先コントロールの Id</summary>
+    public string To { get; set; } = "";
+
+    /// <summary>表示ラベル（①②③ など）</summary>
+    public string Label { get; set; } = "";
+
+    /// <summary>マニュアルに記載する説明文</summary>
+    public string Description { get; set; } = "";
+
+    /// <summary>コネクタ線の色オーバーライド（例: "#FF0000" または "SteelBlue"）</summary>
+    public string? LineColor { get; set; }
+
+    /// <summary>コネクタ線のスタイル（solid, dashed, dotted）。省略時は solid</summary>
+    public string? LineStyle { get; set; }
+
+    /// <summary>ラベル円の背景色オーバーライド（例: "#0000FF"）</summary>
+    public string? LabelBackground { get; set; }
+
+    /// <summary>ラベルテキストの色オーバーライド（例: "#FFFFFF"）</summary>
+    public string? LabelColor { get; set; }
+
+    /// <summary>接続元の端点形状（none, arrow, circle, diamond, square）。省略時は none</summary>
+    public string? FromShape { get; set; }
+
+    /// <summary>接続先の端点形状（none, arrow, circle, diamond, square）。省略時は arrow</summary>
+    public string? ToShape { get; set; }
+
+    /// <summary>接続元のアンカー位置（auto, top, bottom, left, right, center）。省略時は auto</summary>
+    public string? FromAnchor { get; set; }
+
+    /// <summary>接続先のアンカー位置（auto, top, bottom, left, right, center）。省略時は auto</summary>
+    public string? ToAnchor { get; set; }
+
+    /// <summary>線の種類（straight, curve）。省略時は straight</summary>
+    public string? LineType { get; set; }
 }

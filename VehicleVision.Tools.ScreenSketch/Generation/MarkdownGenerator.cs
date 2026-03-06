@@ -48,6 +48,20 @@ public class MarkdownGenerator
             sb.AppendLine();
         }
 
+        // コネクタ（手順）説明
+        if (definition.Connectors is { Count: > 0 })
+        {
+            sb.AppendLine("---");
+            sb.AppendLine();
+            sb.AppendLine("## 手順説明");
+            sb.AppendLine();
+            sb.AppendLine("| ラベル | 説明 |");
+            sb.AppendLine("| ------ | ---- |");
+            foreach (var conn in definition.Connectors)
+                sb.AppendLine(CultureInfo.InvariantCulture, $"| {conn.Label} | {conn.Description} |");
+            sb.AppendLine();
+        }
+
         // 変更履歴
         sb.AppendLine("---");
         sb.AppendLine();

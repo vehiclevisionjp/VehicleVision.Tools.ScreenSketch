@@ -144,3 +144,123 @@ window:
 ![カスタムテーマサンプル](images/custom-theme.svg)
 
 指定可能なプロパティの一覧は [YAML 定義リファレンス](YAML-Definition-Reference) を参照してください。
+
+---
+
+## コネクタ線（手順の図示）
+
+`connectors` を使うとコントロール間を矢印付きの線で結び、操作手順を図示できます。
+`annotations` の引き出し線も個別にカスタマイズ可能です。
+
+端点の形状（`fromShape` / `toShape`）、アンカー位置（`fromAnchor` / `toAnchor`）、
+線の種類（`lineType: straight` / `curve`）を組み合わせて柔軟にレイアウトできます。
+
+```yaml
+screen:
+    title: 'コネクタ・手順説明 サンプル'
+    description: 'コントロール間を結ぶコネクタ線と、引き出し線の個別色カスタマイズの例'
+window:
+    title: 'ユーザー登録 手順'
+    width: 500
+    height: 300
+    controls:
+        - type: label
+          text: '名前:'
+          x: 20
+          y: 20
+        - type: textbox
+          id: nameInput
+          x: 80
+          y: 15
+          width: 200
+          placeholder: '氏名を入力'
+        - type: label
+          text: 'メール:'
+          x: 20
+          y: 60
+        - type: textbox
+          id: emailInput
+          x: 80
+          y: 55
+          width: 200
+          placeholder: 'email@example.com'
+        - type: button
+          id: submitBtn
+          x: 80
+          y: 100
+          text: '登録'
+        - type: button
+          id: cancelBtn
+          x: 170
+          y: 100
+          text: 'キャンセル'
+annotations:
+    - target: nameInput
+      label: '①'
+      description: 'ユーザーの氏名を入力します。'
+    - target: emailInput
+      label: '②'
+      description: 'メールアドレスを入力します。'
+      lineColor: '#1976D2'
+      lineStyle: dotted
+      labelBackground: '#1976D2'
+    - target: submitBtn
+      label: '③'
+      description: '入力内容を登録します。'
+      lineStyle: solid
+      labelBackground: '#4CAF50'
+connectors:
+    - from: nameInput
+      to: emailInput
+      label: '①'
+      description: '名前を入力後、メールアドレスを入力します。'
+      fromAnchor: bottom
+      toAnchor: top
+      fromShape: circle
+      toShape: arrow
+    - from: emailInput
+      to: submitBtn
+      label: '②'
+      description: 'メールアドレスを入力後、登録ボタンを押します。'
+      lineType: curve
+      fromAnchor: bottom
+      toAnchor: top
+      lineColor: '#4CAF50'
+      labelBackground: '#4CAF50'
+      fromShape: diamond
+      toShape: arrow
+    - from: submitBtn
+      to: cancelBtn
+      label: '③'
+      description: '登録完了、またはキャンセルボタンで中止します。'
+      lineStyle: dashed
+      lineColor: '#FF9800'
+      labelBackground: '#FF9800'
+      fromShape: square
+      toShape: diamond
+```
+
+![コネクタサンプル](images/connectors.svg)
+
+---
+
+## 名前付き色
+
+色プロパティには `#RRGGBB` 形式に加えて、WinForms の `KnownColor` 名を使用できます。
+
+```yaml
+window:
+    title: '名前付き色'
+    width: 300
+    height: 100
+    controls:
+        - type: button
+          text: 'OK'
+          x: 20
+          y: 20
+          background: Control
+          foreground: ControlText
+          borderColor: ControlDark
+```
+
+詳細は [YAML 定義リファレンス](YAML-Definition-Reference#色の指定) を参照してください。
