@@ -12,11 +12,11 @@ YAML ファイルから SVG 画面イメージと Markdown ドキュメントを
 screen-sketch generate <input-path> [output-dir] [--theme <name>]
 ```
 
-| 引数           | 必須 | 説明                                                |
-| -------------- | ---- | --------------------------------------------------- |
-| `<input-path>` | ○    | YAML ファイルまたは YAML ファイルを含むディレクトリ |
-| `[output-dir]` |      | 出力先ディレクトリ（省略時: `./output`）            |
-| `--theme`      |      | カラーテーマ（`default`, `dark`, `blueprint`）   |
+| 引数           | 必須 | 説明                                                           |
+| -------------- | ---- | -------------------------------------------------------------- |
+| `<input-path>` | ○    | YAML ファイルまたは YAML ファイルを含むディレクトリ            |
+| `[output-dir]` |      | 出力先ディレクトリ（省略時: `./output`）                       |
+| `--theme`      |      | カラーテーマ（`default`, `dark`, `blueprint`, `custom`）       |
 
 **出力ファイル：**
 
@@ -34,12 +34,12 @@ Markdown ファイル内の ` ```yaml-screen ` コードブロックを検出し
 screen-sketch transform <input-path> [output-dir] [--inline] [--theme <name>]
 ```
 
-| 引数           | 必須 | 説明                                                      |
-| -------------- | ---- | --------------------------------------------------------- |
-| `<input-path>` | ○    | Markdown ファイルまたはディレクトリ                       |
-| `[output-dir]` |      | 出力先ディレクトリ（省略時: 入力と同じ場所に上書き）      |
-| `--inline`     |      | SVG をインライン埋め込みする（PDF/HTML 生成の前処理向け） |
-| `--theme`      |      | カラーテーマ（`default`, `dark`, `blueprint`）           |
+| 引数           | 必須 | 説明                                                          |
+| -------------- | ---- | ------------------------------------------------------------- |
+| `<input-path>` | ○    | Markdown ファイルまたはディレクトリ                           |
+| `[output-dir]` |      | 出力先ディレクトリ（省略時: 入力と同じ場所に上書き）          |
+| `--inline`     |      | SVG をインライン埋め込みする（PDF/HTML 生成の前処理向け）     |
+| `--theme`      |      | カラーテーマ（`default`, `dark`, `blueprint`, `custom`）      |
 
 **変換前（Markdown）：**
 
@@ -101,8 +101,8 @@ stdin から YAML を読み取り、stdout に SVG を出力します。VS Code 
 screen-sketch render [--theme <name>] < input.yaml > output.svg
 ```
 
-| 引数      | 必須 | 説明                                           |
-| --------- | ---- | ---------------------------------------------- |
-| `--theme` |      | カラーテーマ（`default`, `dark`, `blueprint`） |
+| 引数      | 必須 | 説明                                                     |
+| --------- | ---- | -------------------------------------------------------- |
+| `--theme` |      | カラーテーマ（`default`, `dark`, `blueprint`, `custom`） |
 
 YAML は標準入力から読み取り、SVG は標準出力に書き出します。

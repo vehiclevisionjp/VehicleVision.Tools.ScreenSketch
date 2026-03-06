@@ -14,8 +14,11 @@ public class ScreenInfo
     public string Title { get; set; } = "";
     public string Description { get; set; } = "";
 
-    /// <summary>カラーテーマ名（default, dark, blueprint）</summary>
+    /// <summary>カラーテーマ名（default, dark, blueprint, custom）</summary>
     public string? Theme { get; set; }
+
+    /// <summary>カスタムテーマの色定義。theme が "custom" の場合に使用し、未指定の要素は標準テーマにフォールバックする</summary>
+    public Dictionary<string, string>? CustomTheme { get; set; }
 }
 
 /// <summary>ウィンドウ定義</summary>

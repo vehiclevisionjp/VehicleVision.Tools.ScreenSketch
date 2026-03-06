@@ -92,3 +92,55 @@ window:
 ```
 
 ![部分描画サンプル](images/partial-window.svg)
+
+---
+
+## カスタムテーマ
+
+`theme: custom` と `customTheme` を指定すると、ユーザー独自の配色を定義できます。
+指定しなかった色は標準テーマにフォールバックするため、変更したい色だけを記述すれば十分です。
+
+```yaml
+screen:
+    title: 'カスタムテーマ'
+    theme: custom
+    customTheme:
+        canvasBackground: '#F5F0EB'
+        windowBackground: '#FAF7F2'
+        windowBorder: '#8B7355'
+        titleBarBackground: '#6B4226'
+        titleBarText: '#FFFFFF'
+        buttonBackground: '#D2B48C'
+        buttonBorder: '#8B7355'
+        buttonText: '#3E2723'
+        textBoxBackground: '#FFFDF5'
+        textBoxBorder: '#A0866C'
+        labelText: '#3E2723'
+        statusBarBackground: '#6B4226'
+        statusBarText: '#FFFFFF'
+window:
+    title: 'カスタムテーマ画面'
+    width: 500
+    height: 300
+    controls:
+        - type: label
+          text: 'ユーザー名'
+          x: 20
+          y: 40
+        - type: textbox
+          x: 120
+          y: 36
+          width: 200
+          placeholder: '入力してください'
+        - type: button
+          text: '登録'
+          x: 340
+          y: 35
+          width: 100
+        - type: statusbar
+          items: [準備完了, 'カスタムテーマ']
+```
+
+![カスタムテーマサンプル](images/custom-theme.svg)
+
+指定可能なプロパティの一覧は [YAML 定義リファレンス](YAML-Definition-Reference) を参照してください。
