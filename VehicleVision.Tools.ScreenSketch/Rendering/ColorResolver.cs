@@ -49,7 +49,8 @@ public static class ColorResolver
         foreach (KnownColor kc in Enum.GetValues<KnownColor>())
         {
             var color = Color.FromKnownColor(kc);
-            // A=0 の名前付きカラー（Transparent 等）はスキップしない（明示的に指定した場合に対応）
+            // A=0 の名前付きカラー（Transparent 等）も登録する。
+            // SVG は #RRGGBB 形式のため透明度（Alpha）は無視される。
             map.TryAdd(kc.ToString(), $"#{color.R:X2}{color.G:X2}{color.B:X2}");
         }
 

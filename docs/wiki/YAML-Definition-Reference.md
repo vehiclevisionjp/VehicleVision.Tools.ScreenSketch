@@ -221,3 +221,5 @@ connectors:
 | `GrayText`       | 無効テキスト           | `#ACA899` |
 | `SteelBlue`      | Web カラー（青灰色）   | `#4682B4` |
 | `Tomato`         | Web カラー（トマト色） | `#FF6347` |
+
+> **注意:** システムカラー（`Control`, `ActiveBorder` 等）の実際の RGB 値は実行環境の OS テーマに依存します。上記の値は Windows クラシックテーマの既定値です。`Transparent` 等の透明度を持つ色は `#RRGGBB` 形式（不透明）に変換されます。
