@@ -106,6 +106,10 @@ public class SvgRenderer
         return el;
     }
 
+    /// <summary>ユーザー指定の色値を解決する。名前付き色（WinForms KnownColor）をサポート</summary>
+    private static string ResolveColor(string? userColor, string fallback)
+        => ColorResolver.Resolve(userColor, fallback);
+
     private void Register(string? id, int x, int y, int w, int h)
     {
         if (!string.IsNullOrEmpty(id))
@@ -306,9 +310,9 @@ public class SvgRenderer
 
     private void RenderButton(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? _colors.ButtonBackground;
-        var fg = c.Foreground ?? _colors.ButtonText;
-        var border = c.BorderColor ?? _colors.ButtonBorder;
+        var bg = ResolveColor(c.Background, _colors.ButtonBackground);
+        var fg = ResolveColor(c.Foreground, _colors.ButtonText);
+        var border = ResolveColor(c.BorderColor, _colors.ButtonBorder);
 
         svg.Add(Rect(x, y, c.Width, c.Height, bg, border, 1, 3));
         if (!string.IsNullOrEmpty(c.Text))
@@ -317,13 +321,13 @@ public class SvgRenderer
 
     private void RenderTextBox(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? _colors.TextBoxBackground;
-        var border = c.BorderColor ?? _colors.TextBoxBorder;
+        var bg = ResolveColor(c.Background, _colors.TextBoxBackground);
+        var border = ResolveColor(c.BorderColor, _colors.TextBoxBorder);
 
         svg.Add(Rect(x, y, c.Width, c.Height, bg, border, 1, 2));
 
         var display = !string.IsNullOrEmpty(c.Text) ? c.Text : c.Placeholder;
-        var fill = !string.IsNullOrEmpty(c.Text) ? (c.Foreground ?? _colors.TextBoxText) : _colors.TextBoxPlaceholder;
+        var fill = !string.IsNullOrEmpty(c.Text) ? (ResolveColor(c.Foreground, _colors.TextBoxText)) : _colors.TextBoxPlaceholder;
         var style = string.IsNullOrEmpty(c.Text) && !string.IsNullOrEmpty(c.Placeholder) ? "italic" : null;
 
         if (!string.IsNullOrEmpty(display))
@@ -334,16 +338,16 @@ public class SvgRenderer
     {
         if (!string.IsNullOrEmpty(c.Text))
         {
-            var fg = c.Foreground ?? _colors.LabelText;
+            var fg = ResolveColor(c.Foreground, _colors.LabelText);
             svg.Add(Txt(c.Text, x, y + c.Height / 2, 12, fg));
         }
     }
 
     private void RenderComboBox(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? _colors.TextBoxBackground;
-        var fg = c.Foreground ?? _colors.TextBoxText;
-        var border = c.BorderColor ?? _colors.TextBoxBorder;
+        var bg = ResolveColor(c.Background, _colors.TextBoxBackground);
+        var fg = ResolveColor(c.Foreground, _colors.TextBoxText);
+        var border = ResolveColor(c.BorderColor, _colors.TextBoxBorder);
 
         svg.Add(Rect(x, y, c.Width, c.Height, bg, border, 1, 2));
 
@@ -362,7 +366,7 @@ public class SvgRenderer
 
     private void RenderCheckBox(XElement svg, ControlDefinition c, int x, int y)
     {
-        var fg = c.Foreground ?? _colors.LabelText;
+        var fg = ResolveColor(c.Foreground, _colors.LabelText);
 
         var boxSize = 14;
         var boxY = y + 3;
@@ -383,7 +387,7 @@ public class SvgRenderer
 
     private void RenderRadioButton(XElement svg, ControlDefinition c, int x, int y)
     {
-        var fg = c.Foreground ?? _colors.LabelText;
+        var fg = ResolveColor(c.Foreground, _colors.LabelText);
 
         var r = 7;
         var cx = x + r;
@@ -401,8 +405,8 @@ public class SvgRenderer
 
     private void RenderGroupBox(XElement svg, ControlDefinition c, int ax, int ay)
     {
-        var border = c.BorderColor ?? _colors.GroupBorder;
-        var fg = c.Foreground ?? _colors.GroupText;
+        var border = ResolveColor(c.BorderColor, _colors.GroupBorder);
+        var fg = ResolveColor(c.Foreground, _colors.GroupText);
         var w = c.Width;
         var h = c.Height;
 
@@ -425,8 +429,8 @@ public class SvgRenderer
 
     private void RenderDataGrid(XElement svg, ControlDefinition c, int ax, int ay)
     {
-        var bg = c.Background ?? _colors.GridBackground;
-        var border = c.BorderColor ?? _colors.GridBorder;
+        var bg = ResolveColor(c.Background, _colors.GridBackground);
+        var border = ResolveColor(c.BorderColor, _colors.GridBorder);
         var w = c.Width;
         var h = c.Height;
         var headerH = 26;
@@ -472,7 +476,7 @@ public class SvgRenderer
                 for (var ci = 0; ci < Math.Min(row.Count, c.Columns.Count); ci++)
                 {
                     var colW = c.Columns[ci].Width > 0 ? c.Columns[ci].Width : w / c.Columns.Count;
-                    svg.Add(Txt(row[ci], colX + 8, rowY + rowH / 2, 11, c.Foreground ?? _colors.GridCellText));
+                    svg.Add(Txt(row[ci], colX + 8, rowY + rowH / 2, 11, ResolveColor(c.Foreground, _colors.GridCellText)));
                     colX += colW;
                 }
             }
@@ -481,8 +485,8 @@ public class SvgRenderer
 
     private void RenderMenuBar(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? _colors.MenuBackground;
-        var fg = c.Foreground ?? _colors.MenuText;
+        var bg = ResolveColor(c.Background, _colors.MenuBackground);
+        var fg = ResolveColor(c.Foreground, _colors.MenuText);
 
         svg.Add(Rect(x, y, c.Width, c.Height, bg, "none"));
         svg.Add(Line(x, y + c.Height, x + c.Width, y + c.Height, _colors.MenuBorder));
@@ -500,8 +504,8 @@ public class SvgRenderer
 
     private void RenderStatusBar(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? _colors.StatusBarBackground;
-        var fg = c.Foreground ?? _colors.StatusBarText;
+        var bg = ResolveColor(c.Background, _colors.StatusBarBackground);
+        var fg = ResolveColor(c.Foreground, _colors.StatusBarText);
 
         svg.Add(Rect(x, y, c.Width, c.Height, bg, "none"));
 
@@ -521,7 +525,7 @@ public class SvgRenderer
 
     private void RenderTabControl(XElement svg, ControlDefinition c, int ax, int ay)
     {
-        var border = c.BorderColor ?? _colors.GridBorder;
+        var border = ResolveColor(c.BorderColor, _colors.GridBorder);
         var tabH = 26;
         var w = c.Width;
         var h = c.Height;
@@ -562,8 +566,8 @@ public class SvgRenderer
 
     private void RenderListBox(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? _colors.TextBoxBackground;
-        var border = c.BorderColor ?? _colors.TextBoxBorder;
+        var bg = ResolveColor(c.Background, _colors.TextBoxBackground);
+        var border = ResolveColor(c.BorderColor, _colors.TextBoxBorder);
 
         svg.Add(Rect(x, y, c.Width, c.Height, bg, border));
 
@@ -579,14 +583,14 @@ public class SvgRenderer
                     svg.Add(Rect(x + 1, itemY, c.Width - 2, itemH, "#0078D4", "none"));
 
                 svg.Add(Txt(c.Items[i], x + 6, itemY + itemH / 2, 12,
-                    i == c.SelectedIndex ? "#FFFFFF" : (c.Foreground ?? _colors.LabelText)));
+                    i == c.SelectedIndex ? "#FFFFFF" : (ResolveColor(c.Foreground, _colors.LabelText))));
             }
         }
     }
 
     private void RenderPanel(XElement svg, ControlDefinition c, int ax, int ay)
     {
-        var border = c.BorderColor ?? _colors.GridBorder;
+        var border = ResolveColor(c.BorderColor, _colors.GridBorder);
 
         svg.Add(Rect(ax, ay, c.Width, c.Height, "none", border, 1, 2));
         if (c.Controls != null)
@@ -613,8 +617,8 @@ public class SvgRenderer
 
     private void RenderProgressBar(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? "#E0E0E0";
-        var fg = c.Foreground ?? _colors.TitleBarBackground;
+        var bg = ResolveColor(c.Background, "#E0E0E0");
+        var fg = ResolveColor(c.Foreground, _colors.TitleBarBackground);
 
         var clamped = Math.Clamp(c.Value, 0, 100);
         svg.Add(Rect(x, y, c.Width, c.Height, bg, _colors.GridBorder, 1, 3));
@@ -628,9 +632,9 @@ public class SvgRenderer
 
     private void RenderNumericUpDown(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? _colors.TextBoxBackground;
-        var fg = c.Foreground ?? _colors.TextBoxText;
-        var border = c.BorderColor ?? _colors.TextBoxBorder;
+        var bg = ResolveColor(c.Background, _colors.TextBoxBackground);
+        var fg = ResolveColor(c.Foreground, _colors.TextBoxText);
+        var border = ResolveColor(c.BorderColor, _colors.TextBoxBorder);
 
         var clamped = Math.Clamp(c.Value, c.Minimum, c.Maximum);
         var btnW = 18;
@@ -657,9 +661,9 @@ public class SvgRenderer
 
     private void RenderDateTimePicker(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? _colors.TextBoxBackground;
-        var fg = c.Foreground ?? _colors.TextBoxText;
-        var border = c.BorderColor ?? _colors.TextBoxBorder;
+        var bg = ResolveColor(c.Background, _colors.TextBoxBackground);
+        var fg = ResolveColor(c.Foreground, _colors.TextBoxText);
+        var border = ResolveColor(c.BorderColor, _colors.TextBoxBorder);
 
         svg.Add(Rect(x, y, c.Width, c.Height, bg, border, 1, 2));
 
@@ -690,8 +694,8 @@ public class SvgRenderer
 
     private void RenderTreeView(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? _colors.TreeViewBackground;
-        var border = c.BorderColor ?? _colors.TextBoxBorder;
+        var bg = ResolveColor(c.Background, _colors.TreeViewBackground);
+        var border = ResolveColor(c.BorderColor, _colors.TextBoxBorder);
 
         svg.Add(Rect(x, y, c.Width, c.Height, bg, border));
 
@@ -750,8 +754,8 @@ public class SvgRenderer
 
     private void RenderToolbar(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? _colors.ToolbarBackground;
-        var fg = c.Foreground ?? _colors.ToolbarText;
+        var bg = ResolveColor(c.Background, _colors.ToolbarBackground);
+        var fg = ResolveColor(c.Foreground, _colors.ToolbarText);
 
         svg.Add(Rect(x, y, c.Width, c.Height, bg, "none"));
         svg.Add(Line(x, y + c.Height, x + c.Width, y + c.Height, _colors.ToolbarBorder));
@@ -782,7 +786,7 @@ public class SvgRenderer
     {
         if (!string.IsNullOrEmpty(c.Text))
         {
-            var fg = c.Foreground ?? _colors.LinkLabelText;
+            var fg = ResolveColor(c.Foreground, _colors.LinkLabelText);
             var textW = EstimateTextWidth(c.Text, 12);
             svg.Add(Txt(c.Text, x, y + c.Height / 2, 12, fg));
             svg.Add(Line(x, y + c.Height / 2 + 8, x + textW, y + c.Height / 2 + 8, _colors.LinkLabelUnderline));
@@ -791,8 +795,8 @@ public class SvgRenderer
 
     private void RenderTextArea(XElement svg, ControlDefinition c, int x, int y)
     {
-        var bg = c.Background ?? (c.ReadOnly ? "#F5F5F5" : _colors.TextBoxBackground);
-        var border = c.BorderColor ?? _colors.TextBoxBorder;
+        var bg = ResolveColor(c.Background, c.ReadOnly ? "#F5F5F5" : _colors.TextBoxBackground);
+        var border = ResolveColor(c.BorderColor, _colors.TextBoxBorder);
 
         svg.Add(Rect(x, y, c.Width, c.Height, bg, border, 1, 2));
 
@@ -803,7 +807,7 @@ public class SvgRenderer
         svg.Add(Rect(x + c.Width - scrollW + 2, y + 4, scrollW - 5, 20, "#C0C0C0", "none", 0, 3));
 
         var display = !string.IsNullOrEmpty(c.Text) ? c.Text : c.Placeholder;
-        var fill = !string.IsNullOrEmpty(c.Text) ? (c.Foreground ?? _colors.TextBoxText) : _colors.TextBoxPlaceholder;
+        var fill = !string.IsNullOrEmpty(c.Text) ? (ResolveColor(c.Foreground, _colors.TextBoxText)) : _colors.TextBoxPlaceholder;
         var style = string.IsNullOrEmpty(c.Text) && !string.IsNullOrEmpty(c.Placeholder) ? "italic" : null;
 
         if (!string.IsNullOrEmpty(display))
@@ -854,9 +858,9 @@ public class SvgRenderer
             var circleX = annotationX;
 
             // 個別色オーバーライド
-            var lineColor = ann.LineColor ?? _colors.AnnotationLine;
-            var circleColor = ann.LabelBackground ?? _colors.AnnotationCircle;
-            var textColor = ann.LabelColor ?? _colors.AnnotationText;
+            var lineColor = ResolveColor(ann.LineColor, _colors.AnnotationLine);
+            var circleColor = ResolveColor(ann.LabelBackground, _colors.AnnotationCircle);
+            var textColor = ResolveColor(ann.LabelColor, _colors.AnnotationText);
             var dashArray = ResolveDashArray(ann.LineStyle, "dashed");
 
             // リーダー線
@@ -907,9 +911,9 @@ public class SvgRenderer
                 !_bounds.TryGetValue(conn.To, out var toBounds))
                 continue;
 
-            var lineColor = conn.LineColor ?? _colors.ConnectorLine;
-            var circleColor = conn.LabelBackground ?? _colors.ConnectorCircle;
-            var textColor = conn.LabelColor ?? _colors.ConnectorText;
+            var lineColor = ResolveColor(conn.LineColor, _colors.ConnectorLine);
+            var circleColor = ResolveColor(conn.LabelBackground, _colors.ConnectorCircle);
+            var textColor = ResolveColor(conn.LabelColor, _colors.ConnectorText);
             var dashArray = ResolveDashArray(conn.LineStyle, "solid");
 
             // 最近接エッジ間を結ぶ座標を計算
@@ -918,13 +922,13 @@ public class SvgRenderer
             // コネクタ線
             svg.Add(Line(startX, startY, endX, endY, lineColor, 1, dashArray));
 
-            // 接続元の小円
-            svg.Add(El("circle",
-                At("cx", startX), At("cy", startY), At("r", 3),
-                At("fill", lineColor)));
+            // 接続元の端点形状
+            var fromShape = (conn.FromShape ?? "none").ToLowerInvariant();
+            RenderEndpointShape(svg, fromShape, endX, endY, startX, startY, lineColor);
 
-            // 接続先に矢印
-            RenderArrowHead(svg, startX, startY, endX, endY, lineColor);
+            // 接続先の端点形状
+            var toShape = (conn.ToShape ?? "arrow").ToLowerInvariant();
+            RenderEndpointShape(svg, toShape, startX, startY, endX, endY, lineColor);
 
             // ラベル（中間点に表示）
             if (!string.IsNullOrEmpty(conn.Label))
@@ -942,6 +946,67 @@ public class SvgRenderer
                     textColor, "middle", "bold"));
             }
         }
+    }
+
+    /// <summary>端点形状を描画する。形状は始点→終点方向の端点に描画される</summary>
+    private static void RenderEndpointShape(XElement svg, string shape,
+        int fromX, int fromY, int toX, int toY, string color)
+    {
+        switch (shape)
+        {
+            case "arrow":
+                RenderArrowHead(svg, fromX, fromY, toX, toY, color);
+                break;
+            case "circle":
+                svg.Add(El("circle",
+                    At("cx", toX), At("cy", toY), At("r", 4),
+                    At("fill", color)));
+                break;
+            case "diamond":
+                RenderDiamond(svg, fromX, fromY, toX, toY, color);
+                break;
+            case "square":
+                RenderSquare(svg, toX, toY, color);
+                break;
+            // "none" の場合は何も描画しない
+        }
+    }
+
+    /// <summary>ひし形の端点を描画する</summary>
+    private static void RenderDiamond(XElement svg, int x1, int y1, int x2, int y2, string color)
+    {
+        var dx = x2 - x1;
+        var dy = y2 - y1;
+        var len = Math.Sqrt(dx * dx + dy * dy);
+        if (len < 1) return;
+
+        var ux = dx / len;
+        var uy = dy / len;
+        const int size = 6;
+
+        // ひし形の4頂点: 先端, 左, 後端, 右
+        var tipX = x2;
+        var tipY = y2;
+        var backX = (int)(x2 - ux * size * 2);
+        var backY = (int)(y2 - uy * size * 2);
+        var midX = (int)(x2 - ux * size);
+        var midY = (int)(y2 - uy * size);
+        var px = (int)(-uy * size);
+        var py = (int)(ux * size);
+
+        svg.Add(El("polygon",
+            At("points", $"{tipX},{tipY} {midX + px},{midY + py} {backX},{backY} {midX - px},{midY - py}"),
+            At("fill", color)));
+    }
+
+    /// <summary>四角形の端点を描画する</summary>
+    private static void RenderSquare(XElement svg, int x, int y, string color)
+    {
+        const int half = 4;
+        svg.Add(El("rect",
+            At("x", x - half), At("y", y - half),
+            At("width", half * 2), At("height", half * 2),
+            At("fill", color)));
     }
 
     /// <summary>2つのコントロールの最近接エッジ間の座標を計算する</summary>

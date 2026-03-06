@@ -197,4 +197,10 @@ public class ConnectorDefinition
 
     /// <summary>ラベルテキストの色オーバーライド（例: "#FFFFFF"）</summary>
     public string? LabelColor { get; set; }
+
+    /// <summary>接続元の端点形状（none, arrow, circle, diamond, square）。省略時は none</summary>
+    public string? FromShape { get; set; }
+
+    /// <summary>接続先の端点形状（none, arrow, circle, diamond, square）。省略時は arrow</summary>
+    public string? ToShape { get; set; }
 }

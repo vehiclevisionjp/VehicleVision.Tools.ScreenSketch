@@ -64,12 +64,16 @@ connectors:
     to: emailInput
     label: "①"
     description: 名前を入力後、メールアドレスを入力します。
+    fromShape: circle
+    toShape: arrow
   - from: emailInput
     to: submitBtn
     label: "②"
     description: メールアドレスを入力後、登録ボタンを押します。
     lineColor: "#4CAF50"
     labelBackground: "#4CAF50"
+    fromShape: diamond
+    toShape: arrow
   - from: submitBtn
     to: cancelBtn
     label: "③"
@@ -77,3 +81,5 @@ connectors:
     lineStyle: dashed
     lineColor: "#FF9800"
     labelBackground: "#FF9800"
+    fromShape: square
+    toShape: diamond

@@ -101,9 +101,17 @@ public partial class ThemeColors
 
         foreach (var (key, value) in overrides)
         {
-            if (ColorPropertyMap.TryGetValue(key, out var prop) && HexColorRegex().IsMatch(value))
+            if (!ColorPropertyMap.TryGetValue(key, out var prop))
+                continue;
+
+            // #RRGGBB 形式ならそのまま、それ以外は名前付き色として解決を試みる
+            if (HexColorRegex().IsMatch(value))
             {
                 prop.SetValue(colors, value);
+            }
+            else if (ColorResolver.Resolve(value) is { } resolved)
+            {
+                prop.SetValue(colors, resolved);
             }
         }
 

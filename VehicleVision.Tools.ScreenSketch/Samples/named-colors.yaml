@@ -1,0 +1,55 @@
+screen:
+  title: 名前付き色サンプル
+  description: WinForms の KnownColor 名で色を指定する例
+
+window:
+  title: 名前付き色
+  width: 500
+  height: 250
+  controls:
+    - type: label
+      text: "名前:"
+      x: 20
+      y: 20
+      foreground: ControlText
+
+    - type: textbox
+      id: nameInput
+      x: 80
+      y: 15
+      width: 200
+      placeholder: 氏名を入力
+      background: Window
+      borderColor: ActiveBorder
+
+    - type: button
+      id: okBtn
+      x: 80
+      y: 60
+      text: OK
+      background: Control
+      foreground: ControlText
+      borderColor: ControlDark
+
+    - type: button
+      id: cancelBtn
+      x: 170
+      y: 60
+      text: キャンセル
+      background: ButtonFace
+      foreground: ControlText
+
+    - type: label
+      text: "強調テキスト"
+      x: 20
+      y: 110
+      foreground: Highlight
+
+annotations:
+  - target: nameInput
+    label: "①"
+    description: 名前を入力します。名前付き色でカスタマイズされたテキストボックスです。
+  - target: okBtn
+    label: "②"
+    description: OK ボタンは WinForms の Control 色で描画されています。
+    labelBackground: SteelBlue
