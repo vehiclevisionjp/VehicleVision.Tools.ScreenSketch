@@ -38,42 +38,14 @@ jobs:
           node-version: '20'
 
       # ── バージョン取得・計算 ────────────────────────────────
-      - name: Get current version
-        id: get_version
+      - name: Bump version
+        id: new_version
         working-directory: VehicleVision.Tools.ScreenSketch.VSCode
         run: |
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-          echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
-          echo "Current version: $CURRENT_VERSION"
-
-      - name: Calculate new version
-        id: new_version
-        run: |
-          CURRENT="${{ steps.get_version.outputs.current_version }}"
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
-
-          case "${{ github.event.inputs.version_type }}" in
-            major)
-              MAJOR=$((MAJOR + 1))
-              MINOR=0
-              PATCH=0
-              ;;
-            minor)
-              MINOR=$((MINOR + 1))
-              PATCH=0
-              ;;
-            patch)
-              PATCH=$((PATCH + 1))
-              ;;
-          esac
-
-          NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          npm version ${{ github.event.inputs.version_type }} --no-git-tag-version
+          NEW_VERSION=$(node -p "require('./package.json').version")
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "New version: $NEW_VERSION"
-
-      - name: Update version in package.json
-        working-directory: VehicleVision.Tools.ScreenSketch.VSCode
-        run: npm version ${{ steps.new_version.outputs.new_version }} --no-git-tag-version
 
       # ── VS Code 拡張のビルド・パッケージ ───────────────────
       - name: Install dependencies
