@@ -6,12 +6,13 @@ YAML ファイルの構造とプロパティの詳細です。
 
 ## ドキュメント構造
 
-YAML ファイルは以下の 3 つのセクションで構成されます。
+YAML ファイルは以下の 4 つのセクションで構成されます。
 
 ```yaml
 screen: # 画面メタ情報
 window: # ウィンドウ定義（コントロール含む）
 annotations: # アノテーション（任意）
+connectors: # コネクタ線（任意）
 ```
 
 ---
@@ -70,6 +71,9 @@ annotations: # アノテーション（任意）
 | Annotation     | `annotationCircle`     | `#E53935`          |
 |                | `annotationText`       | `#FFFFFF`          |
 |                | `annotationLine`       | `#E53935`          |
+| Connector      | `connectorLine`        | `#1976D2`          |
+|                | `connectorCircle`      | `#1976D2`          |
+|                | `connectorText`        | `#FFFFFF`          |
 | Chromeless     | `chromelessBorder`     | `#D0D0D0`          |
 
 **使用例：**
@@ -106,8 +110,45 @@ screen:
 
 コントロールにラベル（①②③ など）を付け、説明をテーブルとして出力します。
 
-| プロパティ    | 型     | 説明                       |
-| ------------- | ------ | -------------------------- |
-| `target`      | string | 対象コントロールの `id`    |
-| `label`       | string | 表示ラベル（例: `"①"`）    |
-| `description` | string | マニュアルに記載する説明文 |
+| プロパティ        | 型     | 説明                                                        |
+| ----------------- | ------ | ----------------------------------------------------------- |
+| `target`          | string | 対象コントロールの `id`                                     |
+| `label`           | string | 表示ラベル（例: `"①"`）                                     |
+| `description`     | string | マニュアルに記載する説明文                                  |
+| `lineColor`       | string | 引き出し線の色オーバーライド（例: `"#1976D2"`）             |
+| `lineStyle`       | string | 引き出し線のスタイル（`solid`, `dashed`, `dotted`）省略時は `dashed` |
+| `labelBackground` | string | ラベル円の背景色オーバーライド（例: `"#4CAF50"`）           |
+| `labelColor`      | string | ラベルテキストの色オーバーライド（例: `"#FFFFFF"`）         |
+
+---
+
+## connectors（コネクタ線）
+
+コントロール間を結ぶ線を描画し、手順や操作フローを図示します。接続先に矢印が付き、中間点にラベルが表示されます。
+
+| プロパティ        | 型     | 説明                                                        |
+| ----------------- | ------ | ----------------------------------------------------------- |
+| `from`            | string | 接続元コントロールの `id`                                   |
+| `to`              | string | 接続先コントロールの `id`                                   |
+| `label`           | string | 表示ラベル（例: `"①"`）                                     |
+| `description`     | string | マニュアルに記載する説明文                                  |
+| `lineColor`       | string | コネクタ線の色オーバーライド（例: `"#4CAF50"`）             |
+| `lineStyle`       | string | コネクタ線のスタイル（`solid`, `dashed`, `dotted`）省略時は `solid` |
+| `labelBackground` | string | ラベル円の背景色オーバーライド（例: `"#FF9800"`）           |
+| `labelColor`      | string | ラベルテキストの色オーバーライド（例: `"#FFFFFF"`）         |
+
+**使用例：**
+
+```yaml
+connectors:
+  - from: nameInput
+    to: emailInput
+    label: "①"
+    description: 名前を入力後、メールアドレスを入力します。
+  - from: emailInput
+    to: submitBtn
+    label: "②"
+    description: 登録ボタンを押します。
+    lineColor: "#4CAF50"
+    labelBackground: "#4CAF50"
+```
