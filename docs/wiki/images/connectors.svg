@@ -49,7 +49,7 @@
   <circle cx="570" cy="137" r="14" fill="#1976D2" />
   <text x="570" y="137" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">②</text>
   <line x1="202" y1="183" x2="554" y2="183" stroke="#E53935" stroke-width="1" />
-  <circle cx="202" cy="183" r="3" fill="#4CAF50" />
+  <circle cx="202" cy="183" r="3" fill="#E53935" />
   <circle cx="570" cy="183" r="14" fill="#4CAF50" />
   <text x="570" y="183" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold" dominant-baseline="central">③</text>
 </svg>

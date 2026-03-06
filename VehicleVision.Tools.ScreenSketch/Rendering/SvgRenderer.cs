@@ -870,7 +870,7 @@ public class SvgRenderer
             // コントロール接続点
             svg.Add(El("circle",
                 At("cx", lineStartX), At("cy", lineStartY), At("r", 3),
-                At("fill", circleColor)));
+                At("fill", lineColor)));
 
             // ラベル円
             var radius = Math.Max(Theme.AnnotationRadius, EstimateTextWidth(ann.Label, 13) / 2 + 4);
@@ -921,7 +921,7 @@ public class SvgRenderer
             // 接続元の小円
             svg.Add(El("circle",
                 At("cx", startX), At("cy", startY), At("r", 3),
-                At("fill", circleColor)));
+                At("fill", lineColor)));
 
             // 接続先に矢印
             RenderArrowHead(svg, startX, startY, endX, endY, lineColor);
