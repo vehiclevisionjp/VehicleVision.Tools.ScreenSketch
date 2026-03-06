@@ -1,7 +1,10 @@
-﻿namespace VehicleVision.Tools.ScreenSketch.Rendering;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+
+namespace VehicleVision.Tools.ScreenSketch.Rendering;
 
 /// <summary>SVG 描画で使用する色定義。テーマごとにインスタンスを生成する</summary>
-public class ThemeColors
+public partial class ThemeColors
 {
     // ── Window ──
     public string WindowBackground { get; init; } = "#F0F0F0";
@@ -91,13 +94,9 @@ public class ThemeColors
         var colors = new ThemeColors();
         if (overrides is not { Count: > 0 }) return colors;
 
-        var properties = typeof(ThemeColors).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
-            .Where(p => p.PropertyType == typeof(string) && p.CanWrite)
-            .ToDictionary(p => p.Name, p => p, StringComparer.OrdinalIgnoreCase);
-
         foreach (var (key, value) in overrides)
         {
-            if (properties.TryGetValue(key, out var prop))
+            if (ColorPropertyMap.TryGetValue(key, out var prop) && HexColorRegex().IsMatch(value))
             {
                 prop.SetValue(colors, value);
             }
@@ -105,6 +104,15 @@ public class ThemeColors
 
         return colors;
     }
+
+    /// <summary>色プロパティのキャッシュ（大文字小文字を区別しないキー）</summary>
+    private static readonly Dictionary<string, PropertyInfo> ColorPropertyMap =
+        typeof(ThemeColors).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            .Where(p => p.PropertyType == typeof(string) && p.CanWrite)
+            .ToDictionary(p => p.Name, p => p, StringComparer.OrdinalIgnoreCase);
+
+    [GeneratedRegex(@"^#[0-9A-Fa-f]{6}$")]
+    private static partial Regex HexColorRegex();
 
     /// <summary>ダークテーマ</summary>
     public static ThemeColors CreateDark() => new()
