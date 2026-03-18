@@ -16,9 +16,20 @@
 - ドキュメントは**日本語**で記述する
 - コード内のコメント（XMLドキュメントコメント含む）も日本語
 
-### 対象読者
+### 対象読者とドキュメントの役割
 
-- プロジェクトの開発者・コントリビューター
+各ドキュメントの対象読者と役割を明確に分離する。
+
+| ドキュメント | 対象読者 | 役割 |
+| ------------ | -------- | ---- |
+| `README.md` | **利用者** | インストール方法、使い方、対応コントロール、ライセンス情報 |
+| `CONTRIBUTING.md` | **開発者** | 開発環境構築、プロジェクト構成、ブランチ戦略、コーディング規約 |
+| `docs/wiki/` | **利用者** | YAML定義リファレンス、コマンド詳細、コントロール仕様、サンプル |
+| `docs/contributing/` | **開発者** | 各種ガイドライン（コーディング、テスト、ドキュメント、CI/CD） |
+
+- `README.md` には開発者向け情報（プロジェクト構成、ソースからのビルド手順等）を記載しない
+- `CONTRIBUTING.md` にプロジェクト構成やビルド手順を集約する
+- `README.md` から Wiki および `CONTRIBUTING.md` へのリンクで誘導する
 
 ---
 
@@ -51,6 +62,20 @@ docs/
     ├── YAML-Definition-Reference.md
     └── images/
 ```
+
+### Wiki構成
+
+`docs/wiki/` 配下は以下の体系で構成する。
+
+| ページ | 内容 |
+| ------ | ---- |
+| `Home.md` | Wikiトップページ。全ページへのナビゲーション |
+| `Command-Reference.md` | CLIコマンドの引数・オプション詳細 |
+| `YAML-Definition-Reference.md` | YAMLスキーマの全プロパティ解説 |
+| `Controls.md` | 対応コントロールの種類と設定 |
+| `Examples.md` | 画面定義のサンプルと出力例 |
+| `Architecture.md` | 内部構造とレンダリングパイプライン |
+| `VS-Code-Extension.md` | VS Code拡張のインストールと使い方 |
 
 ### ファイル命名規則
 
@@ -102,6 +127,50 @@ npm run lint:md:fix
 
 ---
 
+## Wikiリンク規約
+
+`docs/wiki/` 配下のファイルは CI（`sync-wiki.yml`）によって GitHub Wiki リポジトリへ自動同期される。
+そのため、Wiki ページ間のリンクは以下のルールに従うこと。
+
+### ページ間リンク
+
+Wiki ページ間のリンクには **`.md` 拡張子を付けない**形式を使用する。
+
+```markdown
+<!-- ○ 正しい形式 -->
+[コマンドリファレンス](Command-Reference)
+[YAML定義リファレンス](YAML-Definition-Reference)
+[Home](Home)
+
+<!-- × 誤った形式 -->
+[コマンドリファレンス](Command-Reference.md)
+[コマンドリファレンス](docs/wiki/Command-Reference.md)
+```
+
+### 理由
+
+- GitHub Wiki では `.md` 拡張子なしの相対リンクでページ間遷移が行われる
+- リポジトリ内の `docs/wiki/` からの相対パスではなく、Wiki 上のページ名で解決される
+- `.md` 拡張子を付けると、Wiki 上でリンクが正しく動作しない場合がある
+
+### 画像リンク
+
+Wiki 内の画像は `images/` サブディレクトリに配置し、相対パスで参照する。
+
+```markdown
+![説明](images/sample-screen.svg)
+```
+
+### 外部リンク
+
+リポジトリ内の他のファイル（`README.md`、`CONTRIBUTING.md` 等）へのリンクは絶対URLを使用する。
+
+```markdown
+[README](https://github.com/vehiclevisionjp/VehicleVision.Tools.ScreenSketch/blob/main/README.md)
+```
+
+---
+
 ## npmスクリプト
 
 | スクリプト     | 説明                             |
@@ -134,6 +203,11 @@ VS Codeでは **RunOnSave** 拡張機能により、`docs/` 配下のMarkdownフ
 ---
 
 ## ドキュメント同期
+
+### Wiki同期（CI）
+
+`docs/wiki/` 配下のファイルは `sync-wiki.yml` ワークフローにより GitHub Wiki リポジトリへ自動同期される。
+同期対象は `docs/wiki/` ディレクトリ内の全ファイル（画像含む）。
 
 ### 更新ルール
 

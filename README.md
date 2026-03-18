@@ -28,17 +28,7 @@ dotnet new tool-manifest
 dotnet tool install VehicleVision.Tools.ScreenSketch
 ```
 
-### ソースからビルド
-
-```bash
-git clone https://github.com/vehiclevisionjp/VehicleVision.Tools.ScreenSketch.git
-cd VehicleVision.Tools.ScreenSketch
-dotnet build
-```
-
 ## 使い方
-
-グローバルツールとしてインストールした場合：
 
 ```bash
 # YAML から SVG + Markdown を生成
@@ -51,57 +41,18 @@ screen-sketch transform <input-path> [output-dir] [--inline]
 screen-sketch restore <input-path>
 ```
 
-ソースから実行する場合：
-
-```bash
-dotnet run --project VehicleVision.Tools.ScreenSketch -- generate <input-path> [output-dir]
-```
-
-## サンプル
-
-[Samples/sample-screen.yaml](VehicleVision.Tools.ScreenSketch/Samples/sample-screen.yaml) に車両検索画面のサンプル定義があります。
+詳細なコマンドリファレンスは [Wiki](https://github.com/vehiclevisionjp/VehicleVision.Tools.ScreenSketch/wiki) を参照してください。
 
 ## 対応コントロール
 
 button, textbox, label, combobox, checkbox, radiobutton, group, datagrid, menubar, statusbar, tabcontrol, listbox, panel, image, progressbar, numericupdown, datetimepicker, treeview, toolbar, linklabel, textarea
 
-## プロジェクト構成
+## ドキュメント
 
-```text
-VehicleVision.Tools.ScreenSketch/
-├── .github/                    # GitHub設定（CI/CD、セキュリティポリシー等）
-│   ├── copilot-instructions.md
-│   ├── SECURITY.md
-│   └── workflows/
-│       ├── ci.yml
-│       ├── release.yml
-│       └── sync-wiki.yml
-├── .vscode/                    # VS Code設定
-│   ├── extensions.json
-│   ├── settings.json
-│   └── tasks.json
-├── docs/                       # ドキュメント
-│   ├── contributing/           # 開発者向けガイドライン
-│   ├── script/                 # ドキュメント用スクリプト
-│   └── wiki/                   # Wikiドキュメント
-├── VehicleVision.Tools.ScreenSketch/
-│   ├── Generation/             # Markdown生成ロジック
-│   ├── Models/                 # YAML定義モデル
-│   ├── Rendering/              # SVGレンダリング・テーマ
-│   └── Samples/                # サンプルYAMLファイル
-├── LICENSES/                   # サードパーティライセンス
-├── .editorconfig
-├── .gitignore
-├── .markdownlint-cli2.jsonc
-├── .prettierignore
-├── .prettierrc
-├── AUTHORS
-├── CONTRIBUTING.md
-├── Directory.Build.props
-├── LICENSE
-├── README.md
-└── package.json
-```
+| ドキュメント | 内容 |
+| ------------ | ---- |
+| [Wiki](https://github.com/vehiclevisionjp/VehicleVision.Tools.ScreenSketch/wiki) | YAML定義リファレンス、コマンド詳細、サンプル等 |
+| [CONTRIBUTING](CONTRIBUTING.md) | 開発者向けガイド（環境構築、コーディング規約、ブランチ戦略等） |
 
 ## サードパーティライセンス
 
